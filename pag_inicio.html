@@ -211,13 +211,21 @@
       <ul>
         <li class="navbar-email">platzi@example.com</li>
         <li class="navbar-shopping-cart">
-          <a href="my_order.html"></a>
           <img href="my" src="./icons/icon_shopping_cart.svg" alt="shopping cart">
           <div>2</div>
         </li>
       </ul>
     </div>
   </nav>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const shoppingCartIcon = document.querySelector('.navbar-shopping-cart img');
+
+      shoppingCartIcon.addEventListener('click', function () {
+        window.location.href = 'my_order.html';
+      });
+    });
+  </script>
 
   <section class="main-container">
     <div class="cards-container">
