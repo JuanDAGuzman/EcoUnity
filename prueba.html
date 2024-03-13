@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
-  <title>Document</title>
+  <title>Ventana con Información</title>
   <style>
+    /* Agrega estilos según tus preferencias */
     :root {
       --white: #FFFFFF;
       --black: #000000;
@@ -24,10 +25,13 @@
       font-family: 'Quicksand', sans-serif;
     }
     .product-detail {
+      display: none;
       width: 360px;
       padding-bottom: 24px;
-      position: absolute;
-      right: 0;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
     .product-detail-close {
       background: var(--white);
@@ -94,22 +98,46 @@
   </style>
 </head>
 <body>
-  <aside class="product-detail">
-    <div class="product-detail-close">
-      <a href="./pag_inicio.html">
-        <img src="./icons/icon_close.png" alt="close">
-      </a>
-    </div>
-    <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="bike">
-    <div class="product-info">
-      <p>$35,00</p>
-      <p>Bike</p>
-      <p>With its practical position, this bike also fulfills a decorative function, add your hall or workspace.</p>
-      <button class="primary-button add-to-cart-button">
-        <img src="./icons/bt_add_to_cart.svg" alt="add to cart">
-        Add to cart
-      </button>
-    </div>
-  </aside>
+
+<!-- Imagen que al hacer clic abrirá la ventana -->
+<img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="bike" id="imagenClickeable" width="150px" height="150px">
+
+<!-- Contenido de la ventana -->
+<aside class="product-detail" id="infoWindow">
+  <div class="product-detail-close">
+    <a href="pag_inicio.html">
+      <img src="./icons/icon_close.png" alt="close">
+    </a>
+  </div>
+  <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="bike">
+  <div class="product-info">
+    <p>$35,00</p>
+    <p>Bike</p>
+    <p>With its practical position, this bike also fulfills a decorative function, add your hall or workspace.</p>
+    <button class="primary-button add-to-cart-button">
+      <img src="./icons/bt_add_to_cart.svg" alt="add to cart">
+      Add to cart
+    </button>
+  </div>
+</aside>
+
+<!-- Script JavaScript para manejar la apertura y cierre de la ventana -->
+<script>
+  // Obtén la referencia a la imagen y la ventana
+  var imagen = document.getElementById("imagenClickeable");
+  var ventanaInfo = document.getElementById("infoWindow");
+
+  // Agrega un event listener al hacer clic en la imagen
+  imagen.addEventListener("click", function() {
+    // Abre la ventana
+    ventanaInfo.style.display = "block";
+  });
+
+  // Función para cerrar la ventana
+  function cerrarVentana() {
+    ventanaInfo.style.display = "none";
+  }
+</script>
+
 </body>
 </html>
