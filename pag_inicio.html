@@ -8,195 +8,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
-  <style>
-    :root {
-      --white: #FFFFFF;
-      --black: #000000;
-      --very-light-pink: #C7C7C7;
-      --text-input-field: #F7F7F7;
-      --hospital-green: #ACD9B2;
-      --sm: 14px;
-      --md: 16px;
-      --lg: 18px;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 24px;
-      border-bottom: 1px solid var(--very-light-pink);
-    }
-
-    .menu {
-      display: none;
-    }
-
-    .logo {
-      width: 100px;
-    }
-
-    .navbar-left ul,
-    .navbar-right ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      height: 60px;
-    }
-
-    .navbar-left {
-      display: flex;
-    }
-
-    .navbar-left ul {
-      margin-left: 12px;
-    }
-
-    .navbar-left ul li a,
-    .navbar-right ul li a {
-      text-decoration: none;
-      color: var(--very-light-pink);
-      border: 1px solid var(--white);
-      padding: 8px;
-      border-radius: 8px;
-    }
-
-    .navbar-left ul li a:hover,
-    .navbar-right ul li a:hover {
-      border: 1px solid var(--hospital-green);
-      color: var(--hospital-green);
-    }
-
-    .navbar-email {
-      color: var(--very-light-pink);
-      font-size: var(--sm);
-      margin-right: 12px;
-    }
-
-    .navbar-shopping-cart {
-      position: relative;
-    }
-
-    .navbar-shopping-cart div {
-      width: 16px;
-      height: 16px;
-      background-color: var(--hospital-green);
-      border-radius: 50%;
-      font-size: var(--sm);
-      font-weight: bold;
-      position: absolute;
-      top: -6px;
-      right: -3px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .cards-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, 240px);
-      gap: 26px;
-      place-content: center;
-    }
-
-    .product-card {
-      width: 240px;
-    }
-
-    .product-card img {
-      width: 240px;
-      height: 240px;
-      border-radius: 20px;
-      object-fit: cover;
-    }
-
-    .product-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 12px;
-    }
-
-    .product-info figure {
-      margin: 0;
-    }
-
-    .product-info figure img {
-      width: 35px;
-      height: 35px;
-    }
-
-    .product-info div p:nth-child(1) {
-      font-weight: bold;
-      font-size: var(--md);
-      margin-top: 0;
-      margin-bottom: 4px;
-    }
-
-    .product-info div p:nth-child(2) {
-      font-size: var(--sm);
-      margin-top: 0;
-      margin-bottom: 0;
-      color: var(--very-light-pink);
-    }
-
-    @media (max-width: 640px) {
-      .menu {
-        display: block;
-      }
-
-      .navbar-left ul {
-        display: none;
-      }
-
-      .navbar-email {
-        display: none;
-      }
-
-      .cards-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, 140px);
-        gap: 26px;
-      }
-
-      .product-card {
-        width: 140px;
-      }
-
-      .product-card img {
-        width: 140px;
-        height: 140px;
-      }
-    }
-  </style>
 </head>
 
 <body>
   <nav>
     <img src="./icons/icon_menu.svg" alt="menu" class="menu">
-
     <div class="navbar-left">
-      <img src="./logos/logo_yard_sale.svg" alt="logo" class="logo">
+      <img src="./logos/logo_yard_sale.svg" alt="logo" class="logo" >
 
       <ul>
         <li>
-          <a href="/"> </a>
-        </li>
-        <li>
-          <a href="/"> </a>
-        </li>
-        <li>
-          <a href="/"> </a>
-        </li>
-        <li>
-          <a href="/"> </a>
+          <a href="/">Map</a>
         </li>
         <li>
           <a href="./login.html">Sign Out</a>
@@ -209,7 +33,7 @@
 
     <div class="navbar-right">
       <ul>
-        <li class="navbar-email">platzi@example.com</li>
+        <li class="navbar-email">andres@example.com</li>
         <li class="navbar-shopping-cart">
           <img src="./icons/icon_shopping_cart.svg" alt="shopping cart">
           <div>2</div>
@@ -217,27 +41,18 @@
       </ul>
     </div>
   </nav>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const shoppingCartIcon = document.querySelector('.navbar-shopping-cart img');
-
-      shoppingCartIcon.addEventListener('click', function () {
-        window.location.href = 'my_order.html';
-      });
-    });
-  </script>
 
   <section class="main-container">
     <div class="cards-container">
 
       <div class="product-card">
         <a href="./detalles.html">
-          <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" width="40px" height="38px">
+          <img src="https://images.pexels.com/photos/773252/pexels-photo-773252.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" width="40px" height="38px">
         </a>
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Jabon</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -246,11 +61,11 @@
       </div>
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2019/04/sustainable-travel-cup.jpg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Tazas Portatiles</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -259,11 +74,11 @@
       </div>
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2020/04/wood-journal-cardtorial.jpg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Portadas de Madera</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -272,11 +87,11 @@
       </div>
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2018/08/eco-friendly-products-6.png" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Lapices de Colores</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -285,11 +100,11 @@
       </div>
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2020/04/recycled-bracelets.jpg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Brazalate</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -298,11 +113,11 @@
       </div>
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2019/04/canvas-tote.jpg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Bolsa</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -311,11 +126,11 @@
       </div>
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2019/04/reusable-totes.jpg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Bolsa</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -324,11 +139,11 @@
       </div>
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2020/04/great-wave-tote.jpg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Bolsa</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -337,11 +152,11 @@
       </div>
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2020/04/reusable-makeup-wipes.jpg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Almohadillas Desmaquilantes</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -350,11 +165,11 @@
       </div>
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2020/04/reusable-makeup-cloths.jpeg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Almohadillas Desmaquilantes</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -363,25 +178,11 @@
       </div>
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2019/04/cruelty-free-makeup-brushes.jpeg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
-          </div>
-          <figure>
-            <img src="./icons/bt_add_to_cart.svg" alt="">
-          </figure>
-        </div>
-      </div>
-
-
-      <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <div class="product-info">
-          <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Brochas</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -391,11 +192,11 @@
 
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2020/04/reusable-straws.jpg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Pitillos</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -405,11 +206,11 @@
 
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2020/04/reusable-steel-water-bottle.jpg" alt="">  
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Botellas de Agua</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -419,11 +220,11 @@
 
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2018/08/eco-friendly-products-12.jpg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Papel incrustado con Semillas</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
@@ -433,46 +234,19 @@
 
 
       <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+        <img src="https://mymodernmet.com/wp/wp-content/uploads/2018/09/eco-friendly-products-17.jpg" alt="">
         <div class="product-info">
           <div>
-            <p>$120,00</p>
-            <p>Bike</p>
+            <p>$30,00</p>
+            <p>Botellas de Agua</p>
           </div>
           <figure>
             <img src="./icons/bt_add_to_cart.svg" alt="">
           </figure>
         </div>
       </div>
-
-
-      <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <div class="product-info">
-          <div>
-            <p>$120,00</p>
-            <p>Bike</p>
-          </div>
-          <figure>
-            <img src="./icons/bt_add_to_cart.svg" alt="">
-          </figure>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-        <div class="product-info">
-          <div>
-            <p>$120,00</p>
-            <p>Bike</p>
-          </div>
-          <figure>
-            <img src="./icons/bt_add_to_cart.svg" alt="">
-          </figure>
-        </div>
-      </div>
-    </div>
   </section>
+  <script src="script.js"></script>
 </body>
 
 </html>
