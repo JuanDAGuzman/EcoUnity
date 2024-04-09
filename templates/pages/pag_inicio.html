@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+    <style>
+      /* CSS aquí */
+      body {
+        font-family: "Quicksand", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f3f3f3;
+      }
+
+      nav {
+        background-color: #2c3e50;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+      }
+
+      .menu,
+      .logo {
+        width: 30px;
+        height: 30px;
+      }
+
+      .navbar-left ul,
+      .navbar-right ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-left ul li,
+      .navbar-right ul li {
+        margin-right: 20px;
+      }
+
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .product-card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .product-info {
+        padding: 10px;
+      }
+
+      .product-info p {
+        margin: 5px 0;
+      }
+
+      .product-info figure {
+        margin-top: 10px;
+        text-align: right;
+      }
+
+      .product-info figure img {
+        width: 30px;
+        height: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <img src="./icons/icon_menu.svg" alt="menu" class="menu" />
+      <div class="navbar-left">
+        <img src="./logos/logo_yard_sale.svg" alt="logo" class="logo" />
+
+        <ul>
+          <li>
+            <a href="/">Map</a>
+          </li>
+          <li>
+            <a href="./login.html">Sign Out</a>
+          </li>
+          <li>
+            <a href="./editar_cuenta.html">Edit Account</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="navbar-right">
+        <ul>
+          <li class="navbar-email">andres@example.com</li>
+          <li class="navbar-shopping-cart">
+            <img src="./icons/icon_shopping_cart.svg" alt="shopping cart" />
+            <div>2</div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="main-container">
+      <div class="cards-container">
+        <!-- Product cards will be dynamically added here -->
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          const response = await fetch("http://localhost:3000/api/v1/products");
+          const products = await response.json();
+
+          // Render products
+          renderProducts(products);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      });
+
+      function renderProducts(products) {
+        const cardsContainer = document.querySelector(".cards-container");
+        cardsContainer.innerHTML = "";
+
+        products.forEach((product) => {
+          const card = createProductCard(product);
+          cardsContainer.appendChild(card);
+        });
+      }
+
+      function createProductCard(product) {
+        const card = document.createElement("div");
+        card.classList.add("product-card");
+
+        const productLink = document.createElement("a");
+        productLink.href = `./detalles.html?id=${product.id}`;
+        const productImage = document.createElement("img");
+        productImage.src = product.image;
+        productImage.width = 250; // Mantener el ancho original de la imagen
+        productImage.height = 200; // Mantener la altura original de la imagen
+        productLink.appendChild(productImage);
+        card.appendChild(productLink);
+
+        const productInfo = document.createElement("div");
+        productInfo.classList.add("product-info");
+
+        const priceParagraph = document.createElement("p");
+        priceParagraph.textContent = `$${product.price}`;
+        productInfo.appendChild(priceParagraph);
+
+        const nameParagraph = document.createElement("p");
+        nameParagraph.textContent = product.name;
+        productInfo.appendChild(nameParagraph);
+
+        const figure = document.createElement("figure");
+        const addToCartImage = document.createElement("img");
+        addToCartImage.src = "./icons/bt_add_to_cart.svg";
+
+        figure.appendChild(addToCartImage);
+        productInfo.appendChild(figure);
+
+        card.appendChild(productInfo);
+
+        return card;
+      }
+    </script>
+  </body>
+</html>

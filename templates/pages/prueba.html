@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRODUCTOS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+
+    body {
+      background-color: #f0f8ff; /* verde claro */
+    }
+
+    /* Navbar styles */
+    nav {
+      background-color: #90ee90 !important; /* verde claro */
+      border: 1px solid #e0e0e0;
+    }
+    .btn{
+      background-color: #90ee90 !important;
+      border: 1px solid #53c763;
+    }
+    .btn:hover{
+      background-color: #6ee16e !important;
+      border: 1px solid #3ab04a;
+    }
+
+    nav a.btn-light {
+      background-color: #32cd32 !important; /* verde un poco más oscuro */
+      color: #ffffff !important; /* Texto blanco en el botón */
+    }
+
+    .product-card {
+      background-color: #f0fff0; /* verde claro */
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      height: 300px; /* altura fija */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .product-card img {
+      max-width: 150px; /* ancho fijo */
+      max-height: 150px; /* altura fija */
+      object-fit: contain; /* mantener proporción */
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">PRODUCTOS</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link btn btn-light" href="login.html">LOGIN</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container mt-4 shadow-lg p3 bm-5 pg-body rounded">
+    <!-- Formulario de búsqueda por ID -->
+    <form id="searchForm">
+      <div class="mb-3">
+        <label for="productId" class="form-label">Buscar por ID:</label>
+        <input type="number" class="form-control" id="productId">
+      </div>
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+    <br>
+    <div class="row" id="data"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    const searchForm = document.getElementById('searchForm');
+    const dataContainer = document.getElementById('data');
+    let allProducts = [];
+
+    // Función para cargar todos los productos
+    const loadAllProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/v1/products');
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
+        allProducts = await response.json();
+        updateTable(allProducts);
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to fetch products');
+      }
+    };
+
+    // Función para actualizar la tabla con los productos
+    const updateTable = (products) => {
+      let body = '';
+      for (const product of products) {
+        body += `
+          <div class="col-md-3 mb-4">
+            <div class="product-card">
+              <img src="${product.image}" alt="${product.name}">
+              <h5>${product.name}</h5>
+              <p>Price: $${product.price}</p>
+              <p>${product.description}</p>
+            </div>
+          </div>
+        `;
+      }
+      dataContainer.innerHTML = body;
+    };
+
+    // Función para buscar un producto por ID
+    const searchProductById = (productId) => {
+      if (productId !== '') {
+        const product = allProducts.find(product => product.id === parseInt(productId));
+        if (product) {
+          updateTable([product]);
+        } else {
+          dataContainer.innerHTML = '<div class="col-md-12 text-center">NO HEMOS ENCONTRADO EL PRODUCTO BUSCADO</div>';
+        }
+      } else {
+        loadAllProducts();
+      }
+    };
+
+    // Evento de submit del formulario de búsqueda
+    searchForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const productId = document.getElementById('productId').value;
+      searchProductById(productId);
+    });
+
+    // Cargar todos los productos al cargar la página
+    loadAllProducts();
+  </script>
+</body>
+</html>

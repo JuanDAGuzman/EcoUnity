@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <style>
+      :root {
+        --white: #ffffff;
+        --black: #000000;
+        --very-light-pink: #c7c7c7;
+        --text-input-field: #f7f7f7;
+        --hospital-green: #acd9b2;
+        --hospital-green-dark: #85ab7d; /* Nuevo color verde oscuro */
+        --sm: 14px;
+        --md: 16px;
+        --lg: 18px;
+      }
+
+      body {
+        margin: 0;
+        height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: "Quicksand", sans-serif;
+      }
+
+      .form-container {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        width: 300px;
+      }
+
+      .logo {
+        width: 150px;
+        margin-bottom: 48px;
+        justify-self: center;
+        display: none;
+      }
+
+      .title {
+        font-size: var(--lg);
+        margin-bottom: 30px;
+        text-align: start;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .label {
+        font-size: var(--sm);
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      .input {
+        background-color: var(--text-input-field);
+        border: none;
+        border-radius: 8px;
+        height: 30px;
+        font-size: var(--md);
+        padding: 6px;
+        margin-bottom: 12px;
+      }
+
+      .input-name,
+      .input-email,
+      .inpu-password {
+        margin-bottom: 22px;
+      }
+
+      .primary-button {
+        background-color: var(--hospital-green);
+        border-radius: 8px;
+        border: none;
+        color: var(--white);
+        width: 100%;
+        cursor: pointer;
+        font-size: var(--md);
+        font-weight: bold;
+        height: 50px;
+        margin-bottom: 10px; /* Agregamos un poco de margen entre botones */
+        transition: background-color 0.3s; /* Agregamos una transición suave */
+      }
+
+      .login-button {
+        margin-top: 14px;
+        margin-bottom: 30px;
+      }
+
+      @media (max-width: 640px) {
+        .primary-button {
+          position: absolute;
+          bottom: 0;
+          width: 300px;
+        }
+      }
+      .primary-button:hover {
+        background-color: var(--hospital-green-dark); /* Cambiamos el color al pasar el mouse */
+      }
+
+      /* ... (CSS styles omitted for brevity) ... */
+    </style>
+  </head>
+  <body>
+    <div class="login">
+      <div class="form-container">
+        <h1 class="title">My account</h1>
+        <form id="registerForm" class="form">
+          <label for="email" class="label">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="plati@example.com"
+            class="input input-email"
+            required
+          />
+          <label for="password" class="label">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="***********"
+            class="input input-password"
+            required
+          />
+          <button type="submit" class="primary-button login-button">
+            Create
+          </button>
+          <button onclick="location.href='login.html'" class="primary-button login-button">
+            Login
+          </button>
+        </form>
+
+        <script>
+          const registerForm = document.getElementById("registerForm");
+          registerForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+              const response = await fetch(
+                "http://localhost:3000/api/v1/users",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ email, password }),
+                }
+              );
+
+              if (!response.ok) {
+                throw new Error("Failed to create user");
+              }
+
+              const data = await response.json();
+              console.log("User created:", data);
+              // Aquí puedes redirigir al usuario a otra página o mostrar un mensaje de éxito
+            } catch (error) {
+              console.error("Error:", error);
+              alert("Failed to create user");
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </body>
+</html>

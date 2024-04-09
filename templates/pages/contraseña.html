@@ -42,10 +42,18 @@
 
     .title {
         font-size: var(--lg);
-        margin-bottom: 30px;
-        text-align: start;
+        margin-bottom: 12px;
+        text-align: center;
     }
 
+    .subtitle {
+        color: var(--very-light-pink);
+        font-size: var(--md);
+        font-weight: 300;
+        margin-top: 0;
+        margin-bottom: 32px;
+        text-align: center;
+    }
 
     .form {
         display: flex;
@@ -68,10 +76,6 @@
         margin-bottom: 12px;
     }
 
-    .input-name, .input-email, .inpu-password {
-        margin-bottom: 22px;
-    }
-
     .primary-button {
         background-color: var(--hospital-green);
         border-radius: 8px;
@@ -90,10 +94,8 @@
     }
 
     @media (max-width: 640px) {
-        .primary-button {
-            position: absolute;
-            bottom: 0;
-            width: 300px;
+        .logo {
+            display: block;
         }
     }
 </style>
@@ -101,21 +103,21 @@
 <body>
     <div class="login">
         <div class = "form-container">
-            <h1 class = "title">My account</h1>            
-            <form action="./login.html" class = "form">
-                <label for="name" class="label">Name</label>
-                <input type="text" id = "name" placeholder="Andrés" class = "input input-name">
+            <img src="./logos/logo_yard_sale.svg" alt="logo" class = "logo">
 
-                <label for="email" class="label">Email</label>
-                <input type="email" id = "email" placeholder="plati@example.com" class = "input input-email">
-
+            <h1 class = "title">Create a new password</h1>            
+            <p class = "subtitle">Enter a new password for your account</p>
+            
+            <form action="./email.html" class = "form">
                 <label for="password" class="label">Password</label>
                 <input type="password" id = "password" placeholder="*********" class = "input input-password">
- 
-                <input type="submit" value="Create" class="primary-button login-button">
+            
+                <label for="new-password" class="label">Password</label>
+                <input type="password" id = "new-password" placeholder="*********" class = "input input-password">
+            
+                <input type="submit" value="Confirm" class="primary-button login-button">
             </form>
-        </div>
+            </div>
     </div>
-    
 </body>
 </html>
