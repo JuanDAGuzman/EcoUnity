@@ -5,175 +5,332 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
+        <!-- Box Icons -->
+    <link rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link/>
     <title>Document</title>
     <style>
-      :root {
+        /*Google Fonts*/
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            font-family:'Poppins','sans-serif';
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+            scroll-padding-top: 2rem;
+            scroll-behavior: smooth;
+        }
+
+        :root {
         --white: #ffffff;
         --black: #000000;
         --very-light-pink: #c7c7c7;
         --text-input-field: #f7f7f7;
         --hospital-green: #acd9b2;
-        --hospital-green-dark: #85ab7d; /* Nuevo color verde oscuro */
         --sm: 14px;
         --md: 16px;
         --lg: 18px;
       }
 
-      body {
-        margin: 0;
-        height: 100vh;
-        display: grid;
-        place-items: center;
-        font-family: "Quicksand", sans-serif;
-      }
 
-      .form-container {
-        display: grid;
-        grid-template-rows: auto 1fr auto;
-        width: 300px;
-      }
-
-      .logo {
-        width: 150px;
-        margin-bottom: 48px;
-        justify-self: center;
-        display: none;
-      }
-
-      .title {
-        font-size: var(--lg);
-        margin-bottom: 30px;
-        text-align: start;
-      }
-
-      .form {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .label {
-        font-size: var(--sm);
-        font-weight: bold;
-        margin-bottom: 4px;
-      }
-
-      .input {
-        background-color: var(--text-input-field);
-        border: none;
-        border-radius: 8px;
-        height: 30px;
-        font-size: var(--md);
-        padding: 6px;
-        margin-bottom: 12px;
-      }
-
-      .input-name,
-      .input-email,
-      .inpu-password {
-        margin-bottom: 22px;
-      }
-
-      .primary-button {
-        background-color: var(--hospital-green);
-        border-radius: 8px;
-        border: none;
-        color: var(--white);
-        width: 100%;
-        cursor: pointer;
-        font-size: var(--md);
-        font-weight: bold;
-        height: 50px;
-        margin-bottom: 10px; /* Agregamos un poco de margen entre botones */
-        transition: background-color 0.3s; /* Agregamos una transición suave */
-      }
-
-      .login-button {
-        margin-top: 14px;
-        margin-bottom: 30px;
-      }
-
-      @media (max-width: 640px) {
-        .primary-button {
-          position: absolute;
-          bottom: 0;
-          width: 300px;
+        section{
+            padding: 4.5rem 0 1.5rem;
         }
-      }
-      .primary-button:hover {
-        background-color: var(--hospital-green-dark); /* Cambiamos el color al pasar el mouse */
-      }
 
-      /* ... (CSS styles omitted for brevity) ... */
+        img {
+            width: 100%;
+        }
+
+        body {
+            color: var(--text-color);
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            background: var(--bg-color);
+            box-shadow: 0 8px 11px rgb(14 55 54 / 15%);
+            padding: 20px 100px;
+            transition: 0.5s;
+        }
+
+        .profile{
+            display: flex;
+            align-items: center;
+            column-gap: 0.5rem;
+            cursor: pointer;
+        }
+
+
+        .profile img{
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+        }
+
+        .profile span{
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .profile span a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .logo{
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            column-gap: 0.5rem;
+        }
+
+        .logo .bx{
+            font-size: 24px;
+            color: var(--hospital-green);
+        }
+
+        .navbar{
+            display: flex;
+            column-gap: 0.5rem;
+            margin: 0.3rem;
+        }
+
+        .navbar a{
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-color);
+            padding: 0.8rem 1rem;
+        }
+
+        .navbar a:hover, .navbar .home-active {
+            background: var(--hospital-green);
+            border-radius: 5rem;
+            color: var(--bg-color);
+        }
+
+        #menu-icon{
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10001;
+            display: none;
+        }
+
+      .container-principal{
+            position: fixed;
+            width: 95%;
+            height: 700px;
+            display: grid;
+            margin-top: 100px;
+            margin-left: 50px;
+            grid-template-columns: auto 1fr;
+            gap: 8  px;
+            align-items: center;
+            margin-bottom: 24px;
+            border: 2px var(--hospital-green) solid;
+            border-radius: 8px;
+            padding: 24px 24px ;
+            box-shadow: 0 8px 11px rgb(14 55 54 / 25%);
+      }  
+
+        .form-container {
+          display: grid;
+          grid-template-rows: auto 1fr auto;
+          width: 350px;
+          align-items: end;
+          justify-content: end;
+          margin-left: 100px;
+          gap: 12px;
+        }
+
+        .form {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .label {
+          font-size: var(--sm);
+          font-weight: bold;
+          margin-bottom: 4px;
+        }
+
+        .input {
+          background-color: var(--text-input-field);
+          border: none;
+          border-radius: 8px;
+          height: 34px;
+          width: 350px;
+          font-size: var(--md);
+          padding: 6px;
+          margin-bottom: 12px;
+          margin-top: 6px;
+        }
+
+        .input-name,
+        .input-email,
+        .inpu-password,
+        .tittle {
+          margin-bottom: 30px;
+          margin: 0 0 24px 0;
+        }
+
+          .primary-button {
+          background-color: var(--hospital-green);
+          border-radius: 8px;
+          border: none;
+          color: var(--white);
+          width: 100%;
+          cursor: pointer;
+          font-size: var(--md);
+          font-weight: bold;
+          height: 40px;
+          transition: background-color 0.3s; /* Agregamos una transición suave */ 
+        }
+
+          .social-icons{
+            margin: 5px 70px;
+            
+        }
+
+          .social-icons a{
+            border: 1px solid var(--hospital-green);
+            border-radius: 20%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 3px;
+            width: 40px;
+            height: 40px;
+        }
+
+
+        .login-button {
+        margin: 8px 0 15px 0 ;
+        }
+
+
+        @media (max-width: 640px) {
+          .primary-button {
+            position: absolute;
+            bottom: 0;
+            width: 300px;
+          }
+        }
+        .primary-button:hover {
+          background-color: var(--hospital-green); /* Cambiamos el color al pasar el mouse */
+        }
+
     </style>
   </head>
   <body>
-    <div class="login">
-      <div class="form-container">
-        <h1 class="title">My account</h1>
-        <form id="registerForm" class="form">
-          <label for="email" class="label">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="plati@example.com"
-            class="input input-email"
-            required
-          />
-          <label for="password" class="label">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="***********"
-            class="input input-password"
-            required
-          />
-          <button type="submit" class="primary-button login-button">
-            Create
-          </button>
-          <button onclick="location.href='login.html'" class="primary-button login-button">
-            Login
-          </button>
-        </form>
+    <header>    
+      <a href="./inicio.html" class="logo"><i class='bx bx-basket'></i>Ecounity</a>
+      <!--  Menu icon -->
+      <!-- crear una clase .bx.bx-menu#menu-icon -->
+      <div class="bx bx-menu" id="menu-icon"></div>
 
-        <script>
-          const registerForm = document.getElementById("registerForm");
-          registerForm.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            try {
-              const response = await fetch(
-                "http://localhost:3000/api/v1/users",
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({ email, password }),
-                }
-              );
-
-              if (!response.ok) {
-                throw new Error("Failed to create user");
-              }
-
-              const data = await response.json();
-              console.log("User created:", data);
-              // Aquí puedes redirigir al usuario a otra página o mostrar un mensaje de éxito
-            } catch (error) {
-              console.error("Error:", error);
-              alert("Failed to create user");
-            }
-          });
-        </script>
+      <!-- Nav List -->
+      <ul class="navbar">
+          <li><a href="./inicio.html" class="home-active">Inicio</a></li>
+          <li><a href="#categorias" >Categorias</a></li>
+          <li><a href="./products.html">Productos</a></li>
+          <li><a href="#map">Puntos reciclaje</a></li>
+          <li><a href="#map">Puntos reforestacion</a></li>
+          <li><a href="#information" >Informacion</a></li>
+      </ul>
+      <!-- Profile  -->
+      <div class="profile">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAmFJREFUSEvl1knIjVEcx/HPS+aNcWVnYSND5lKmiNgQC2RFyZBMCymlWFjItEBSNkRKSUJIFBtTkSHWZCEkRZHp+b+dt+77vPfe57n3vvUunN29zzm/7/kP53dOmx4abT3E1Qy4N8ZhStr0QzzH70aCaBS8DEcxMgd5i824XBbeCPgwthYIH8KOMvCy4Pm4mQQfYReepN+TsL8i9XNxpwheFnwL81ItJ+NnTrgvHmMsrmNRd4B74Rv6YxOO1xDdiGP4mvXBEPypBy8TcXTwsySyGNdqCEaUV9O3MXjVKjg6+F0SWYXzNQRX4lz6FmvetwqO9Z8wFPW69mCW5u34mKV8RHfUODT2YXcyiaW4khNegovZvDCXPdjbXeBorJcYlQTvpy7ukzp5Zvr/TXK1fNd32UeZ5upYFE12NoGqBRS2GXWODRaORsAhFkdrAxZgepb+XynyOLsni45Q5W4aBRdGUnZCWfAwzMhcaRrCufrlAD9S5A8yh4v6fy7aQBF4MA5gLaWv0L8p7TuTi1XdQz3wcpzA8IqV35OLVfPq8RhYMfcD1uNSNXItcFzykbaO76dxBC+ycxoR1dKKS2IL1qQJMXdqKkOnNdXAcdPE0RiNiHAh7hXVLPd9VvL0yMDrLOrIRqcsVQOHLW5LQuuy18apBqEd0yPNUaoYXay2GjiiHIAbKdomue3LbiMeBqE5qN45jmMTJh9jBS60QsVqnEkacUd/6dDLRzyx4kkTtY2oWxmVd3RYbvRO+8iDZ1e8l+bgbivUbH1NvTw4DGNCgj2tTE2TG6ipV+RcTfKKl/1/4H9Qfmkf+jdIxwAAAABJRU5ErkJggg=="/>
+          <span ><a href="./login.html"></a></span>
+          <i class="bx bx-caret-down"></i>
       </div>
+  </header>
+
+  <div class="container-principal">
+  <div class="login">
+    <div class="form-container">
+      <h1 class="title">Crear cuenta</h1>
+      <form id="registerForm" class="form">
+        <label for="email" class="label">Correo electronico</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="andres@mail.com"
+          class="input input-email"
+          required
+        />
+        <label for="password" class="label">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="***********"
+          class="input input-password"
+          required
+        />
+        <button type="submit" class="primary-button login-button">
+          Create
+        </button>
+        <button onclick="location.href='login.html'" class="primary-button login-button">
+          Login
+        </button>
+
+        <div class="social-icons">
+          <a href="#" class="icon"><i class='bx bxl-google'></i></a>
+          <a href="#" class="icon"><i class='bx bxl-facebook' ></i></a>
+          <a href="#" class="icon"><i class='bx bxl-github' ></i></a>
+          <a href="#" class="icon"><i class='bx bxl-tiktok' ></i></a>
+      </div>    
+  </form>
+
+      <script>
+        const registerForm = document.getElementById("registerForm");
+        registerForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+
+          try {
+            const response = await fetch(
+              "http://localhost:3000/api/v1/users",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+              }
+            );
+
+            if (!response.ok) {
+              throw new Error("Failed to create user");
+            }
+
+            const data = await response.json();
+            console.log("User created:", data);
+            // Aquí puedes redirigir al usuario a otra página o mostrar un mensaje de éxito
+          } catch (error) {
+            console.error("Error:", error);
+            alert("Failed to create user");
+          }
+        });
+      </script>
     </div>
+  </div>
+</div>
   </body>
 </html>
