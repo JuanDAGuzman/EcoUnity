@@ -1,145 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-    <title>Password Recovery</title>
-    <style>
-      /* Utilizamos los mismos estilos que el formulario de inicio de sesión */
-      :root {
-        --white: #ffffff;
-        --black: #000000;
-        --very-light-pink: #c7c7c7;
-        --text-input-field: #f7f7f7;
-        --hospital-green: #acd9b2;
-        --hospital-green-dark: #85ab7d; /* Nuevo color verde oscuro */
-        --sm: 14px;
-        --md: 16px;
-        --lg: 18px;
-      }
 
-      body {
-        margin: 0;
-        height: 100vh;
-        display: grid;
-        place-items: center;
-        font-family: "Quicksand", sans-serif;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@300..700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/EcoUnity/static/recovery.css  ">
+  <title>Password Recovery</title>
+</head>
 
-      .container-send{
-        background-color: var(--white);
-        border-radius: 8px;
-        border: 3px solid var(--hospital-green);
-        width: 800px;
-        height: 500px;
-        box-shadow: 0 8px 11px rgb(14 55 54 / 25%);
-        align-items: center;
-        justify-content: center;
-      }
-
-      .form-container {
-        justify-content: center;
-        align-items: center;
-        margin-top: 100px;
-        margin-left: 240px;
-        display: grid;
-        width: 300px;
-      }
-
-      .logo {
-        width: 150px;
-        margin-bottom: 48px;
-        justify-self: center;
-        display: none;
-      }
-
-      .form {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .form a {
-        color: var(--hospital-green);
-        font-size: var(--sm);
-        text-align: center;
-        text-decoration: none;
-        margin-bottom: 52px;
-      }
-
-      .label {
-        font-size: var(--sm);
-        font-weight: bold;
-        margin-bottom: 4px;
-        padding: 0 0 16px 0 ;
-      }
-
-      .input {
-        background-color: var(--text-input-field);
-        border: none;
-        border-radius: 8px;
-        height: 32px;
-        width: 240px;
-        font-size: var(--md);
-        padding: 12px;
-        margin-bottom: 12px;
-      }
-
-      .input-email {
-        margin-bottom: 22px;
-      }
-
-      .primary-button {
-        background-color: var(--hospital-green);
-        border-radius: 8px;
-        border: none;
-        color: var(--white);
-        width: 100%;
-        cursor: pointer;
-        font-size: var(--md);
-        font-weight: bold;
-        height: 50px;
-        margin-bottom: 10px; /* Agregamos un poco de margen entre botones */
-        transition: background-color 0.3s; /* Agregamos una transición suave */
-        margin-top: 24px;
-      }
-
-      .primary-button:hover {
-        background-color: var(--hospital-green-dark); /* Cambiamos el color al pasar el mouse */
-      }
-
-      #message {
-        text-align: center;
-        margin-top: 20px;
-      }
-
-      @media (max-width: 640px) {
-        .logo {
-          display: block;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container-send">
+<body>
+  <div class="container-send">
     <div class="login">
       <div class="form-container">
         <img src="./logos/logo_yard_sale.svg" alt="logo" class="logo" />
         <form id="recoveryForm" class="form">
           <label for="email" class="label">Ingresa el correo electronico registrado</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="andres@mail.com"
-            class="input input-email"
-            required
-          />
+          <input type="email" id="email" name="email" placeholder="andres@mail.com" class="input input-email"
+            required />
           <button type="submit" class="primary-button login-button">
             Enviar solicitud
           </button>
@@ -151,37 +33,38 @@
       </div>
     </div>
   </div>
-    <script>
-      const recoveryForm = document.getElementById("recoveryForm");
+  <script>
+    const recoveryForm = document.getElementById("recoveryForm");
 
-      recoveryForm.addEventListener("submit", async () => {
-        const formData = new FormData(recoveryForm);
-        const email = formData.get("email");
+    recoveryForm.addEventListener("submit", async () => {
+      const formData = new FormData(recoveryForm);
+      const email = formData.get("email");
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/auth/recovery",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email }),
-            }
-          );
-
-          if (!response.ok) {
-            throw new Error("Failed to send recovery email");
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/auth/recovery",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
           }
-          if (response.ok) {
-            window.location.href= "login.html"; // Redireccionar después de 3 segundos
-          }
-          // Redireccionar al usuario a login.html después de un tiempo
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Failed to sent email");
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to send recovery email");
         }
-      });
-    </script>
-  </body>
+        if (response.ok) {
+          window.location.href = "login.html"; // Redireccionar después de 3 segundos
+        }
+        // Redireccionar al usuario a login.html después de un tiempo
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to sent email");
+      }
+    });
+  </script>
+</body>
+
 </html>
