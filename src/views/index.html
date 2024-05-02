@@ -14,7 +14,7 @@
         padding: 0;
       }
       #map-template {
-        height: 500px; /* Ajusta la altura según tus necesidades */
+        height: 500px;
       }
     </style>
   </head>
@@ -23,7 +23,7 @@
 <<<<<<< HEAD
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 =======
-    
+
     <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -44,7 +44,7 @@
       // Función para obtener los puntos desde el endpoint
       async function getMapPoints() {
         try {
-          const response = await fetch("http://localhost:3000/api/v1/points"); // Cambia la URL según tu configuración
+          const response = await fetch("http://localhost:3000/api/v1/points");
           const mapPoints = await response.json();
           return mapPoints;
         } catch (error) {
