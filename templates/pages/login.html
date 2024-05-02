@@ -18,7 +18,29 @@
 
 <body>
   <header>
-    
+    <div class="navbar">
+      <div class="logo"><a>Ecounity</a></div>
+      <ul class="links">
+        <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
+        <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
+        <li><a href="/EcoUnity/src/views/index.html">Puntos de reciclaje</a></li>
+        <li><a href="/EcoUnity/src/views/index.html">Puntos de reforestación</a></li>
+        <li><a href="#">Información</a></li>
+      </ul>
+      <a href="/EcoUnity/templates/pages/login.html" class="action_btn">Acceder</a>
+      <div class="toggle_btn">
+        <i class='bx bx-menu'></i>
+      </div>
+
+      <div class="dropdown-menu ">
+        <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
+        <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
+        <li><a href="/EcoUnity/src/views/index.html">Puntos de reciclaje</a></li>
+        <li><a href="/EcoUnity/src/views/index.html">Puntos de reforestación</a></li>
+        <li><a href="#">Información</a></li>
+        <li><a href="/EcoUnity/templates/pages/login.html" class="action_btn">Acceder</a></li>
+      </div>
+    </div>
   </header>
 
   <section>
@@ -53,7 +75,7 @@
       <div class="information">
         <div class="info-childs">
           <h2>Inicia Sesión</h2>
-          <p>Para conocer todos los beneficios crea una cuenta con nosotros o accede desde el siguiente link .</p>
+          <p>Si no tienes una cuenta registrada, ingresa al siguente link y resgistrate</p>
           <button onclick="location.href='cuenta.html'" class="registrarse">Registrarse</button>
         </div>
       </div>
@@ -64,34 +86,15 @@
 
 
 
-
-
-  <!-- <section>
-    <div class="container-login">
-      <div class="form-container">
-        <form id="loginForm" class="form">
-          <label for="email" class="label">Correo electrónico</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="input input-email"
-            required
-          />
-          <label for="password" class="label">Contraseña</label>
-          <input type="password" id="password" name="password" class="input input-password" required/>
-          <button type="submit" class="primary-button login-button">Ingresar</button>
-          <a href="./recuperar.html">Recordar mi contraseña</a>
-        </form>
-  
-        <form action="/EcoUnity/templates/pages/cuenta.html" class="form">
-          <button class="secondary-button signup-button">Registrarse</button>
-        </form>
-      </div>
-    </div>
-  </section> -->
-
   <script>
+
+    const toggleBtn = document.querySelector('.toggle_btn')
+    const toggleBtnIcon = document.querySelector('.toggle_btn i')
+    const dropDownMenu = document.querySelector('.dropdown-menu')
+
+    toggleBtn.onclick = function (){
+      dropDown_menu.classList.toggle('open')
+    }
 
     const loginForm = document.getElementById("loginForm");
     loginForm.addEventListener("submit", async (event) => {
