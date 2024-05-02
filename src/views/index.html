@@ -187,12 +187,12 @@
       margin-top: 20px;
     }
 
-    button{
+    button {
       height: 80px;
       width: 300px;
       border-radius: 20px;
       background-color: var(--hospital-green);
-      font-size: var(--md) ;
+      font-size: var(--md);
       cursor: pointer;
       box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
       transition: scale .2ease;
@@ -209,7 +209,6 @@
       scale: 0.95;
     }
 
-
     header {
       position: relative;
       top: 0;
@@ -220,7 +219,7 @@
       box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
     }
 
-    .container span{
+    .container span {
       font-size: 2.5rem;
       font-weight: bold;
       color: var(--hospital-green);
@@ -247,17 +246,17 @@
         <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
         <li><a href="#">Información</a></li>
       </ul>
-      <a href="./login.html" class="action_btn">Acceder</a>
+      <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
       <div class="toggle_btn">
         <i class="bx bx-menu"></i>
       </div>
       <div class="dropdown-menu">
-        <li><a href="./inicio.html">Inicio</a></li>
-        <li><a href="./prueba.html">Productos</a></li>
+        <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
+        <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
         <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
         <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
         <li><a href="#">Información</a></li>
-        <li><a href="./login.html" class="action_btn">Acceder</a></li>
+        <li><a href="./../../templates/pages/login.html" class="action_btn">Acceder</a></li>
       </div>
     </div>
   </header>
@@ -267,8 +266,8 @@
     <div id="map-template">
     </div>
 
-    <button class="button">Información</button>
-    
+    <button id="info-btn" class="button">Información</button>
+
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -299,6 +298,7 @@
       const mapPoints = await getMapPoints();
 
       mapPoints.forEach((point) => {
+        const popupContent = `<b>${point.title}</b><br>${point.description}`;
         const circle = L.circle([point.latitude, point.longitude], {
           color: "green",
           fillColor: "green",
@@ -306,11 +306,7 @@
           radius: 500,
         }).addTo(map);
 
-        circle.bindPopup(point.title);
-
-        if (point.description) {
-          circle.bindPopup(point.description);
-        }
+        circle.bindPopup(popupContent);
       });
     }
 
@@ -321,15 +317,12 @@
 
     // Mostrar/ocultar recomendaciones al hacer clic en el botón "Información"
     const infoBtn = document.getElementById('info-btn');
-    const infoTitle = document.getElementById('info-title');
-    const recomendations = document.querySelector('.recomendations');
 
     infoBtn.addEventListener('click', () => {
+      const recomendations = document.querySelector('.recomendations');
       if (recomendations.style.display === 'none') {
-        infoTitle.style.display = 'block';
         recomendations.style.display = 'flex';
       } else {
-        infoTitle.style.display = 'none';
         recomendations.style.display = 'none';
       }
     });
