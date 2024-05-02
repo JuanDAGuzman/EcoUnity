@@ -1,119 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Products Management</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./../../static/products.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Products Management</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./../../static/products.css">
-</head>
+  <body>
+    <header>
+      <ul class="navbar">
+        <li>
+          <a href="#home" class="home-active">Anadir punto de reciclaje</a>
+        </li>
+        <li><a href="./map-crud.html">Añadir punto de reforestación</a></li>
 
-<body>
-  <header>
-    <ul class="navbar">
-      <li><a href="#home" class="home-active">Anadir punto de reciclaje</a></li>
-      <li><a href="#categorias">Anadir punto de reforestacion</a></li>
-      <li><a href="#añadirproductos">Añadir productos</a></li>
-      <li><a href="#añadirproductos">Administar usuarios</a></li>
-      <li><a href="#editar">Editar</a></li>
-    </ul>
-    <div class="container-button">
-      <button id="logoutButton" class="button-logout">Cerrar sesión</button>
+        <li><a href="#añadirproductos">Añadir productos</a></li>
+        <li><a href="#añadirproductos">Administar usuarios</a></li>
+        <li><a href="#editar">Editar</a></li>
+      </ul>
+      <div class="container-button">
+        <button id="logoutButton" class="button-logout">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <div class="container-create">
+      <h1>CREAR NUEVO PRODUCTO</h1>
+      <div class="create-product-form">
+        <form id="createProductForm">
+          <div class="mb-3">
+            <label for="productName" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="productName" required />
+          </div>
+          <div class="mb-3">
+            <label for="productPrice" class="form-label">Precio</label>
+            <input
+              type="number"
+              class="form-control"
+              id="productPrice"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="productDescription" class="form-label"
+              >Descripcion</label
+            >
+            <textarea
+              class="form-control"
+              id="productDescription"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="productImage" class="form-label"
+              >URL de la imagen
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="productImage"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="productCategory" class="form-label"
+              >Categoria ID
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              id="productCategory"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+      </div>
     </div>
-  </header>
-
-  <div class="container-create">
-    <h1>CREAR NUEVO PRODUCTO</h1>
-    <div class="create-product-form">
-      <form id="createProductForm">
-        <div class="mb-3">
-          <label for="productName" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="productName" required />
-        </div>
-        <div class="mb-3">
-          <label for="productPrice" class="form-label">Precio</label>
-          <input type="number" class="form-control" id="productPrice" required />
-        </div>
-        <div class="mb-3">
-          <label for="productDescription" class="form-label">Descripcion</label>
-          <textarea class="form-control" id="productDescription" rows="3" required></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="productImage" class="form-label">URL de la imagen </label>
-          <input type="text" class="form-control" id="productImage" required />
-        </div>
-        <div class="mb-3">
-          <label for="productCategory" class="form-label">Categoria ID </label>
-          <input type="number" class="form-control" id="productCategory" required />
-        </div>
-        <button type="submit" class="btn btn-primary">Agregar</button>
-      </form>
+    <div id="updateProductModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="updateTitle">Actualizar Producto</h2>
+        <form id="updateProductForm">
+          <label for="updateField">Campo a actualizar:</label>
+          <select id="updateField">
+            <option value="name">Nombre</option>
+            <option value="price">Precio</option>
+            <option value="description">Descripción</option>
+            <option value="image">Imagen</option>
+          </select>
+          <label for="updateValue">Nuevo valor:</label>
+          <input type="text" id="updateValue" required />
+          <input type="hidden" id="productId" />
+          <button type="submit">Actualizar</button>
+        </form>
+      </div>
     </div>
-  </div>
-  <div id="updateProductModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2 id="updateTitle">Actualizar Producto</h2>
-      <form id="updateProductForm">
-        <label for="updateField">Campo a actualizar:</label>
-        <select id="updateField">
-          <option value="name">Nombre</option>
-          <option value="price">Precio</option>
-          <option value="description">Descripción</option>
-          <option value="image">Imagen</option>
-        </select>
-        <label for="updateValue">Nuevo valor:</label>
-        <input type="text" id="updateValue" required />
-        <input type="hidden" id="productId" />
-        <button type="submit">Actualizar</button>
-      </form>
+    <div class="container-products">
+      <h1>PRODUCTOS AÑADIDOS</h1>
+      <div class="row" id="data"></div>
     </div>
-  </div>
-  <div class="container-products">
-    <h1>PRODUCTOS AÑADIDOS</h1>
-    <div class="row" id="data"></div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script>
-    const logoutButton = document.getElementById("logoutButton");
-    const createProductForm = document.getElementById("createProductForm");
-    const dataContainer = document.getElementById("data");
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // Después de obtener el token al iniciar sesión
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get("token");
 
-    logoutButton.addEventListener("click", () => {
-      localStorage.removeItem("token");
-      window.location.href = "login.html";
-    });
 
-    const loadAllProducts = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          "http://localhost:3000/api/v1/products",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const products = await response.json();
-        updateTable(products);
-      } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to fetch products");
+
+
+      if (token) {
+        localStorage.setItem("token", token);
       }
-    };
 
-    const updateTable = (products) => {
-      let body = "";
-      for (const product of products) {
-        body += `
+      const logoutButton = document.getElementById("logoutButton");
+      const createProductForm = document.getElementById("createProductForm");
+      const dataContainer = document.getElementById("data");
+
+      logoutButton.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      });
+
+      const loadAllProducts = async () => {
+        try {
+          const token = localStorage.getItem("token");
+          const response = await fetch(
+            "http://localhost:3000/api/v1/products",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          if (!response.ok) {
+            throw new Error("Failed to fetch products");
+          }
+          const products = await response.json();
+          updateTable(products);
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Failed to fetch products");
+        }
+      };
+
+      const updateTable = (products) => {
+        let body = "";
+        for (const product of products) {
+          body += `
       <div class="col-md-3 mb-4">
         <div class="product-box">
           <img src="${product.image}" alt="${product.name}" class="img-fluid">
@@ -128,142 +173,142 @@
         </div>
       </div>
     `;
-      }
-      dataContainer.innerHTML = body;
+        }
+        dataContainer.innerHTML = body;
 
-      const updateButtons = document.querySelectorAll(".update-button");
-      updateButtons.forEach((button) => {
-        button.addEventListener("click", function () {
-          updateProductModal.style.display = "block";
-          const productId = this.dataset.productId;
-          document.getElementById("productId").value = productId;
-          document.getElementById(
-            "updateTitle"
-          ).textContent = `Actualizar Producto ID: ${productId}`;
+        const updateButtons = document.querySelectorAll(".update-button");
+        updateButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            updateProductModal.style.display = "block";
+            const productId = this.dataset.productId;
+            document.getElementById("productId").value = productId;
+            document.getElementById(
+              "updateTitle"
+            ).textContent = `Actualizar Producto ID: ${productId}`;
+          });
         });
-      });
-    };
-
-    const deleteProduct = async (productId) => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `http://localhost:3000/api/v1/products/${productId}`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to delete product");
-        }
-
-        alert("Product deleted successfully!");
-        loadAllProducts();
-      } catch (error) {
-        console.error("Error:", error);
-        if (error instanceof SyntaxError) {
-          alert("Failed to delete product: Unauthorized");
-        } else {
-          alert("Failed to delete product");
-        }
-      }
-    };
-
-    const updateProductModal = document.getElementById("updateProductModal");
-    const closeBtn = document.getElementsByClassName("close")[0];
-
-    closeBtn.addEventListener("click", function () {
-      updateProductModal.style.display = "none";
-    });
-
-    const updateProductForm = document.getElementById("updateProductForm");
-    updateProductForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const productId = document.getElementById("productId").value;
-      const field = document.getElementById("updateField").value;
-      const value = document.getElementById("updateValue").value;
-
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `http://localhost:3000/api/v1/products/${productId}`,
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              [field]: value,
-            }),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to update product");
-        }
-
-        alert("Product updated successfully!");
-        updateProductModal.style.display = "none";
-        setTimeout(loadAllProducts, 500);
-      } catch (error) {
-        console.error("Error:", error);
-        if (error instanceof SyntaxError) {
-          alert("Failed to update product: Unauthorized");
-        } else {
-          alert("Failed to update product");
-        }
-      }
-    });
-
-    createProductForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const productData = {
-        name: document.getElementById("productName").value,
-        price: parseFloat(document.getElementById("productPrice").value),
-        description: document.getElementById("productDescription").value,
-        image: document.getElementById("productImage").value,
-        categoryId: parseInt(
-          document.getElementById("productCategory").value
-        ),
       };
 
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          "http://localhost:3000/api/v1/products",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(productData),
+      const deleteProduct = async (productId) => {
+        try {
+          const token = localStorage.getItem("token");
+          const response = await fetch(
+            `http://localhost:3000/api/v1/products/${productId}`,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to delete product");
           }
-        );
 
-        if (!response.ok) {
-          throw new Error("Failed to create product");
+          alert("Product deleted successfully!");
+          loadAllProducts();
+        } catch (error) {
+          console.error("Error:", error);
+          if (error instanceof SyntaxError) {
+            alert("Failed to delete product: Unauthorized");
+          } else {
+            alert("Failed to delete product");
+          }
         }
+      };
 
-        alert("Product created successfully!");
-        setTimeout(loadAllProducts, 500);
-      } catch (error) {
-        console.error("Error:", error);
-        if (error instanceof SyntaxError) {
-          alert("Failed to create product: Unauthorized");
-        } else {
-          alert("Failed to create product");
+      const updateProductModal = document.getElementById("updateProductModal");
+      const closeBtn = document.getElementsByClassName("close")[0];
+
+      closeBtn.addEventListener("click", function () {
+        updateProductModal.style.display = "none";
+      });
+
+      const updateProductForm = document.getElementById("updateProductForm");
+      updateProductForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const productId = document.getElementById("productId").value;
+        const field = document.getElementById("updateField").value;
+        const value = document.getElementById("updateValue").value;
+
+        try {
+          const token = localStorage.getItem("token");
+          const response = await fetch(
+            `http://localhost:3000/api/v1/products/${productId}`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                [field]: value,
+              }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to update product");
+          }
+
+          alert("Product updated successfully!");
+          updateProductModal.style.display = "none";
+          setTimeout(loadAllProducts, 500);
+        } catch (error) {
+          console.error("Error:", error);
+          if (error instanceof SyntaxError) {
+            alert("Failed to update product: Unauthorized");
+          } else {
+            alert("Failed to update product");
+          }
         }
-      }
-    });
+      });
 
-    loadAllProducts();
-  </script>
-</body>
+      createProductForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const productData = {
+          name: document.getElementById("productName").value,
+          price: parseFloat(document.getElementById("productPrice").value),
+          description: document.getElementById("productDescription").value,
+          image: document.getElementById("productImage").value,
+          categoryId: parseInt(
+            document.getElementById("productCategory").value
+          ),
+        };
 
+        try {
+          const token = localStorage.getItem("token");
+          const response = await fetch(
+            "http://localhost:3000/api/v1/products",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify(productData),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to create product");
+          }
+
+          alert("Product created successfully!");
+          setTimeout(loadAllProducts, 500);
+        } catch (error) {
+          console.error("Error:", error);
+          if (error instanceof SyntaxError) {
+            alert("Failed to create product: Unauthorized");
+          } else {
+            alert("Failed to create product");
+          }
+        }
+      });
+      // Después de obtener el token al iniciar sesión
+
+      loadAllProducts();
+    </script>
+  </body>
 </html>
