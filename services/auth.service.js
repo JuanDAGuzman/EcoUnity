@@ -53,7 +53,6 @@ class AuthService {
     const payload = { sub: user.id };
     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '15min' });
     const link = `http://127.0.0.1:5500/templates/pages/change-password.html?token=${token}`;
-
     await service.update(user.id, { recoveryToken: token });
 
     const mail = {
@@ -63,9 +62,11 @@ class AuthService {
       html: htmlContent.replace('${link}', link),
     };
 
-    const response = await this.sendMail(mail);
-    return response;
-  }
+    await this.sendMail(mail);
+
+    return { message: 'mail sent' };
+
+    }
   async changePassword(token, newPassword) {
     try {
       const payload = jwt.verify(token, config.jwtSecret);

@@ -1,149 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@300..700&display=swap"
-    rel="stylesheet" />
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-  <link />
-  <link rel="stylesheet" href="/EcoUnity/static/login.css">
-  <title>Login</title>
-</head>
-
-<body>
-  <header>
-    <div class="navbar">
-      <div class="logo"><a>Ecounity</a></div>
-      <ul class="links">
-        <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
-        <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
-        <li><a href="/EcoUnity/src/views/index.html">Puntos de reciclaje</a></li>
-        <li><a href="/EcoUnity/src/views/index.html">Puntos de reforestación</a></li>
-        <li><a href="#">Información</a></li>
-      </ul>
-      <a href="/EcoUnity/templates/pages/login.html" class="action_btn">Acceder</a>
-      <div class="toggle_btn">
-        <i class='bx bx-menu'></i>
-      </div>
-
-      <div class="dropdown-menu ">
-        <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
-        <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
-        <li><a href="/EcoUnity/src/views/index.html">Puntos de reciclaje</a></li>
-        <li><a href="/EcoUnity/src/views/index.html">Puntos de reforestación</a></li>
-        <li><a href="#">Información</a></li>
-        <li><a href="/EcoUnity/templates/pages/login.html" class="action_btn">Acceder</a></li>
-      </div>
-    </div>
-  </header>
-
-  <section>
-    <div class="container-form login">
-      <div class="form-information">
-        <div class="form-information-childs">
-          <h1>Accede con tu usuario y contraseña</h1>
-          <form class="form form-login">
-            <div>
-              <label>
-                <i class='bx bxs-user'></i>
-                <input type="email" id="email" name="email" class="input input-email"  placeholder="Usuario o correo" required />
-              </label>
-            </div>
-            <div>
-              <label>
-                <i class='bx bx-lock-alt'></i>
-                <input type="password" id="password" name="password" class="input input-password"  placeholder="Contraseña"    required />
-              </label>
-              <button type="submit" class="primary-button login-button">Ingresar</button>
-              <a href="./recuperar.html" >Recordar mi contraseña</a>
-            </div>
-            <div class="icons">
-              <i class='bx bxl-google'></i>
-              <i class='bx bxl-github'></i>
-              <i class='bx bxl-linkedin'></i>
-            </div>
-          </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="./../../static/login.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo"><a>Ecounity</a></div>
+        <ul class="links">
+          <li><a href="./inicio.html">Inicio</a></li>
+          <li><a href="./prueba.html">Productos</a></li>
+          <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
+          <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
+          <li><a href="#">Información</a></li>
+        </ul>
+        <a href="./login.html" class="action_btn">Acceder</a>
+        <div class="toggle_btn">
+          <i class="bx bx-menu"></i>
+        </div>
+        <div class="dropdown-menu">
+          <li><a href="./inicio.html">Inicio</a></li>
+          <li><a href="./prueba.html">Productos</a></li>
+          <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
+          <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
+          <li><a href="#">Información</a></li>
+          <li><a href="./login.html" class="action_btn">Acceder</a></li>
         </div>
       </div>
-
-      <div class="information">
-        <div class="info-childs">
-          <h2>Inicia Sesión</h2>
-          <p>Si no tienes una cuenta registrada, ingresa al siguente link y resgistrate</p>
-          <button onclick="location.href='cuenta.html'" class="registrarse">Registrarse</button>
+    </header>
+    <section>
+      <div class="container-form login">
+        <div class="form-information">
+          <div class="form-information-childs">
+            <h1>Accede con tu usuario y contraseña</h1>
+            <form class="form form-login" id="loginForm">
+              <div>
+                <label>
+                  <i class="bx bxs-user"></i>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="input input-email"
+                    placeholder="Usuario o correo"
+                    required
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  <i class="bx bx-lock-alt"></i>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="input input-password"
+                    placeholder="Contraseña"
+                    required
+                  />
+                </label>
+                <button type="submit" class="primary-button login-button">Ingresar</button>
+                <a href="./recovery.html">Recordar mi contraseña</a>
+              </div>
+              <div class="icons">
+                <i class="bx bxl-google"></i>
+                <i class="bx bxl-github"></i>
+                <i class="bx bxl-linkedin"></i>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="information">
+          <div class="info-childs">
+            <h2>Inicia Sesión</h2>
+            <p>Si no tienes una cuenta registrada, ingresa al siguiente link y regístrate</p>
+            <button onclick="location.href='cuenta.html'" class="registrarse">Registrarse</button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <script>
+      const toggleBtn = document.querySelector(".toggle_btn");
+      const dropDownMenu = document.querySelector(".dropdown-menu");
 
-
-
-
-
-  <script>
-
-    const toggleBtn = document.querySelector('.toggle_btn')
-    const toggleBtnIcon = document.querySelector('.toggle_btn i')
-    const dropDownMenu = document.querySelector('.dropdown-menu')
-
-    toggleBtn.onclick = function (){
-      dropDown_menu.classList.toggle('open')
-    }
-
-    const loginForm = document.getElementById("loginForm");
-    loginForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const formData = new FormData(loginForm);
-      const loginData = {
-        email: formData.get("email"),
-        password: formData.get("password"),
+      toggleBtn.onclick = function () {
+        dropDownMenu.classList.toggle("open");
       };
 
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v1/auth/login",
-          {
+      const loginForm = document.getElementById("loginForm");
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(loginForm);
+        const loginData = {
+          email: formData.get("email"),
+          password: formData.get("password"),
+        };
+
+        try {
+          const response = await fetch("http://localhost:3000/api/v1/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(loginData),
+          });
+
+          if (!response.ok) {
+            throw new Error("Login failed");
           }
-        );
 
-        if (!response.ok) {
-          throw new Error("Login failed");
+          const data = await response.json();
+          const token = data.token;
+          const role = data.user.role;
+
+          // Guardar el token en el almacenamiento local
+          localStorage.setItem("token", token);
+
+          // Redireccionar según el rol del usuario
+          if (role === "admin" || role === "seller") {
+            window.location.href = "products.html"; // Redirigir a products.html
+          } else if (role === "customer") {
+            window.location.href = "prueba.html"; // Redirigir a prueba.html
+          }
+
+          // Imprimir el token en la consola para verificar
+          console.log("Token:", token);
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Failed to login");
         }
-
-        const data = await response.json();
-        const token = data.token;
-        const role = data.user.role;
-
-        // Obtener el rol del usuario
-        // Guardar el token en el almacenamiento local
-        localStorage.setItem("token", token);
-
-        // Redireccionar según el rol del usuario
-        if (role === "admin" || role === "seller") {
-          window.location.href = "products.html"; // Redirigir a products.html
-        } else if (role === "customer") {
-          window.location.href = "prueba.html"; // Redirigir a prueba.html
-        }
-
-        // Imprimir el token en la consola para verificar
-        console.log("Token:", token);
-      } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to login");
-      }
-    });
-  </script>
-</body>
-
+      });
+    </script>
+  </body>
 </html>

@@ -1,32 +1,50 @@
-require('dotenv').config();
-const {config} = require('./config/config');
+const express = require("express");
+const nodemailer = require("nodemailer");
+const bodyParser = require("body-parser");
 
-const nodemailer = require('nodemailer');
+const app = express();
+app.use(bodyParser.json());
 
+// Configuración de nodemailer
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+  host: "smtp.gmail.com",
   secure: true,
   port: 465,
   auth: {
     user: config.mailUser,
     pass: config.mailPass,
-
   },
 });
 
-// async..await is not allowed in global scope, must use a wrapper
-async function main() {
-  // send mail with defined transport object
-  const info = await transporter.sendMail({
-    from: config.mailUser, // sender address
-    to: 'guzmanjuan796@gmail.com', // list of receivers
-    subject: 'NUEVO CORREO', // Subject line
-    text: 'BIENVENID@', // plain text body
-    html: '<b>Hello world?</b>', // html body
-  });
+// Middleware para manejar errores
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Internal Server Error");
+});
 
-  console.log('Message sent: %s', info.messageId);
-  // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
-}
+// Ruta para manejar la solicitud de recuperación de contraseña
+app.post("/api/v1/auth/recovery", async (req, res, next) => {
+  const { email } = req.body;
 
-main();
+  try {
+    // Envía el correo de recuperación al correo electrónico proporcionado por el usuario
+    const info = await transporter.sendMail({
+      from: config.mailUser, // Remitente
+      to: email, // Destinatario
+      subject: "NUEVO CORREO", // Asunto
+      text: "BIENVENID@", // Cuerpo del correo electrónico (texto sin formato)
+      html: "<b>Hello world?</b>", // Cuerpo del correo electrónico (HTML)
+    });
+
+    console.log("Message sent: %s", info.messageId);
+    res.sendStatus(200); // Envío exitoso
+  } catch (error) {
+    console.error("Error sending email:", error);
+    next(error); // Pasa el error al middleware de manejo de errores
+  }
+});
+
+// Inicia el servidor
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});

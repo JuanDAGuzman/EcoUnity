@@ -1,124 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mapa con Leaflet</title>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa EcoUnity</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-      * {
-        font-family: "Poppins", "sans-serif";
-      }
+    * {
+      font-family: "Poppins", "sans-serif";
+      box-sizing: border-box;
+    }
 
-      body {
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(
-          to right,
-          rgb(196, 252, 196),
-          rgb(214, 245, 165)
-        );
-      }
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, rgb(196, 252, 196), rgb(214, 245, 165));
+    }
 
-      .navbar {
-        display: flex;
-        column-gap: 0.5rem;
-        margin: 0.3rem;
-      }
+    .navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #fff;
+      padding: 1rem 2rem;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-      .navbar a {
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: var(--text-color);
-        padding: 0.8rem 1rem;
-      }
+    .navbar a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      margin: 0 1rem;
+    }
 
-      .navbar a:hover,
-      .navbar .home-active {
-        background: var(--hospital-green);
-        border-radius: 5rem;
-        color: var(--bg-color);
-      }
+    .navbar a:hover {
+      color: green;
+    }
 
-      .containerMap {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-      }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      text-align: center;
+    }
 
-      #map-template {
-        margin-top: 30px;
-        height: 50%;
-        width: 100%;
-        top: 0;
-        position: absolute;
-        display: flex;
-        justify-items: center;
-      }
+    #map-template {
+      height: 70vh;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
 
-      h1 {
-        display: flex;
-        justify-content: center;
-        margin-top: 27%;
-        font-size: 2rem;
-        font-weight: 700;
-      }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 2rem;
+    }
 
-      .recomendations {
-        display: flex;
-        justify-content: center;
-        margin-left: 50px;
-        margin-right: 50px;
-        padding: 10px;
-      }
+    .recomendations {
+      display: none;
+    }
 
+    .recomendations div {
+      flex: 1 1 45%;
+      margin: 0.5rem;
+      padding: 1rem;
+      background-color: rgb(184, 252, 184);
+      border: black solid 1px;
+      text-align: center;
+    }
+
+    .recomendations div p {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    @media only screen and (max-width: 600px) {
       .recomendations div {
-        all: unset;
-        text-align: center;
-        background-color: rgb(184, 252, 184);
-        border: black solid 1px;
+        flex-basis: 100%;
       }
-      .recomendations div p {
-        font-size: 0.9rem;
-        margin-top: 10px;
-        text-align: center;
-      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="./../../templates/pages/inicio.html" class="home-active">Inicio</a>
+    <a href="#" id="info-btn">Información</a>
+  </div>
 
-      .popuTextTitle {
-        font-size: 0.9rem;
-        display: flex;
-        justify-content: center;
-      }
-
-      .popuRecomend {
-        font-size: 0.8rem;
-        margin-top: 10px;
-      }
-
-      .popuConsiderations {
-        font-size: 0.8rem;
-        margin-top: 10px;
-      }
-    </style>
-  </head>
-  <body>
+  <div class="container">
+    <h1 id="info-title" style="display:none;">RECOMENDACIONES GENERALES PARA PLANTAR</h1>
     <div id="map-template"></div>
 
-    <ul class="navbar">
-      <li>
-        <a href="./../../templates/pages/inicio.html" class="home-active"
-          >Inicio</a
-        >
-      </li>
-      <li><a href="#information">Informacion</a></li>
-    </ul>
-
-    <h1>RECOMENDACIONES GENERALES PARA PLANTAR</h1>
     <section class="recomendations">
       <div>
         Preparación del suelo
@@ -149,54 +125,70 @@
         </p>
       </div>
     </section>
+  </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-      // Inicializa el mapa
-      const map = L.map("map-template").setView([4.6089, -74.0875], 12);
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Inicializa el mapa
+    const map = L.map("map-template").setView([4.6089, -74.0875], 12);
 
-      // Agrega una capa base de OpenStreetMap
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
+    // Agrega una capa base de OpenStreetMap
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
 
-      // Función para obtener los puntos desde el endpoint
-      async function getMapPoints() {
-        try {
-          const response = await fetch("http://localhost:3000/api/v1/points");
-          const mapPoints = await response.json();
-          return mapPoints;
-        } catch (error) {
-          console.error("Error fetching map points:", error);
-          return [];
+    // Función para obtener los puntos desde el endpoint
+    async function getMapPoints() {
+      try {
+        const response = await fetch("http://localhost:3000/api/v1/points");
+        const mapPoints = await response.json();
+        return mapPoints;
+      } catch (error) {
+        console.error("Error fetching map points:", error);
+        return [];
+      }
+    }
+
+    // Función para crear círculos en el mapa
+    async function createMapCircles() {
+      const mapPoints = await getMapPoints();
+
+      mapPoints.forEach((point) => {
+        const circle = L.circle([point.latitude, point.longitude], {
+          color: "green",
+          fillColor: "green",
+          fillOpacity: 0.25,
+          radius: 500,
+        }).addTo(map);
+
+        circle.bindPopup(point.title);
+
+        if (point.description) {
+          circle.bindPopup(point.description);
         }
+      });
+    }
+
+    // Carga los círculos cuando el mapa esté listo
+    window.onload = async () => {
+      await createMapCircles();
+    };
+
+    // Mostrar/ocultar recomendaciones al hacer clic en el botón "Información"
+    const infoBtn = document.getElementById('info-btn');
+    const infoTitle = document.getElementById('info-title');
+    const recomendations = document.querySelector('.recomendations');
+
+    infoBtn.addEventListener('click', () => {
+      if (recomendations.style.display === 'none') {
+        infoTitle.style.display = 'block';
+        recomendations.style.display = 'flex';
+      } else {
+        infoTitle.style.display = 'none';
+        recomendations.style.display = 'none';
       }
-
-      // Función para crear círculos en el mapa
-      async function createMapCircles() {
-        const mapPoints = await getMapPoints();
-
-        mapPoints.forEach((point) => {
-          const circle = L.circle([point.latitude, point.longitude], {
-            color: "green",
-            fillColor: "green",
-            fillOpacity: 0.25,
-            radius: 500,
-          }).addTo(map);
-
-          circle.bindPopup(point.title);
-
-          if (point.description) {
-            circle.bindPopup(point.description);
-          }
-        });
-      }
-
-      // Carga los círculos cuando el mapa esté listo
-      window.onload = async () => {
-        await createMapCircles();
-      };
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>

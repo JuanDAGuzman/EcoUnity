@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,80 +7,74 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Box Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-  <link />
-  <link rel="stylesheet" href="/EcoUnity/static/cuenta.css">
-  <title>Document</title>
+  <link rel="stylesheet" href="./../../static/cuenta.css">
+  <title>Registro</title>
 </head>
-
 <body>
   <header>
     <div class="navbar">
       <div class="logo"><a>Ecounity</a></div>
       <ul class="links">
-        <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
-        <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
-        <li><a href="/EcoUnity/src/views/index.html">Puntos de reciclaje</a></li>
-        <li><a href="/EcoUnity/src/views/index.html">Puntos de reforestación</a></li>
+        <li><a href="./inicio.html">Inicio</a></li>
+        <li><a href="./prueba.html">Productos</a></li>
+        <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
+        <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
         <li><a href="#">Información</a></li>
       </ul>
-      <a href="/EcoUnity/templates/pages/login.html" class="action_btn">Acceder</a>
+      <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
       <div class="toggle_btn">
         <i class='bx bx-menu'></i>
       </div>
-
       <div class="dropdown-menu ">
-        <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
-        <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
-        <li><a href="/EcoUnity/src/views/index.html">Puntos de reciclaje</a></li>
-        <li><a href="/EcoUnity/src/views/index.html">Puntos de reforestación</a></li>
+        <li><a href="./inicio.html">Inicio</a></li>
+        <li><a href="./prueba.html">Productos</a></li>
+        <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
+        <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
         <li><a href="#">Información</a></li>
-        <li><a href="/EcoUnity/templates/pages/login.html" class="action_btn">Acceder</a></li>
+        <li><a href="./login.html" class="action_btn">Acceder</a></li>
       </div>
     </div>
   </header>
 
   <section>
-  <div class="container-form register">
-    <div class="information">
-      <div class="info-childs">
-        <h2>Bienvenido a EcoUnity</h2>
-        <p>Para conocer todos los beneficios crea una cuenta con nosotros o accede desde el siguiente link .</p>
-        <button onclick="location.href='login.html'" class="login">
-          Acceder
-        </button>
+    <div class="container-form register">
+      <div class="information">
+        <div class="info-childs">
+          <h2>Bienvenido a EcoUnity</h2>
+          <p>Para conocer todos los beneficios crea una cuenta con nosotros o accede desde el siguiente link .</p>
+          <button onclick="location.href='login.html'" class="login">Acceder</button>
+        </div>
+      </div>
+      <div class="form-information">
+        <div class="form-information-childs">
+          <h2>Registra tus datos</h2>
+
+          <form id="registerForm" class="form">
+            <div>
+              <label>
+                <i class='bx bx-envelope'></i>
+                <input type="email" placeholder="Correo Electrónico" id="email" name="email" class="input input-email" required>
+              </label>
+            </div>
+            <div>
+              <label>
+                <i class='bx bx-lock-alt'></i>
+                <input type="password" placeholder="Contraseña" id="password" name="password" class="input input-password" required>
+              </label>
+
+              <button type="submit" class="primary-button login-button">Crear cuenta</button>
+            </div>
+            <div class="icons">
+              <i class='bx bxl-google'></i>
+              <i class='bx bxl-facebook'></i>
+              <i class='bx bxl-github'></i>
+              <i class='bx bxl-tiktok'></i>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-    <div class="form-information">
-      <div class="form-information-childs">
-        <h2>Registra tus datos</h2>
-
-        <form class="form form-register">
-          <div>
-            <label>
-              <i class='bx bx-envelope'></i>
-              <input type="email" placeholder="Correo Electronico" name="userEmail">
-            </label>
-          </div>
-          <div>
-            <label>
-              <i class='bx bx-lock-alt'></i>
-              <input type="password" placeholder="Contraseña" name="userPassword">
-            </label>
-
-            <button type="submit" class="primary-button login-button">
-              Crear cuenta
-            </button>
-          </div>
-          <div class="icons">
-            <i class='bx bxl-google'></i>
-            <i class='bx bxl-github'></i>
-            <i class='bx bxl-linkedin'></i>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
   <script>
     const registerForm = document.getElementById("registerForm");
@@ -115,9 +108,5 @@
       }
     });
   </script>
-  </div>
-  </div>
-  </div>
 </body>
-
 </html>
