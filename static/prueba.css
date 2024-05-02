@@ -64,12 +64,12 @@ a:hover::before {
 }
 
 header {
-  position: fixed;  
-  top: 0;  
-  left: 0;  
-  right: 0;  
-  border-bottom: 2px solid var(--hospital-green); 
-  background-color: white;  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid var(--hospital-green);
+  background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
@@ -88,7 +88,7 @@ header {
   font-weight: bold;
 }
 
-.navbar .links { 
+.navbar .links {
   display: flex;
   gap: 1rem;
 }

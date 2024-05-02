@@ -41,15 +41,15 @@ li{
     list-style: none;
     padding: 0 40px;
   }
-  
+
   a{
     text-decoration: none;
     color: var(--black);
     font-size: 1rem;
     position: relative;
   }
-  
-  
+
+
   a::before {
     content: '';
     position: absolute;
@@ -60,21 +60,21 @@ li{
     background: var(--hospital-green);
     transition: all 0.4s;
   }
-  
+
   a:hover::before {
     width: 100%;  /* El borde se extiende de izquierda a derecha */
   }
-  
+
   header {
-    position: fixed;  
-    top: 0;  
-    left: 0;  
-    right: 0;  
-    border-bottom: 2px solid var(--hospital-green); 
-    background-color: white;  
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 2px solid var(--hospital-green);
+    background-color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
   }
-  
+
   .navbar{
     width: 100%;
     height: 80px;
@@ -84,24 +84,24 @@ li{
     align-items: center;
     justify-content: space-between;
   }
-  
+
   .navbar .logo a{
     font-size: 1.5rem;
     font-weight: bold;
   }
-  
-  .navbar .links { 
+
+  .navbar .links {
     display: flex;
     gap: 1rem;
   }
-  
+
   .toggle_btn{
     color: var(--hospital-green);
     font-size: 1.5rem;
     cursor: pointer;
     display: none;
   }
-  
+
   .action_btn{
     background-color: var(--hospital-green);
     color: var(--white);
@@ -113,17 +113,17 @@ li{
     cursor: pointer;
     transition: scale .2ease;
   }
-  
+
   .action_btn:hover{
     scale: 1.05;
     color: var(--white);
   }
-  
+
   .action_btn :active{
     scale: 0.95;
   }
-  
-  
+
+
   .dropdown-menu{
       position: absolute;
       right: 20rem;
@@ -136,44 +136,44 @@ li{
       transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       display: none;
   }
-  
+
   .dropdown-menu.open{
     height: 240px;
   }
-  
+
   .dropdown-menu li{
     padding: 0.9rem;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   .dropdown-menu .action_btn{
     width: 100%;
     display: flex;
     justify-content: center;
   }
-  
+
   /* responsive design */
   @media (max-width: 992px) {
     .navbar .links,
     .navbar .action_btn {
       display: none;
     }
-  
+
     .navbar .toggle_btn {
       display: block;
     }
-  
+
     .dropdown-menu {
       display: block;
     }
   }
-  
+
   @media (max-width: 576px) {
     .dropdown-menu{
       left: 2rem;
       width: unset;
     }
-  
+
   }
