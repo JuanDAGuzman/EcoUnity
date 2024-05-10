@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
     <link rel="stylesheet" href="./../../static/login.css" />
     <title>Login</title>
   </head>
@@ -17,8 +23,12 @@
         <ul class="links">
           <li><a href="./inicio.html">Inicio</a></li>
           <li><a href="./prueba.html">Productos</a></li>
-          <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
-          <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
+          <li>
+            <a href="./../../src/views/index.html">Puntos de reciclaje</a>
+          </li>
+          <li>
+            <a href="./../../src/views/index.html">Puntos de reforestación</a>
+          </li>
           <li><a href="#">Información</a></li>
         </ul>
         <a href="./login.html" class="action_btn">Acceder</a>
@@ -28,8 +38,12 @@
         <div class="dropdown-menu">
           <li><a href="./inicio.html">Inicio</a></li>
           <li><a href="./prueba.html">Productos</a></li>
-          <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
-          <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
+          <li>
+            <a href="./../../src/views/index.html">Puntos de reciclaje</a>
+          </li>
+          <li>
+            <a href="./../../src/views/index.html">Puntos de reforestación</a>
+          </li>
           <li><a href="#">Información</a></li>
           <li><a href="./login.html" class="action_btn">Acceder</a></li>
         </div>
@@ -66,7 +80,9 @@
                     required
                   />
                 </label>
-                <button type="submit" class="primary-button login-button">Ingresar</button>
+                <button type="submit" class="primary-button login-button">
+                  Ingresar
+                </button>
                 <a href="./recovery.html">Recordar mi contraseña</a>
               </div>
               <div class="icons">
@@ -80,8 +96,13 @@
         <div class="information">
           <div class="info-childs">
             <h2>Inicia Sesión</h2>
-            <p>Si no tienes una cuenta registrada, ingresa al siguiente link y regístrate</p>
-            <button onclick="location.href='cuenta.html'" class="registrarse">Registrarse</button>
+            <p>
+              Si no tienes una cuenta registrada, ingresa al siguiente link y
+              regístrate
+            </p>
+            <button onclick="location.href='cuenta.html'" class="registrarse">
+              Registrarse
+            </button>
           </div>
         </div>
       </div>
@@ -102,15 +123,22 @@
           email: formData.get("email"),
           password: formData.get("password"),
         };
+        // Guardar el correo electrónico en la variable
+        userEmail = loginData.email;
+        localStorage.setItem("Mail", userEmail);
+
 
         try {
-          const response = await fetch("http://localhost:3000/api/v1/auth/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(loginData),
-          });
+          const response = await fetch(
+            "http://localhost:3000/api/v1/auth/login",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(loginData),
+            }
+          );
 
           if (!response.ok) {
             throw new Error("Login failed");

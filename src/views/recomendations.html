@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="estilos.css">
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-  
+
   * {
     padding: 0;
     margin: 0;
@@ -24,14 +24,14 @@
     --sm: 14px;
     --md: 16px;
     --lg: 18px;
-  }            
+  }
   /* Estilos de flashcards */
 .flashcard-container {
     display: flex;
     flex-wrap: wrap;
     gap: 80px; /* Espacio entre flashcards */
     justify-content: center;
-    margin-top: 220px;
+    margin-top: 130px;
 }
 
 .flashcard {
@@ -76,9 +76,16 @@
 /* Estilos para la barra de navegación */
 
 span{
-    margin-left: 730px;
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 52px;
+    margin-bottom: 0;
 }
+
+
 header {
       position: relative;
       top: 0;
@@ -245,10 +252,10 @@ a:hover::before {
               <li><a href="#">Información</a></li>
               <li><a href="./login.html" class="action_btn">Acceder</a></li>
             </div>
-          </div>   
+          </div>
 
     </header>
-    <span>En esta parte encontraras información de como realizar la plantación correctamente</span>
+    <span class="titulo">En esta parte encontraras información de como realizar la plantación correctamente</span>
     <div class="flashcard-container">
         <div class="flashcard" onclick="flipCard(this)">
             <div class="flashcard-front">

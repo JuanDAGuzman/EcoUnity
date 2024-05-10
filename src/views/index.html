@@ -1,332 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa EcoUnity</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mapa EcoUnity</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        list-style: none;
+        text-decoration: none;
+      }
 
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-      list-style: none;
-      text-decoration: none;
-    }
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, white, white);
+      }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, white, white);
-    }
+      :root {
+        --white: #ffffff;
+        --black: #000000;
+        --very-light-pink: #c7c7c7;
+        --text-input-field: #f7f7f7;
+        --hospital-green: #acd9b2;
+        --sm: 14px;
+        --md: 16px;
+        --lg: 18px;
+      }
 
-    :root {
-      --white: #ffffff;
-      --black: #000000;
-      --very-light-pink: #c7c7c7;
-      --text-input-field: #f7f7f7;
-      --hospital-green: #acd9b2;
-      --sm: 14px;
-      --md: 16px;
-      --lg: 18px;
-    }
+      .navbar {
+        width: 100%;
+        height: 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
-    .navbar {
-      width: 100%;
-      height: 80px;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+      .navbar .logo a {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
 
-    .navbar .logo a {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
+      a {
+        text-decoration: none;
+        color: var(--black);
+        font-size: 0.5rem;
+        position: relative;
+      }
 
-    a {
-      text-decoration: none;
-      color: var(--black);
-      font-size: 0.5rem;
-      position: relative;
-    }
+      a::before {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--hospital-green);
+        transition: all 0.4s;
+      }
 
+      a:hover::before {
+        width: 100%;
+        /* El borde se extiende de izquierda a derecha */
+      }
 
-    a::before {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--hospital-green);
-      transition: all 0.4s;
-    }
+      .navbar a {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        margin: 0 1rem;
+      }
 
-    a:hover::before {
-      width: 100%;
-      /* El borde se extiende de izquierda a derecha */
-    }
+      .navbar .links {
+        display: flex;
+        gap: 2rem;
+      }
 
-    .navbar a {
-      font-size: 1rem;
-      font-weight: 500;
-      color: #333;
-      text-decoration: none;
-      transition: color 0.3s ease;
-      margin: 0 1rem;
-    }
-
-    .navbar .links {
-      display: flex;
-      gap: 2rem;
-    }
-
-    .toggle_btn {
-      color: var(--hospital-green);
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: none;
-    }
-
-    .action_btn {
-      background-color: var(--hospital-green);
-      color: var(--white);
-      padding: 0.5rem 1rem;
-      border: none;
-      outline: none;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: scale .2ease;
-    }
-
-    .action_btn:hover {
-      scale: 1.05;
-      color: var(--white);
-    }
-
-    .action_btn :active {
-      scale: 0.95;
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      right: 20rem;
-      top: 40px;
-      width: 280px;
-      background: var(--white);
-      backdrop-filter: blur(15px);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      display: none;
-    }
-
-    .dropdown-menu.open {
-      height: 240px;
-    }
-
-    .dropdown-menu li {
-      padding: 0.9rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .dropdown-menu .action_btn {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
-    /* responsive design */
-    @media (max-width: 992px) {
-
-      .navbar .links,
-      .navbar .action_btn {
+      .toggle_btn {
+        color: var(--hospital-green);
+        font-size: 1.5rem;
+        cursor: pointer;
         display: none;
       }
 
-      .navbar .toggle_btn {
-        display: block;
+      .action_btn {
+        background-color: var(--hospital-green);
+        color: var(--white);
+        padding: 0.5rem 1rem;
+        border: none;
+        outline: none;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: scale 0.2ease;
+      }
+
+      .action_btn:hover {
+        scale: 1.05;
+        color: var(--white);
+      }
+
+      .action_btn :active {
+        scale: 0.95;
       }
 
       .dropdown-menu {
-        display: block;
+        position: absolute;
+        right: 20rem;
+        top: 40px;
+        width: 280px;
+        background: var(--white);
+        backdrop-filter: blur(15px);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: none;
       }
-    }
 
-    @media (max-width: 576px) {
-      .dropdown-menu {
-        left: 2rem;
-        width: unset;
+      .dropdown-menu.open {
+        height: 240px;
       }
 
-    }
+      .dropdown-menu li {
+        padding: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 2rem;
-      text-align: center;
-    }
+      .dropdown-menu .action_btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
 
-    #map-template {
-      height: 80vh;
-      width: 100%;
-      margin-bottom: 2rem;
-      border-radius: 20px;
-      border: 4px solid var(--hospital-green);
-      box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
-      margin-top: 20px;
-    }
+      /* responsive design */
+      @media (max-width: 992px) {
+        .navbar .links,
+        .navbar .action_btn {
+          display: none;
+        }
 
-    button {
-      height: 80px;
-      width: 300px;
-      border-radius: 20px;
-      background-color: var(--hospital-green);
-      font-size: var(--md);
-      cursor: pointer;
-      box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
-      transition: scale .2ease;
-      font-weight: bold;
-    }
+        .navbar .toggle_btn {
+          display: block;
+        }
 
-    button:hover {
-      scale: 1.05;
-      color: var(--white);
-      font-weight: bold;
-    }
+        .dropdown-menu {
+          display: block;
+        }
+      }
 
-    button :active {
-      scale: 0.95;
-    }
+      @media (max-width: 576px) {
+        .dropdown-menu {
+          left: 2rem;
+          width: unset;
+        }
+      }
 
-    header {
-      position: relative;
-      top: 0;
-      left: 0;
-      right: 0;
-      border-bottom: 2px solid var(--hospital-green);
-      background-color: white;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-    }
+      .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        text-align: center;
+      }
 
-    .container span {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: var(--hospital-green);
-    }
+      #map-template {
+        height: 80vh;
+        width: 100%;
+        margin-bottom: 2rem;
+        border-radius: 20px;
+        border: 4px solid var(--hospital-green);
+        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
+        margin-top: 20px;
+      }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-top: 2rem;
-    }
+      button {
+        height: 80px;
+        width: 300px;
+        border-radius: 20px;
+        background-color: var(--hospital-green);
+        font-size: var(--md);
+        cursor: pointer;
+        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
+        transition: scale 0.2ease;
+        font-weight: bold;
+      }
 
-  </style>
-</head>
+      button:hover {
+        scale: 1.05;
+        color: var(--white);
+        font-weight: bold;
+      }
 
-<body>
+      button :active {
+        scale: 0.95;
+      }
 
-  <header>
-    <div class="navbar">
-      <div class="logo"><a>Ecounity</a></div>
-      <ul class="links">
-        <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
-        <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
-        <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
-        <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
-        <li><a href="#">Información</a></li>
-      </ul>
-      <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
-      <div class="toggle_btn">
-        <i class="bx bx-menu"></i>
+      header {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-bottom: 2px solid var(--hospital-green);
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .container span {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--hospital-green);
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo"><a>Ecounity</a></div>
+        <ul class="links">
+          <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
+          <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
+          <li>
+            <a href="./../../src/views/index.html">Puntos de reciclaje</a>
+          </li>
+          <li>
+            <a href="./../../src/views/index.html">Puntos de reforestación</a>
+          </li>
+          <li><a href="#">Información</a></li>
+        </ul>
+        <a href="./../../templates/pages/login.html" class="action_btn"
+          >Acceder</a
+        >
+        <div class="toggle_btn">
+          <i class="bx bx-menu"></i>
+        </div>
+        <div class="dropdown-menu">
+          <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
+          <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
+          <li>
+            <a href="./../../src/views/index.html">Puntos de reciclaje</a>
+          </li>
+          <li>
+            <a href="./../../src/views/index.html">Puntos de reforestación</a>
+          </li>
+          <li><a href="#">Información</a></li>
+          <li>
+            <a href="./../../templates/pages/login.html" class="action_btn"
+              >Acceder</a
+            >
+          </li>
+        </div>
       </div>
-      <div class="dropdown-menu">
-        <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
-        <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
-        <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
-        <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
-        <li><a href="#">Información</a></li>
-        <li><a href="./../../templates/pages/login.html" class="action_btn">Acceder</a></li>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <div class="container">
-    <span>Puntos de reforestación</span>
-    <div id="map-template">
+    <div class="container">
+      <span>Puntos de reforestación</span>
+      <div id="map-template"></div>
+
+      <button id="info-btn" class="button">Información</button>
     </div>
 
-    <button id="info-btn" class="button">Información</button>
-
-  </div>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    // Inicializa el mapa
-    const map = L.map("map-template").setView([4.6089, -74.0875], 12);
-
-    // Agrega una capa base de OpenStreetMap
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    // Función para obtener los puntos desde el endpoint
-    async function getMapPoints() {
-      try {
-        const response = await fetch("http://localhost:3000/api/v1/points");
-        const mapPoints = await response.json();
-        return mapPoints;
-      } catch (error) {
-        console.error("Error fetching map points:", error);
-        return [];
-      }
-    }
-
-    // Función para crear círculos en el mapa
-    async function createMapCircles() {
-      const mapPoints = await getMapPoints();
-
-      mapPoints.forEach((point) => {
-        const popupContent = `<b>${point.title}</b><br>${point.description}`;
-        const circle = L.circle([point.latitude, point.longitude], {
-          color: "green",
-          fillColor: "green",
-          fillOpacity: 0.25,
-          radius: 500,
-        }).addTo(map);
-
-        circle.bindPopup(popupContent);
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      const backButton = document.getElementById("info-btn");
+      backButton.addEventListener("click", () => {
+        window.location.href = "./recomendations.html";
       });
-    }
+      // Inicializa el mapa
+      const map = L.map("map-template").setView([4.6089, -74.0875], 12);
 
-    // Carga los círculos cuando el mapa esté listo
-    window.onload = async () => {
-      await createMapCircles();
-    };
+      // Agrega una capa base de OpenStreetMap
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
 
-    // Mostrar/ocultar recomendaciones al hacer clic en el botón "Información"
-    const infoBtn = document.getElementById('info-btn');
-
-    infoBtn.addEventListener('click', () => {
-      const recomendations = document.querySelector('.recomendations');
-      if (recomendations.style.display === 'none') {
-        recomendations.style.display = 'flex';
-      } else {
-        recomendations.style.display = 'none';
+      // Función para obtener los puntos desde el endpoint
+      async function getMapPoints() {
+        try {
+          const response = await fetch("http://localhost:3000/api/v1/points");
+          const mapPoints = await response.json();
+          return mapPoints;
+        } catch (error) {
+          console.error("Error fetching map points:", error);
+          return [];
+        }
       }
-    });
-  </script>
-</body>
 
+      // Función para crear círculos en el mapa
+      async function createMapCircles() {
+        const mapPoints = await getMapPoints();
+
+        mapPoints.forEach((point) => {
+          const popupContent = `<b>${point.title}</b><br>${point.description}`;
+          const circle = L.circle([point.latitude, point.longitude], {
+            color: "green",
+            fillColor: "green",
+            fillOpacity: 0.25,
+            radius: 500,
+          }).addTo(map);
+
+          circle.bindPopup(popupContent);
+        });
+      }
+
+      // Carga los círculos cuando el mapa esté listo
+      window.onload = async () => {
+        await createMapCircles();
+      };
+
+      // Mostrar/ocultar recomendaciones al hacer clic en el botón "Información"
+      const infoBtn = document.getElementById("info-btn");
+
+      infoBtn.addEventListener("click", () => {
+        const recomendations = document.querySelector(".recomendations");
+        if (recomendations.style.display === "none") {
+          recomendations.style.display = "flex";
+        } else {
+          recomendations.style.display = "none";
+        }
+      });
+    </script>
+  </body>
 </html>
