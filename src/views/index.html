@@ -237,6 +237,7 @@
       <div class="navbar">
         <div class="logo"><a>Ecounity</a></div>
         <ul class="links">
+          <li id="welcomeMessage"></li>
           <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
           <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
           <li>
@@ -247,7 +248,10 @@
           </li>
           <li><a href="#">Información</a></li>
         </ul>
-        <a href="./../../templates/pages/login.html" class="action_btn"
+        <a
+          href="./../../templates/pages/login.html"
+          id="loginButton"
+          class="action_btn"
           >Acceder</a
         >
         <div class="toggle_btn">
@@ -281,6 +285,22 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+
+
+      const Mail = localStorage.getItem("Mail");
+      if (Mail) {
+        const welcomeMessage = document.getElementById("welcomeMessage");
+        welcomeMessage.textContent = "Bienvenid@ " + Mail;
+
+        loginButton.textContent = "Cerrar sesión";
+
+        loginButton.addEventListener("click", () => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("Mail");
+          window.location.href = "./../../templates/pages/login.html";
+        });
+      }
+      // Obtiene el botón para regresar a la página anterior
       const backButton = document.getElementById("info-btn");
       backButton.addEventListener("click", () => {
         window.location.href = "./recomendations.html";
@@ -338,7 +358,10 @@
         } else {
           recomendations.style.display = "none";
         }
-      });
+      }
+
+
+    );
     </script>
   </body>
 </html>

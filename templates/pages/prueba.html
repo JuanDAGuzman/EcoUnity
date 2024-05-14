@@ -82,15 +82,15 @@
       const Mail = localStorage.getItem("Mail");
       if (Mail) {
         const welcomeMessage = document.getElementById("welcomeMessage");
-        welcomeMessage.textContent = "Bienvenid@ "+Mail;
-        
+        welcomeMessage.textContent = "Bienvenid@ " + Mail;
+
         loginButton.textContent = "Cerrar sesión";
 
         loginButton.addEventListener("click", () => {
           localStorage.removeItem("token");
           localStorage.removeItem("Mail");
           window.location.href = "./../../templates/pages/login.html";
-        })
+        });
       }
 
       // Función para cargar todos los productos
