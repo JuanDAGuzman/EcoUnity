@@ -58,10 +58,10 @@
       <form id="searchForm">
         <div class="mb-3">
           <input
-            type="number"
+            type="text"
             class="form-control"
-            id="productId"
-            placeholder="Buscar productos por ID"
+            id="productName"
+            placeholder="Buscar productos por nombre"
           />
           <button type="submit" class="btn btn-primary">Buscar</button>
         </div>
@@ -76,6 +76,7 @@
     ></script>
     <script>
       const searchForm = document.getElementById("searchForm");
+      const productNameInput = document.getElementById("productName");
       const dataContainer = document.getElementById("data");
       let allProducts = [];
 
@@ -126,28 +127,19 @@
         dataContainer.innerHTML = body;
       };
 
-      // Función para buscar un producto por ID
-      const searchProductById = (productId) => {
-        if (productId !== "") {
-          const product = allProducts.find(
-            (product) => product.id === parseInt(productId)
-          );
-          if (product) {
-            updateTable([product]);
-          } else {
-            dataContainer.innerHTML =
-              '<div class="col-md-12 text-center">NO HEMOS ENCONTRADO EL PRODUCTO BUSCADO</div>';
-          }
-        } else {
-          loadAllProducts();
-        }
+      const handleSearch = () => {
+        const searchQuery = productNameInput.value.toLowerCase();
+        const filteredProducts = allProducts.filter((product) =>
+          product.name.toLowerCase().includes(searchQuery)
+        );
+        updateTable(filteredProducts);
       };
 
-      // Evento de submit del formulario de búsqueda
-      searchForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const productId = document.getElementById("productId").value;
-        searchProductById(productId);
+      productNameInput.addEventListener("input", handleSearch);
+      productNameInput.addEventListener("input", () => {
+        if (productNameInput.value.trim() === "") {
+          loadAllProducts();
+        }
       });
 
       // Cargar todos los productos al cargar la página

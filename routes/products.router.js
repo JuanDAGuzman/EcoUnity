@@ -25,16 +25,15 @@ const checkRoles = (roles) => {
   };
 };
 
-router.get(
-  '/',
-  async (req, res, next) => {
-    try {
-      res.json(await service.find());
-    } catch (error) {
-      next(error);
-    }
+router.get('/', async (req, res, next) => {
+  try {
+    const products = await service.find();
+    res.set('Cache-Control', 'no-store'); // Agrega este encabezado
+    res.json(products);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 router.post(
   '/',
