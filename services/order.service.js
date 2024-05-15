@@ -16,6 +16,13 @@ class OrderService {
     const newItem = await models.OrderProduct.create(data);
     return newItem;
   }
+
+
+  async deleteItem(data){
+    const newItem = await models.OrderProduct.delete(data);
+    return newItem;
+  }
+  
   async findByUser(userId) {
     const orders = await models.Order.findAll({
       where: {

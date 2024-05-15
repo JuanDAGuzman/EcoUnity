@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de Categorías</title>
+    <style>
+      button {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+
+        height: 40px;
+        width: 80px;
+        border-radius: 20px;
+        background-color: var(--hospital-green);
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(14, 55, 54, 0.25);
+        transition: scale 0.2ease;
+        font-weight: bold;
+      }
+      button:hover {
+        scale: 1.05;
+        color: var(--white);
+        font-weight: bold;
+      }
+
+      button :active {
+        scale: 0.95;
+      }
+
+      .returnButton {
+        display: flex;
+        margin-left: 20px;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        width: 60px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+
+      .returnButton a {
+        text-decoration: none;
+        color: #000;
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      .returnButton:hover a {
+        color: #666; /* Cambia el color del texto al pasar el cursor sobre el botón */
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .Listas {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60%;
+        padding: 20px;
+        border: 2px solid #ccc;
+        min-height: 200px;
+        margin-bottom: 20px;
+      }
+      form{
+        margin-top: 80px;
+        padding-right: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      input{
+        margin-right: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <button class="ButtonReturn returnButton">
+      <a class="btn-regresar" href="./products.html">Volver</a>
+    </button>
+    <div class="container">
+      <h2>Listado de Categorías</h2>
+      <div class="Listas">
+        <div class="categories">
+          <ul id="categoriesList"></ul>
+        </div>
+    </div>
+
+    <form id="categoryForm">
+      <input type="text" id="nameInput" placeholder="Nombre" />
+      <input type="text" id="imageInput" placeholder="Imagen URL" />
+      <button type="submit">Crear Categoría</button>
+    </form>
+
+    <script>
+      const token = localStorage.getItem("token");
+      const Mail = localStorage.getItem("Mail");
+
+      if (token) {
+        localStorage.setItem("token", token);
+      }
+
+      const categoryForm = document.getElementById("categoryForm");
+      categoryForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const name = document.getElementById("nameInput").value;
+        const image = document.getElementById("imageInput").value;
+        try {
+          const response = await fetch(
+            "http://localhost:3000/api/v1/categories",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({ name, image }),
+            }
+          );
+          if (!response.ok) {
+            throw new Error("Failed to create category");
+          }
+          alert("Category created successfully");
+          loadAllCategories();
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Failed to create category");
+        }
+      });
+
+      const loadAllCategories = async () => {
+        try {
+          const token = localStorage.getItem("token");
+          const response = await fetch(
+            "http://localhost:3000/api/v1/categories",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch categories");
+          }
+
+          const categories = await response.json();
+          updateList(categories);
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Failed to fetch categories");
+        }
+      };
+
+      const updateList = (categories) => {
+        const categoriesList = document.getElementById("categoriesList");
+        categoriesList.innerHTML = "";
+
+        categories.forEach((category) => {
+          const idLi = document.createElement("li");
+          idLi.textContent = `Id: ${category.id}`;
+          categoriesList.appendChild(idLi);
+
+          const nameLi = document.createElement("li");
+          nameLi.textContent = `Nombre: ${category.name}`;
+          categoriesList.appendChild(nameLi);
+
+          const imageLi = document.createElement("li");
+          imageLi.textContent = `Imagen: ${category.image}`;
+          categoriesList.appendChild(imageLi);
+
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "Eliminar";
+          deleteButton.addEventListener("click", () => {
+            deleteCategory(category.id);
+          });
+          categoriesList.appendChild(deleteButton);
+
+          const updateButton = document.createElement("button");
+          updateButton.textContent = "Actualizar";
+          updateButton.addEventListener("click", () => {
+            openEditCategoryModal(category);
+          });
+          categoriesList.appendChild(updateButton);
+        });
+      };
+
+      const deleteCategory = async (categoryId) => {
+        try {
+          const response = await fetch(
+            `http://localhost:3000/api/v1/categories/${categoryId}`,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          if (!response.ok) {
+            throw new Error("Failed to delete category");
+          }
+          alert("Category deleted successfully");
+          loadAllCategories();
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Failed to delete category");
+        }
+      };
+
+      const openEditCategoryModal = (category) => {
+        const fieldToEdit = prompt(
+          "Choose field to edit: name or image"
+        ).toLowerCase();
+        if (fieldToEdit === "name") {
+          const newName = prompt("Enter new name:");
+          if (newName === null) return; // User cancelled
+          updateCategory(category.id, { name: newName });
+        } else if (fieldToEdit === "image") {
+          const newImage = prompt("Enter new image URL:");
+          if (newImage === null) return; // User cancelled
+          updateCategory(category.id, { image: newImage });
+        } else {
+          alert("Invalid field selection. Please choose 'name' or 'image'.");
+        }
+      };
+
+      const updateCategory = async (categoryId, newData) => {
+        try {
+          const response = await fetch(
+            `http://localhost:3000/api/v1/categories/${categoryId}`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify(newData),
+            }
+          );
+          if (!response.ok) {
+            throw new Error("Failed to update category");
+          }
+          alert("Category updated successfully");
+          loadAllCategories();
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Failed to update category");
+        }
+      };
+
+      document.addEventListener("DOMContentLoaded", loadAllCategories);
+    </script>
+  </body>
+</html>

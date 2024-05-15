@@ -1,5 +1,6 @@
 const express = require('express');
-
+const passport = require('passport');
+const path = require('path');
 const CustomerService = require('../services/customers.service');
 const validationHandler = require('../middlewares/validator.handler');
 const {
@@ -10,16 +11,35 @@ const {
 
 const router = express.Router();
 const service = new CustomerService();
+const authenticateJWT = passport.authenticate('jwt', { session: false });
 
-router.get('/',  async (req, res, next) => {
-  try {
-    res.json(await service.find());
-  } catch (error) {
-    next(error);
+// Middleware de verificación de roles
+const checkRoles = (roles) => {
+  return (req, res, next) => {
+    if (!req.user || !roles.includes(req.user.role)) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+    next();
+  };
+};
+
+router.get(
+  '/',
+  authenticateJWT,
+  checkRoles(['admin']),
+  async (req, res, next) => {
+    try {
+      res.json(await service.find());
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
-router.post('/',
+router.post(
+  '/',
+  authenticateJWT,
+  checkRoles(['admin']),
   validationHandler(createCustomerSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -31,7 +51,10 @@ router.post('/',
   }
 );
 
-router.patch('/:id',
+router.patch(
+  '/:id',
+  authenticateJWT,
+  checkRoles(['admin']),
   validationHandler(getCustomerSchema, 'params'),
   validationHandler(updateCustomerSchema, 'body'),
   async (req, res, next) => {
@@ -45,7 +68,10 @@ router.patch('/:id',
   }
 );
 
-router.delete('/:id',
+router.delete(
+  '/:id',
+  authenticateJWT,
+  checkRoles(['admin']),
   validationHandler(getCustomerSchema, 'params'),
   async (req, res, next) => {
     try {
