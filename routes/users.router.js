@@ -3,7 +3,7 @@ const express = require('express');
 
 const UserService = require('./../services/user.service');
 const validatorHandler = require('./../middlewares/validator.handler');
-const { updateUserSchema, createUserSchema, getUserSchema } = require('./../schemas/user.schema');
+const { updateUserSchema, createUserSchema, getUserSchema, getUserMailSchema } = require('./../schemas/user.schema');
 
 const router = express.Router();
 const service = new UserService();
@@ -29,6 +29,19 @@ router.get('/:id',
     }
   }
 );
+
+router.get('/email/:email',
+  validatorHandler(getUserMailSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { email } = req.params;
+      const category = await service.findByEmail(email);
+      res.json(category);
+    } catch (error) {
+      next(error);
+    }
+  }
+)
 
 router.post('/', validatorHandler(createUserSchema, 'body'), async (req, res, next) => {
   try {

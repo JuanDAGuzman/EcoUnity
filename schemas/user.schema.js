@@ -20,7 +20,12 @@ const getUserSchema = Joi.object({
   id: id.required(),
 });
 
+const getUserMailSchema = Joi.object({
+  email: email.required(),
+});
+
 module.exports = {
+  getUserMailSchema,
   createUserSchema,
   updateUserSchema,
   getUserSchema,

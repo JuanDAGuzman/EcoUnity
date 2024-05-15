@@ -26,8 +26,10 @@ class UserService {
     if (!user) {
       throw boom.notFound('user not found');
     }
+    // Excluir la contraseña del objeto del usuario
     return user;
   }
+
   async update(id, changes) {
     const user = await this.findOne(id);
     const rta = await user.update(changes);
