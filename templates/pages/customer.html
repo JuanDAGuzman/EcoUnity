@@ -179,14 +179,13 @@
     </div>
     <script>
       const token = localStorage.getItem("token");
-      const Mail = localStorage.getItem("Mail");
-      if (Mail) {
-        localStorage.setItem("Mail", Mail);
-
-      }
 
       if (token) {
         localStorage.setItem("token", token);
+      }
+      const Mail = localStorage.getItem("Mail");
+      if (Mail) {
+        localStorage.setItem("Mail", Mail);
       }
 
       let currentUserId;
@@ -200,7 +199,7 @@
               method: "GET",
               headers: {
                 "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
               },
             }),
             new Promise(
@@ -252,7 +251,7 @@
               method: "GET",
               headers: {
                 "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
               },
             }
           );

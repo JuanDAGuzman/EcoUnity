@@ -20,6 +20,8 @@
           <a href="#home" class="home-active">Anadir punto de reciclaje</a>
         </li>
         <li id="welcomeMessage"></li>
+        <li><a href="./categories.html">Editar Categorias</a></li>
+
         <li><a href="./map-crud.html">Añadir punto de reforestación</a></li>
 
         <li><a href="#products">Añadir productos</a></li>
@@ -117,6 +119,10 @@
       // Después de obtener el token al iniciar sesión
 
       const token = localStorage.getItem("token");
+
+      if (token) {
+        localStorage.setItem("token", token);
+      }
       const Mail = localStorage.getItem("Mail");
       if (Mail) {
         const welcomeMessage = document.getElementById("welcomeMessage");
@@ -124,9 +130,6 @@
 
       }
 
-      if (token) {
-        localStorage.setItem("token", token);
-      }
 
       const logoutButton = document.getElementById("logoutButton");
       const createProductForm = document.getElementById("createProductForm");
