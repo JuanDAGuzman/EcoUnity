@@ -258,22 +258,25 @@
         <div class="logo"><a>Ecounity</a></div>
         <ul class="links">
           <li id="welcomeMessage"></li>
-          <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
-          <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="./prueba.html">Productos</a></li>
           <li>
             <a href="./../../src/views/index.html">Puntos de reciclaje</a>
           </li>
           <li>
             <a href="./../../src/views/index.html">Puntos de reforestación</a>
           </li>
+          <li>
+            <a href="/pago">Pago</a>
+          </li>
           <li><a href="#">Información</a></li>
         </ul>
         <a
-        href="./../../templates/pages/login.html"
-        id="loginButton"
-        class="action_btn"
-        >Acceder</a
-      >
+          href="./../../templates/pages/login.html"
+          id="loginButton"
+          class="action_btn"
+          >Acceder</a
+        >
         <div class="toggle_btn">
           <i class="bx bx-menu"></i>
         </div>
@@ -292,7 +295,6 @@
       </div>
     </header>
     <script>
-
       const Mail = localStorage.getItem("Mail");
       if (Mail) {
         const welcomeMessage = document.getElementById("welcomeMessage");
