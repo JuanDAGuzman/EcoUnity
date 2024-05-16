@@ -10,49 +10,28 @@
   <body>
     <header>
       <div class="navbar">
-        <div class="logo"><a>Ecounity</a></div>
+        <div class="logo"><a href="#">Ecounity</a></div>
         <ul class="links">
-          <li id="welcomeMessage"></li>
-          <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
-          <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
-          <li>
-            <a href="./../../src/views/index.html">Puntos de reciclaje</a>
-          </li>
-          <li>
-            <a href="./../../src/views/index.html">Puntos de reforestación</a>
-          </li>
-          <li><a href="#">Información</a></li>
+          <li><a href="./inicio.html">Inicio</a></li>
+          <li><a href="./prueba.html">Productos</a></li>
+          <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
+          <li><a href="#">Ayuda</a></li>
         </ul>
-        <a
-          href="./../../templates/pages/login.html"
-          id="loginButton"
-          class="action_btn"
-          >Acceder</a
-        >
-
+        <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
         <div class="toggle_btn">
           <i class="bx bx-menu"></i>
         </div>
-
+        
         <div class="dropdown-menu">
-          <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
-          <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
-          <li>
-            <a href="./../../src/views/index.html">Puntos de reciclaje</a>
-          </li>
-          <li>
-            <a href="./../../src/views/index.html">Puntos de reforestación</a>
-          </li>
-          <li><a href="#">Información</a></li>
-          <li>
-            <a href="/EcoUnity/templates/pages/login.html" class="action_btn"
-              >Acceder</a
-            >
-          </li>
+          <li><a href="./inicio.html">Inicio</a></li>
+          <li><a href="./prueba.html">Productos</a></li>
+          <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
+          <li><a href="#">Ayuda</a></li>
+          <li><a href="./../../templates/pages/login.html" class="action_btn">Acceder</a></li>
         </div>
+        <li id="welcomeMessage"></li> 
       </div>
     </header>
-
     <div class="container-principal">
       <!-- Formulario de búsqueda por ID -->
       <form id="searchForm">
@@ -62,13 +41,16 @@
             class="form-control"
             id="productName"
             placeholder="Buscar productos por nombre"
+            
           />
-          <button type="submit" class="btn btn-primary">Buscar</button>
+          
         </div>
       </form>
       <br />
       <div class="row" id="data"></div>
+      
     </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -114,6 +96,7 @@
         let body = "";
         for (const product of products) {
           body += `
+          <div class="container-principal">
           <div class="container-cards">
             <div class="product-card">
               <img src="${product.image}" alt="${product.name}">
@@ -122,6 +105,7 @@
               <p>${product.description}</p>
             </div>
           </div>
+        </div>  
         `;
         }
         dataContainer.innerHTML = body;

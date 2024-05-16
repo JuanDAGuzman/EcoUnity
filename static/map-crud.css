@@ -1,0 +1,212 @@
+
+:root {
+    --white: #ffffff;
+    --black: #000000;
+    --very-light-pink: #c7c7c7;
+    --text-input-field: #f7f7f7;
+    --hospital-green: #acd9b2;
+    --sm: 14px;
+    --md: 16px;
+    --lg: 18px;
+  }
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Estilos personalizados */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+  }
+
+  .container-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+
+
+
+  .btn-back {
+    background-color: var(--hospital-green); /* Reemplazamos var(--hospital-green) con un valor hexadecimal */
+    color: var(--black);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-left: 800px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-back {
+    background-color: var(--hospital-green); /* Reemplazamos var(--hospital-green) con un valor hexadecimal */
+    color: var(--black);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    height: 55px;
+    width: 160px;
+    margin-left: 600px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-cls {
+    background-color: var(--hospital-green); /* Reemplazamos var(--hospital-green) con un valor hexadecimal */
+    color: var(--black);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    height: 55px;
+    width: 160px;
+    margin-right: 680px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-add {
+    background-color: var(--hospital-green); /* Reemplazamos var(--hospital-green) con un valor hexadecimal */
+    color: var(--black);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    height: 55px;
+    width: 160px;
+    margin-left: 44%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-back:hover {
+    background-color: #AFEF8C; /* Cambiamos el color de hover a un verde más oscuro */
+  }
+
+  .btn-cls:hover {
+    background-color: #AFEF8C; /* Cambiamos el color de hover a un verde más oscuro */
+  }
+
+  .container-create {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 80px;
+    border: 1.5px solid var(--hospital-green);
+  }
+
+  .container-map-points {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 80px;
+    border: 1.5px solid var(--hospital-green);
+  }
+
+  .map-point-box{
+    border: 1px solid var(--hospital-green);
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    height: 300px;
+    width: 300px;
+  }
+
+  .map-point-box p {
+    align-items: center;
+    justify-content: center;
+    margin-left: 30px;
+    margin-top: 20px;
+  }
+
+  .map-point-box p:nth-child(1){
+    font-weight: bold;
+  }
+
+
+  h1 {
+    
+    margin-bottom: 20px;
+  }
+
+  a {
+    color: var(--hospital-green);
+  }
+
+  .create-map-point-form {
+    margin-top: 20px;
+  }
+
+  .form-label {
+    font-weight: bold;
+  
+  }
+
+  .form-control {
+    margin-bottom: 15px;
+  }
+
+  .button-delete,
+  .button-update {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+    margin-left: 50px;
+  }
+
+  .button-delete:hover,
+  .button-update:hover {
+    background-color: #c82333;
+  }

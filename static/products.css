@@ -29,47 +29,47 @@ body {
 }
 
 header {
-    position: relative;
-    width: 100%;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    background: var(--bg-color);
-    box-shadow: 0 8px 11px rgb(14 55 54 / 15%);
-    padding: 10px 80px;
-    transition: 0.5s;
+  position: relative;
+  width: 100%;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  background: var(--bg-color);
+  box-shadow: 0 8px 11px rgb(14 55 54 / 15%);
+  padding: 10px 80px;
+  transition: 0.5s;
 }
 
-.navbar{
-    display: flex;
-    column-gap: 9rem;
-    margin: 0.3rem;
+.navbar {
+  display: flex;
+  column-gap: 9rem;
+  margin: 0.3rem;
 }
 
-.navbar a{
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-color);
-    padding: 0.8rem 1rem;
-    text-decoration: none;
-  }
+.navbar a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-color);
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+}
 
-  .button-logout{
-    width: 100px;
-    border-radius: 5px;
-    margin-top: 12%;
-    margin-right: 20%;
-    background-color: var(--hospital-green);
-  }
+.button-logout {
+  width: 100px;
+  border-radius: 5px;
+  margin-top: 12%;
+  margin-right: 20%;
+  background-color: var(--hospital-green);
+}
 
-  .update-button{
-    width: 100px;
-    border-radius: 5px;
-    margin-top: 8%;
-    background-color:var(--hospital-green);
-  }
+.update-button {
+  width: 100px;
+  border-radius: 5px;
+  margin-top: 8%;
+  background-color: var(--hospital-green);
+}
 
   .container-create{
     position: relative;
