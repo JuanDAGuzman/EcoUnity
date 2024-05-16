@@ -38,8 +38,6 @@ router.get(
 
 router.post(
   '/',
-  authenticateJWT,
-  checkRoles(['admin']),
   validationHandler(createCustomerSchema, 'body'),
   async (req, res, next) => {
     try {
