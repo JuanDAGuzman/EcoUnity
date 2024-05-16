@@ -3,6 +3,7 @@ const cors = require('cors');
 const routerApi = require('./routes');
 const { checkApiKey } = require('./middlewares/auth.handler');
 const engine = require('ejs-mate');
+const paymentRouter = require('./routes/payment.router');
 
 const {
   logErrors,
@@ -17,6 +18,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 const whitelist = [
+  'http://localhost:3000',
   'http://localhost:8080',
   'https://myapp.co',
   'http://127.0.0.1:5500',
@@ -35,11 +37,21 @@ const options = {
 };
 
 app.use(cors(options));
+app.use(paymentRouter);
+
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 require('./utils/auth');
+
+app.get('/', (req, res) => {
+  res.sendFile(process.cwd() + '/templates/pages/inicio.html');
+});
+
+app.get('/pago', (req, res) => {
+  res.sendFile(process.cwd() + '/templates/pages/pago.html');
+});
 
 app.get('/maps', (req, res) => {
   res.sendFile(process.cwd() + '/src/views/index.html');
