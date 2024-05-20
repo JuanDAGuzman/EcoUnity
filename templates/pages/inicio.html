@@ -23,7 +23,8 @@
           <li><a href="#">Ayuda</a></li>
           <li id="welcomeMessage"></li>
         </ul>
-        <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
+        <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
+
 
 
         <div class="toggle_btn">
@@ -37,6 +38,7 @@
             <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
           </ul>
         </div>
+        <li id="welcomeMessage"></li>
       </div>
     </header>
     <script>
@@ -50,7 +52,7 @@
     });
   });
   //button
-      const Mail = localStorage.getItem("Mail");
+  const Mail = localStorage.getItem("Mail");
       if (Mail) {
         const welcomeMessage = document.getElementById("welcomeMessage");
         welcomeMessage.textContent = "Bienvenid@ " + Mail;
