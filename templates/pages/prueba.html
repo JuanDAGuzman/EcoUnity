@@ -21,7 +21,7 @@
         <div class="toggle_btn">
           <i class="bx bx-menu"></i>
         </div>
-        
+
         <div class="dropdown-menu">
           <li><a href="./inicio.html">Inicio</a></li>
           <li><a href="./prueba.html">Productos</a></li>
@@ -29,9 +29,16 @@
           <li><a href="#">Ayuda</a></li>
           <li><a href="./../../templates/pages/login.html" class="action_btn">Acceder</a></li>
         </div>
-        <li id="welcomeMessage"></li> 
+        <li id="welcomeMessage"></li>
       </div>
     </header>
+
+    <button>
+      <a href="">
+
+      </a>
+    </button>
+
     <div class="container-principal">
       <!-- Formulario de búsqueda por ID -->
       <form id="searchForm">
@@ -41,16 +48,14 @@
             class="form-control"
             id="productName"
             placeholder="Buscar productos por nombre"
-            
           />
-          
+
         </div>
       </form>
       <br />
       <div class="row" id="data"></div>
-      
-    </div>
 
+    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -100,12 +105,13 @@
           <div class="container-cards">
             <div class="product-card">
               <img src="${product.image}" alt="${product.name}">
+              <p class ="price">$${product.price}</p>
               <h5>${product.name}</h5>
-              <p>Price: $${product.price}</p>
               <p>${product.description}</p>
+              <button><a><box-icon name='cart-add'></box-icon></a></button>
             </div>
           </div>
-        </div>  
+        </div>
         `;
         }
         dataContainer.innerHTML = body;
