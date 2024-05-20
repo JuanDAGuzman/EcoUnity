@@ -200,7 +200,41 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
+/* Media Queries para Responsividad */
+@media (max-width: 1200px) {
+  .container-form {
+    flex-direction: column;
+    width: 90%; 
+    max-width: none; 
+  }
+}
 
+@media (max-width: 992px) {
+  .information,
+  .form-information {
+    flex-direction: column;
+    width: 100%; 
+    border-radius: 0; 
+  }
+
+  .info-childs,
+  .form-information-childs {
+    flex-direction: column;
+    padding: 0 5%; 
+  }
+
+  .info-childs p,
+  .form-information-childs p {
+    flex-direction: column;
+    margin: 20px 0; 
+  }
+
+  .form label {
+    flex-direction: column;
+    max-width: 100%; 
+  }
+}
+ 
 
 li{
   list-style: none;
@@ -230,6 +264,8 @@ a:hover::before {
   width: 100%;  /* El borde se extiende de izquierda a derecha */
 }
 
+
+/* header */
 header {
   position: fixed;
   top: 0;
@@ -240,7 +276,7 @@ header {
   box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
-.navbar{
+.navbar {
   width: 100%;
   height: 80px;
   max-width: 1200px;
@@ -250,7 +286,7 @@ header {
   justify-content: space-between;
 }
 
-.navbar .logo a{
+.navbar .logo a {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--hospital-green); /* Manteniendo el color del logo */
@@ -261,13 +297,14 @@ header {
   gap: 1rem;
 }
 
-.toggle_btn{
+.toggle_btn {
   color: var(--hospital-green);
   font-size: 1.5rem;
   cursor: pointer;
+  display: none; /* Oculto por defecto */
 }
 
-.action_btn{
+.action_btn {
   background-color: var(--hospital-green);
   color: var(--white);
   padding: 0.5rem 1rem;
@@ -279,27 +316,27 @@ header {
   transition: transform 0.2s ease; /* Corregido el error de sintaxis en la propiedad transition */
 }
 
-.action_btn:hover{
+.action_btn:hover {
   transform: scale(1.05); /* Corregido el error en la propiedad transform */
 }
 
-.action_btn:active{
+.action_btn:active {
   transform: scale(0.95); /* Corregido el error en la propiedad transform */
 }
 
-.dropdown-menu{
-    position: absolute;
-    right: 0;
-    top: 100%;
-    width: 200px;
-    background: var(--white);
-    backdrop-filter: blur(15px) ;
-    border-radius: 10px;
-    overflow: hidden;
-    display: none;
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 200px;
+  background: var(--white);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  overflow: hidden;
+  display: none;
 }
 
-.dropdown-menu.open{
+.dropdown-menu.open {
   display: block;
 }
 
@@ -309,11 +346,11 @@ header {
   margin: 0;
 }
 
-.dropdown-menu li{
+.dropdown-menu li {
   padding: 0.9rem;
 }
 
-.dropdown-menu .action_btn{
+.dropdown-menu .action_btn {
   width: 100%;
 }
 
@@ -330,20 +367,23 @@ header {
 
   .dropdown-menu {
     position: static;
-    width: 100%;
+    margin-top: 110px;
+    width: 50%;
     display: none;
   }
 }
 
 @media (max-width: 576px) {
-  .dropdown-menu{
+  .dropdown-menu {
     right: unset;
     left: 0;
     width: 100%;
     border-radius: 0;
   }
 
-  .navbar .logo a{
+  .navbar .logo a {
     margin-left: 1rem;
   }
 }
+
+

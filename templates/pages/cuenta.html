@@ -23,17 +23,16 @@
             <li><a href="#">Ayuda</a></li>
           </ul>
           <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
+  
           <div class="toggle_btn">
             <i class="bx bx-menu"></i>
-          </div>
+          </div>  
           <div class="dropdown-menu">
             <ul>
               <li><a href="./inicio.html">Inicio</a></li>
               <li><a href="./prueba.html">Productos</a></li>
               <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
               <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
-              <li><a href="#">Ayuda </a></li>
-              <li><a href="./login.html" class="action_btn">Acceder</a></li>
             </ul>
           </div>
         </div>
@@ -134,7 +133,17 @@
       </div>
     </section>
     <script>
-      const customerForm = document.getElementById("customerForm");
+        // button
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggleBtn = document.querySelector('.toggle_btn');
+    var dropdownMenu = document.querySelector('.dropdown-menu');
+
+    toggleBtn.addEventListener('click', function() {
+      dropdownMenu.classList.toggle('open');
+    });
+  });
+  //button
+    const customerForm = document.getElementById("customerForm");
 
       const submitForm = async (e) => {
         e.preventDefault();

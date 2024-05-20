@@ -6,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: var(--white)
+    background-color: var(--white);
 }
 
 :root {
@@ -18,8 +18,7 @@ body {
     --sm: 14px;
     --md: 16px;
     --lg: 18px;
-   }
-
+}
 
 #container {
     text-align: center;
@@ -75,12 +74,36 @@ body {
     0% {
         transform: scale(1);
     }
-
     50% {
         transform: scale(1.1);
     }
-
     100% {
         transform: scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    #direccion {
+        width: calc(100% - 140px);
+        margin-right: 5px;
+        font-size: var(--sm);
+    }
+    #buscar {
+        font-size: var(--sm);
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    #container {
+        padding: 20px;
+    }
+    #direccion, #buscar {
+        width: 100%;
+        margin: 10px 0;
+        font-size: var(--sm);
+    }
+    #map {
+        height: 300px;
     }
 }
