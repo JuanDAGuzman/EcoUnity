@@ -28,5 +28,8 @@ const updateCustomerSchema = Joi.object({
   phone,
   userId
 });
+const getUserIDSchema = Joi.object({
+  userId: userId.required(),
+});
 
-module.exports = { getCustomerSchema, createCustomerSchema, updateCustomerSchema };
+module.exports = { getUserIDSchema ,getCustomerSchema, createCustomerSchema, updateCustomerSchema };

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ver Orden</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 1rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    main {
+      background-color: white;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      width: 100%;
+      max-width: 600px;
+      margin: 2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 0.5rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #orderDetails {
+      margin-top: 2rem;
+    }
+
+    .order-item {
+      border-bottom: 1px solid #ddd;
+      padding: 1rem 0;
+    }
+
+    .order-item img {
+      max-width: 100px;
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ver Orden</h1>
+  </header>
+  <main>
+    <form id="orderForm">
+      <label for="orderId">Ingrese el ID de la Orden:</label>
+      <input type="number" id="orderId" required>
+      <button type="submit">Ver Orden</button>
+    </form>
+    <div id="orderDetails"></div>
+  </main>
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const orderId = document.getElementById("orderId").value;
+      const orderDetailsContainer = document.getElementById("orderDetails");
+
+      try {
+        const response = await fetch(`http://localhost:3000/api/v1/orders/${orderId}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch order details");
+        }
+
+        const order = await response.json();
+        displayOrderDetails(order, orderDetailsContainer);
+      } catch (error) {
+        console.error("Error:", error);
+        orderDetailsContainer.innerHTML = "<p>Failed to fetch order details</p>";
+      }
+    });
+
+    function displayOrderDetails(order, container) {
+      container.innerHTML = `
+        <h2>Detalles de la Orden</h2>
+        <p><strong>ID de la Orden:</strong> ${order.id}</p>
+        <p><strong>Total:</strong> $${order.total}</p>
+        <p><strong>Fecha de Creación:</strong> ${new Date(order.createdAt).toLocaleString()}</p>
+        <h3>Cliente</h3>
+        <p><strong>Nombre:</strong> ${order.customer.name} ${order.customer.lastName}</p>
+        <p><strong>Teléfono:</strong> ${order.customer.phone}</p>
+        <p><strong>Email:</strong> ${order.customer.user.email}</p>
+        <h3>Productos</h3>
+        ${order.items.map(item => `
+          <div class="order-item">
+            <img src="${item.image}" alt="${item.name}">
+            <p><strong>Nombre:</strong> ${item.name}</p>
+            <p><strong>Cantidad:</strong> ${item.OrderProduct.amount}</p>
+            <p><strong>Precio:</strong> $${item.price}</p>
+          </div>
+        `).join("")}
+      `;
+    }
+  </script>
+</body>
+</html>

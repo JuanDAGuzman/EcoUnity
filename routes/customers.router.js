@@ -7,6 +7,7 @@ const {
   createCustomerSchema,
   getCustomerSchema,
   updateCustomerSchema,
+  getUserIDSchema,
 } = require('../schemas/customer.schema');
 
 const router = express.Router();
@@ -22,6 +23,28 @@ const checkRoles = (roles) => {
     next();
   };
 };
+
+router.get(
+  '/id/:userId',
+  validationHandler(getUserIDSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { userId } = req.params;
+      const customerId = await service.findCustomerIdByUserId(userId); // Cambiar customersService a service
+
+      if (!customerId) {
+        return res.status(404).json({ error: 'Cliente no encontrado' });
+      }
+      
+
+      // Puedes hacer cualquier cosa con customerId aquí
+
+      res.json({ customerId });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 router.get(
   '/',
