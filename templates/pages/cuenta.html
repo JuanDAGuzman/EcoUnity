@@ -20,9 +20,10 @@
             <li><a href="./inicio.html">Inicio</a></li>
             <li><a href="./prueba.html">Productos</a></li>
             <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
-            <li><a href="#">Ayuda</a></li>
+            <li><a href="/EcoUnity/templates/pages/pqrs.html">Ayuda</a></li>
+            <li id="welcomeMessage"></li>
           </ul>
-          <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
+          <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
   
           <div class="toggle_btn">
             <i class="bx bx-menu"></i>
@@ -42,7 +43,7 @@
       <div class="container-form register">
         <div class="information">
           <div class="info-childs">
-            <h2>Bienvenido a EcoUnity</h2>
+            <h2 class="tittle-container">Bienvenido a EcoUnity</h2>
             <p>
               Para conocer todos los beneficios crea una cuenta con nosotros o
               accede desde el siguiente link .
@@ -54,7 +55,7 @@
         </div>
         <div class="form-information">
           <div class="form-information-childs">
-            <h2>Registra tus datos</h2>
+            <h2 class="register">Registra tus datos</h2>
 
             <form id="customerForm" class="form">
               <div>
@@ -143,6 +144,21 @@
     });
   });
   //button
+
+  const Mail = localStorage.getItem("Mail");
+      if (Mail) {
+        const welcomeMessage = document.getElementById("welcomeMessage");
+        welcomeMessage.textContent = "Bienvenid@ " + Mail;
+
+        loginButton.textContent = "Cerrar sesión";
+
+        loginButton.addEventListener("click", () => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("Mail");
+          window.location.href = "./../../templates/pages/login.html";
+        });
+      }
+        
     const customerForm = document.getElementById("customerForm");
 
       const submitForm = async (e) => {

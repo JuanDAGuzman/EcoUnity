@@ -1,524 +1,450 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registro y Lista de Clientes</title>
-    <style>
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-      .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-      }
-      .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-      }
-      .close:hover,
-      .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-      }
-      .field-input {
-        display: none;
-      }
 
-      .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .Listas {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60%;
-        padding: 20px;
-        border: 2px solid #ccc;
-        min-height: 200px;
-        margin-bottom: 20px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro y Lista de Clientes</title>
+  <link rel="stylesheet" href="/EcoUnity/static/customer.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+</head>
 
-      .Users,
-      .Customers {
-        display: flex;
-        flex-direction: column; /* Cambia la dirección de la distribución de los elementos */
-      }
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo"><a href="#">Ecounity Admin</a></div>
+      <ul class="links">
+        <li><a href="./categories.html">Editar Categorias</a></li>
+        <li><a href="./map-crud.html">Añadir punto de reforestación</a></li>
+        <li><a href="./customer.html">Administar usuarios</a></li>
+        <li id="welcomeMessage"></li>
+      </ul>
+      <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
 
-      .actions {
-        display: flex;
-        justify-content: space-between; /* Alinea los botones a la izquierda */
-        margin-bottom: 10px; /* Alinea los botones a la derecha */
-        margin-top: 10px; /* Agrega un poco de espacio entre los botones y los elementos de la lista */
-      }
-      ul {
-        font-size: 15px;
-      }
-      button {
-        height: 40px;
-        width: 80px;
-        border-radius: 20px;
-        background-color: var(--hospital-green);
-        cursor: pointer;
-        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
-        transition: scale 0.2ease;
-        font-weight: bold;
-      }
-      button:hover {
-        scale: 1.05;
-        color: var(--white);
-        font-weight: bold;
-      }
-
-      button :active {
-        scale: 0.95;
-      }
-      .returnButton {
-        display: flex;
-        margin-left: 20px;
-        margin-top: 20px;
-        justify-content: center;
-        align-items: center;
-        height: 30px;
-        width: 60px;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-      }
-
-      .returnButton a {
-        text-decoration: none;
-        color: #000;
-        font-size: 15px;
-        font-weight: bold;
-      }
-
-      .returnButton:hover a {
-        color: #666; /* Cambia el color del texto al pasar el cursor sobre el botón */
-      }
-    </style>
-  </head>
-
-  <body>
-    <div>
-      <button class="ButtonReturn returnButton">
-        <a class="btn-regresar" href="./products.html">Volver</a>
-      </button>
-    </div>
-    <div class="container">
-      <h2>Lista de Usuarios</h2>
-      <div class="Listas">
-        <div class="Users">
-          <ul id="userList"></ul>
-        </div>
+      <div class="toggle_btn">
+        <i class="bx bx-menu"></i>
       </div>
-      <h2>Lista de Clientes</h2>
-      <div class="Listas">
-        <div class="Customers">
-          <ul id="customerList"></ul>
-        </div>
+      <div class="dropdown-menu">
+        <ul>
+          <li><a href="./inicio.html">Editar Categorias</a></li>
+          <li><a href="./prueba.html">Añadir</a></li>
+          <li><a href="./../../src/views/index.html">administrar usuarios</a></li>
+        </ul>
       </div>
     </div>
+  </header>
 
-    <div id="userModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('userModal')">&times;</span>
-        <h2>Editar Usuario</h2>
-        <select id="fieldSelect" onchange="updateUserField()">
-          <option value="">Seleccionar campo</option>
-          <option value="email">Email</option>
-          <option value="role">Role</option>
-        </select>
-        <div class="field-input" id="emailInput">
-          <input type="text" id="editUserEmail" placeholder="Email" />
-        </div>
-        <div class="field-input" id="roleInput">
-          <input type="text" id="editUserRole" placeholder="Role" />
-        </div>
-        <button onclick="updateUser()">Guardar</button>
+  <div class="container">
+    <h2 class="tittle" >Lista de Usuarios</h2>
+    <div class="Listas">
+      <div class="Users">
+        <ul id="userList"></ul>
       </div>
     </div>
-
-    <div id="customerModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('customerModal')">&times;</span>
-        <h2>Editar Cliente</h2>
-        <select id="fieldSelectCustomer" onchange="updateCustomerField()">
-          <option value="">Seleccionar campo</option>
-          <option value="name">Nombre</option>
-          <option value="lastName">Apellido</option>
-          <option value="phone">Teléfono</option>
-        </select>
-        <div class="field-input" id="nameInputCustomer">
-          <input type="text" id="editCustomerName" placeholder="Nombre" />
-        </div>
-        <div class="field-input" id="lastNameInput">
-          <input type="text" id="editCustomerLastName" placeholder="Apellido" />
-        </div>
-        <div class="field-input" id="phoneInput">
-          <input type="text" id="editCustomerPhone" placeholder="Teléfono" />
-        </div>
-        <button onclick="updateCustomer()">Guardar</button>
+    <h2 class="tittle">Lista de Clientes</h2>
+    <div class="Listas">
+      <div class="Customers">
+        <ul id="customerList"></ul>
       </div>
     </div>
-    <script>
-      const token = localStorage.getItem("token");
+  </div>
 
-      if (token) {
-        localStorage.setItem("token", token);
-      }
-      const Mail = localStorage.getItem("Mail");
-      if (Mail) {
-        localStorage.setItem("Mail", Mail);
-      }
+  <div id="userModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('userModal')">&times;</span>
+      <h2>Editar Usuario</h2>
+      <select id="fieldSelect" onchange="updateUserField()">
+        <option value="">Seleccionar campo</option>
+        <option value="email">Email</option>
+        <option value="role">Role</option>
+      </select>
+      <div class="field-input" id="emailInput">
+        <input type="text" id="editUserEmail" placeholder="Email" />
+      </div>
+      <div class="field-input" id="roleInput">
+        <input type="text" id="editUserRole" placeholder="Role" />
+      </div>
+      <button onclick="updateUser()">Guardar</button>
+    </div>
+  </div>
 
-      let currentUserId;
-      let currentCustomerId;
-      async function loadUserList() {
-        const userListElement = document.getElementById("userList");
+  <div id="customerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('customerModal')">&times;</span>
+      <h2>Editar Cliente</h2>
+      <select id="fieldSelectCustomer" onchange="updateCustomerField()">
+        <option value="">Seleccionar campo</option>
+        <option value="name">Nombre</option>
+        <option value="lastName">Apellido</option>
+        <option value="phone">Teléfono</option>
+      </select>
+      <div class="field-input" id="nameInputCustomer">
+        <input type="text" id="editCustomerName" placeholder="Nombre" />
+      </div>
+      <div class="field-input" id="lastNameInput">
+        <input type="text" id="editCustomerLastName" placeholder="Apellido" />
+      </div>
+      <div class="field-input" id="phoneInput">
+        <input type="text" id="editCustomerPhone" placeholder="Teléfono" />
+      </div>
+      <button onclick="updateCustomer()">Guardar</button>
+    </div>
+  </div>
+  <script>
 
-        try {
-          const response = await Promise.race([
-            fetch("http://localhost:3000/api/v1/users", {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            }),
-            new Promise(
-              (resolve, reject) =>
-                setTimeout(() => reject(new Error("Request timeout")), 10000) // Timeout de 10 segundos
-            ),
-          ]);
+    // button
+    document.addEventListener('DOMContentLoaded', function () {
+      var toggleBtn = document.querySelector('.toggle_btn');
+      var dropdownMenu = document.querySelector('.dropdown-menu');
 
-          if (!response.ok) {
-            throw new Error("Failed to fetch user list");
-          }
-
-          const dataUser = await response.json();
-
-          userListElement.innerHTML = "";
-
-          dataUser.forEach((user) => {
-            const listUserItem = document.createElement("li");
-            listUserItem.textContent = `Id: ${user.id} - Email: ${user.email} - Role: ${user.role}`;
-            userListElement.appendChild(listUserItem);
-
-            const updateUserButton = document.createElement("button");
-            updateUserButton.textContent = "Actualizar";
-            updateUserButton.onclick = () => openUpdateUserModal(user);
-            const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Eliminar";
-            deleteButton.onclick = () => deleteUser(user.id);
-
-            const actionsContainer = document.createElement("div"); // Contenedor para los botones
-            actionsContainer.classList.add("actions"); // Agrega la clase "actions" al contenedor
-            actionsContainer.appendChild(updateUserButton);
-            actionsContainer.appendChild(deleteButton);
-
-            listUserItem.appendChild(actionsContainer); // Agrega el contenedor con los botones al elemento de la lista
-          });
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Failed to fetch user list");
-        }
-      }
-
-      async function loadCustomerList() {
-        const customerListElement = document.getElementById("customerList");
-
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/customers",
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-
-          if (!response.ok) {
-            throw new Error("Failed to fetch customer list");
-          }
-
-          const data = await response.json();
-
-          customerListElement.innerHTML = "";
-
-          data.forEach((customer) => {
-            const listItem = document.createElement("li");
-            listItem.textContent = `Id: ${customer.id} - Nombre: ${customer.name} ${customer.lastName} - Teléfono: ${customer.phone} - Email: ${customer.user.email}`;
-            customerListElement.appendChild(listItem);
-
-            const updateCustomerButton = document.createElement("button");
-            updateCustomerButton.textContent = "Actualizar";
-            updateCustomerButton.onclick = () =>
-              openUpdateCustomerModal(customer);
-
-            const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Eliminar";
-            deleteButton.onclick = () => deleteCustomer(customer.id);
-
-            const actionsContainer = document.createElement("div"); // Contenedor para los botones
-            actionsContainer.classList.add("actions"); // Agrega la clase "actions" al contenedor
-            actionsContainer.appendChild(updateCustomerButton);
-            actionsContainer.appendChild(deleteButton);
-
-            listItem.appendChild(actionsContainer); // Agrega el contenedor con los botones al elemento de la lista
-          });
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Failed to fetch customer list");
-        }
-      }
-
-      function openUpdateUserModal(user) {
-        currentUserId = user.id;
-        const modal = document.getElementById("userModal");
-        const editUserEmail = document.getElementById("editUserEmail");
-        const editUserRole = document.getElementById("editUserRole");
-
-        // Mostrar solo el campo de correo
-        document.getElementById("emailInput").style.display = "none";
-        document.getElementById("roleInput").style.display = "none";
-
-        // Establecer el valor del campo de correo
-
-        editUserEmail.value = user.email;
-        editUserRole.value = user.role;
-
-        modal.style.display = "block";
-
-        // Ocultar todos los campos de entrada
-        document.getElementById("nameInputCustomer").style.display = "none";
-        document.getElementById("lastNameInput").style.display = "none";
-        document.getElementById("phoneInput").style.display = "none";
-
-        // Establecer los valores de los campos de entrada según el cliente seleccionado
-        document.getElementById("editCustomerName").value = customer.name;
-        document.getElementById("editCustomerLastName").value =
-          customer.lastName;
-        document.getElementById("editCustomerPhone").value = customer.phone;
-
-        modal.style.display = "block";
-      }
-
-      function openUpdateCustomerModal(customer) {
-        currentCustomerId = customer.id;
-        const modal = document.getElementById("customerModal");
-
-        // Ocultar todos los campos de entrada
-        document.getElementById("nameInputCustomer").style.display = "none";
-        document.getElementById("lastNameInput").style.display = "none";
-        document.getElementById("phoneInput").style.display = "none";
-
-        // Establecer los valores de los campos de entrada según el cliente seleccionado
-        document.getElementById("editCustomerName").value = customer.name;
-        document.getElementById("editCustomerLastName").value =
-          customer.lastName;
-        document.getElementById("editCustomerPhone").value = customer.phone;
-
-        modal.style.display = "block";
-      }
-
-      function updateUserField() {
-        const selectedField = document.getElementById("fieldSelect").value;
-
-        // Ocultar todos los campos de entrada excepto el seleccionado
-        document.getElementById("emailInput").style.display =
-          selectedField === "email" ? "block" : "none";
-        document.getElementById("roleInput").style.display =
-          selectedField === "role" ? "block" : "none";
-      }
-
-      function updateCustomerField() {
-        const selectedField = document.getElementById(
-          "fieldSelectCustomer"
-        ).value;
-
-        // Ocultar todos los campos de entrada excepto el seleccionado
-        document.getElementById("nameInputCustomer").style.display =
-          selectedField === "name" ? "block" : "none";
-        document.getElementById("lastNameInput").style.display =
-          selectedField === "lastName" ? "block" : "none";
-        document.getElementById("phoneInput").style.display =
-          selectedField === "phone" ? "block" : "none";
-      }
-
-      window.addEventListener("DOMContentLoaded", () => {
-        loadUserList();
-        loadCustomerList();
+      toggleBtn.addEventListener('click', function () {
+        dropdownMenu.classList.toggle('open');
       });
+    });
 
-      async function deleteUser(userId) {
-        try {
-          const token = localStorage.getItem("token");
-          const response = await fetch(
-            `http://localhost:3000/api/v1/users/${userId}`,
-            {
-              method: "DELETE",
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+    
+    const token = localStorage.getItem("token");
 
-          if (!response.ok) {
-            throw new Error("Failed to delete user");
+    if (token) {
+      localStorage.setItem("token", token);
+    }
+    const Mail = localStorage.getItem("Mail");
+    if (Mail) {
+      localStorage.setItem("Mail", Mail);
+    }
+
+    let currentUserId;
+    let currentCustomerId;
+    async function loadUserList() {
+      const userListElement = document.getElementById("userList");
+
+      try {
+        const response = await Promise.race([
+          fetch("http://localhost:3000/api/v1/users", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+          new Promise(
+            (resolve, reject) =>
+              setTimeout(() => reject(new Error("Request timeout")), 10000) // Timeout de 10 segundos
+          ),
+        ]);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user list");
+        }
+
+        const dataUser = await response.json();
+
+        userListElement.innerHTML = "";
+
+        dataUser.forEach((user) => {
+          const listUserItem = document.createElement("li");
+          listUserItem.textContent = `Id: ${user.id} - Email: ${user.email} - Role: ${user.role}`;
+          userListElement.appendChild(listUserItem);
+
+          const updateUserButton = document.createElement("button");
+          updateUserButton.textContent = "Actualizar";
+          updateUserButton.onclick = () => openUpdateUserModal(user);
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "Eliminar";
+          deleteButton.onclick = () => deleteUser(user.id);
+
+          const actionsContainer = document.createElement("div"); // Contenedor para los botones
+          actionsContainer.classList.add("actions"); // Agrega la clase "actions" al contenedor
+          actionsContainer.appendChild(updateUserButton);
+          actionsContainer.appendChild(deleteButton);
+
+          listUserItem.appendChild(actionsContainer); // Agrega el contenedor con los botones al elemento de la lista
+        });
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to fetch user list");
+      }
+    }
+
+    async function loadCustomerList() {
+      const customerListElement = document.getElementById("customerList");
+
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/customers",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
           }
+        );
 
-          alert("User deleted successfully!");
-          loadUserList();
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Failed to delete user");
+        if (!response.ok) {
+          throw new Error("Failed to fetch customer list");
         }
+
+        const data = await response.json();
+
+        customerListElement.innerHTML = "";
+
+        data.forEach((customer) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `Id: ${customer.id} - Nombre: ${customer.name} ${customer.lastName} - Teléfono: ${customer.phone} - Email: ${customer.user.email}`;
+          customerListElement.appendChild(listItem);
+
+          const updateCustomerButton = document.createElement("button");
+          updateCustomerButton.textContent = "Actualizar";
+          updateCustomerButton.onclick = () =>
+            openUpdateCustomerModal(customer);
+
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "Eliminar";
+          deleteButton.onclick = () => deleteCustomer(customer.id);
+
+          const actionsContainer = document.createElement("div"); // Contenedor para los botones
+          actionsContainer.classList.add("actions"); // Agrega la clase "actions" al contenedor
+          actionsContainer.appendChild(updateCustomerButton);
+          actionsContainer.appendChild(deleteButton);
+
+          listItem.appendChild(actionsContainer); // Agrega el contenedor con los botones al elemento de la lista
+        });
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to fetch customer list");
       }
+    }
 
-      async function deleteCustomer(customerId) {
-        try {
-          const token = localStorage.getItem("token");
-          const response = await fetch(
-            `http://localhost:3000/api/v1/customers/${customerId}`,
-            {
-              method: "DELETE",
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+    function openUpdateUserModal(user) {
+      currentUserId = user.id;
+      const modal = document.getElementById("userModal");
+      const editUserEmail = document.getElementById("editUserEmail");
+      const editUserRole = document.getElementById("editUserRole");
 
-          if (!response.ok) {
-            throw new Error("Failed to delete customer");
+      // Mostrar solo el campo de correo
+      document.getElementById("emailInput").style.display = "none";
+      document.getElementById("roleInput").style.display = "none";
+
+      // Establecer el valor del campo de correo
+
+      editUserEmail.value = user.email;
+      editUserRole.value = user.role;
+
+      modal.style.display = "block";
+
+      // Ocultar todos los campos de entrada
+      document.getElementById("nameInputCustomer").style.display = "none";
+      document.getElementById("lastNameInput").style.display = "none";
+      document.getElementById("phoneInput").style.display = "none";
+
+      // Establecer los valores de los campos de entrada según el cliente seleccionado
+      document.getElementById("editCustomerName").value = customer.name;
+      document.getElementById("editCustomerLastName").value =
+        customer.lastName;
+      document.getElementById("editCustomerPhone").value = customer.phone;
+
+      modal.style.display = "block";
+    }
+
+    function openUpdateCustomerModal(customer) {
+      currentCustomerId = customer.id;
+      const modal = document.getElementById("customerModal");
+
+      // Ocultar todos los campos de entrada
+      document.getElementById("nameInputCustomer").style.display = "none";
+      document.getElementById("lastNameInput").style.display = "none";
+      document.getElementById("phoneInput").style.display = "none";
+
+      // Establecer los valores de los campos de entrada según el cliente seleccionado
+      document.getElementById("editCustomerName").value = customer.name;
+      document.getElementById("editCustomerLastName").value =
+        customer.lastName;
+      document.getElementById("editCustomerPhone").value = customer.phone;
+
+      modal.style.display = "block";
+    }
+
+    function updateUserField() {
+      const selectedField = document.getElementById("fieldSelect").value;
+
+      // Ocultar todos los campos de entrada excepto el seleccionado
+      document.getElementById("emailInput").style.display =
+        selectedField === "email" ? "block" : "none";
+      document.getElementById("roleInput").style.display =
+        selectedField === "role" ? "block" : "none";
+    }
+
+    function updateCustomerField() {
+      const selectedField = document.getElementById(
+        "fieldSelectCustomer"
+      ).value;
+
+      // Ocultar todos los campos de entrada excepto el seleccionado
+      document.getElementById("nameInputCustomer").style.display =
+        selectedField === "name" ? "block" : "none";
+      document.getElementById("lastNameInput").style.display =
+        selectedField === "lastName" ? "block" : "none";
+      document.getElementById("phoneInput").style.display =
+        selectedField === "phone" ? "block" : "none";
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadUserList();
+      loadCustomerList();
+    });
+
+    async function deleteUser(userId) {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch(
+          `http://localhost:3000/api/v1/users/${userId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
+        );
 
-          alert("Customer deleted successfully!");
-          loadCustomerList();
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Failed to delete customer");
+        if (!response.ok) {
+          throw new Error("Failed to delete user");
         }
+
+        alert("User deleted successfully!");
+        loadUserList();
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to delete user");
       }
+    }
 
-      async function updateUser() {
-        const userId = currentUserId;
-        const fieldSelect = document.getElementById("fieldSelect").value;
-        let userData = {};
-
-        switch (fieldSelect) {
-          case "email":
-            userData.email = document.getElementById("editUserEmail").value;
-            break;
-          case "role":
-            userData.role = document.getElementById("editUserRole").value;
-            break;
-          default:
-            alert("Por favor, seleccione un campo a editar.");
-            return;
-        }
-
-        try {
-          const token = localStorage.getItem("token");
-          const response = await fetch(
-            `http://localhost:3000/api/v1/users/${userId}`,
-            {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-              body: JSON.stringify(userData),
-            }
-          );
-
-          if (!response.ok) {
-            throw new Error("Failed to update user");
+    async function deleteCustomer(customerId) {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch(
+          `http://localhost:3000/api/v1/customers/${customerId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
+        );
 
-          alert("User updated successfully!");
-          loadUserList();
-          closeModal("userModal");
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Failed to update user");
+        if (!response.ok) {
+          throw new Error("Failed to delete customer");
         }
+
+        alert("Customer deleted successfully!");
+        loadCustomerList();
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to delete customer");
+      }
+    }
+
+    async function updateUser() {
+      const userId = currentUserId;
+      const fieldSelect = document.getElementById("fieldSelect").value;
+      let userData = {};
+
+      switch (fieldSelect) {
+        case "email":
+          userData.email = document.getElementById("editUserEmail").value;
+          break;
+        case "role":
+          userData.role = document.getElementById("editUserRole").value;
+          break;
+        default:
+          alert("Por favor, seleccione un campo a editar.");
+          return;
       }
 
-      async function updateCustomer() {
-        const customerId = currentCustomerId;
-        const fieldSelect = document.getElementById(
-          "fieldSelectCustomer"
-        ).value;
-        let customerData = {};
-
-        switch (fieldSelect) {
-          case "name":
-            customerData.name =
-              document.getElementById("editCustomerName").value;
-            break;
-          case "lastName":
-            customerData.lastName = document.getElementById(
-              "editCustomerLastName"
-            ).value;
-            break;
-          case "phone":
-            customerData.phone =
-              document.getElementById("editCustomerPhone").value;
-            break;
-          default:
-            alert("Por favor, seleccione un campo a editar.");
-            return;
-        }
-
-        try {
-          const token = localStorage.getItem("token");
-          const response = await fetch(
-            `http://localhost:3000/api/v1/customers/${customerId}`,
-            {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-              body: JSON.stringify(customerData),
-            }
-          );
-
-          if (!response.ok) {
-            throw new Error("Failed to update customer");
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch(
+          `http://localhost:3000/api/v1/users/${userId}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(userData),
           }
+        );
 
-          alert("Customer updated successfully!");
-          loadCustomerList();
-          closeModal("customerModal");
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Failed to update customer");
+        if (!response.ok) {
+          throw new Error("Failed to update user");
         }
+
+        alert("User updated successfully!");
+        loadUserList();
+        closeModal("userModal");
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to update user");
+      }
+    }
+
+    async function updateCustomer() {
+      const customerId = currentCustomerId;
+      const fieldSelect = document.getElementById(
+        "fieldSelectCustomer"
+      ).value;
+      let customerData = {};
+
+      switch (fieldSelect) {
+        case "name":
+          customerData.name =
+            document.getElementById("editCustomerName").value;
+          break;
+        case "lastName":
+          customerData.lastName = document.getElementById(
+            "editCustomerLastName"
+          ).value;
+          break;
+        case "phone":
+          customerData.phone =
+            document.getElementById("editCustomerPhone").value;
+          break;
+        default:
+          alert("Por favor, seleccione un campo a editar.");
+          return;
       }
 
-      function closeModal(modalId) {
-        document.getElementById(modalId).style.display = "none";
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch(
+          `http://localhost:3000/api/v1/customers/${customerId}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(customerData),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to update customer");
+        }
+
+        alert("Customer updated successfully!");
+        loadCustomerList();
+        closeModal("customerModal");
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to update customer");
       }
-    </script>
-  </body>
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+    }
+  </script>
+</body>
+
 </html>
