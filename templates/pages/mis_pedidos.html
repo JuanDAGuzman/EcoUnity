@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Pedidos</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #4caf50;
+        color: white;
+        padding: 1rem 0;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      #ordersList {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+      }
+      .order-card {
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 2rem;
+      }
+      .order-card h3 {
+        margin: 0 0 0.5rem;
+        color: #333;
+      }
+      .order-card p {
+        margin: 0.5rem 0;
+        color: #555;
+      }
+      .order-card ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .order-card li {
+        display: flex;
+        align-items: center;
+        margin: 0.5rem 0;
+      }
+      .order-card li img {
+        margin-right: 1rem;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+      }
+      .order-card li span {
+        color: #333;
+      }
+      .order-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .returnButton {
+        display: flex;
+        margin-left: 20px;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        width: 60px;
+        background-color: white;
+        cursor: pointer;
+
+        border-radius: 5px;
+        color: black;
+        font-size: 15px;
+        font-weight: bold;
+        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
+        transition: scale 0.2ease;
+      }
+
+      .returnButton a {
+        text-decoration: none;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <button class="returnButton">
+        <a href="./inicio.html">Inicio</a>
+      </button>
+      <h1>Mis Pedidos</h1>
+    </header>
+    <div id="ordersList"></div>
+
+    <script>
+      window.onload = async () => {
+        try {
+          // Obtener userId del usuario actual
+          const email = localStorage.getItem("Mail");
+          if (!email) {
+            throw new Error("Debes iniciar sesión para ver tus pedidos.");
+          }
+
+          // Obtener el userId usando el correo electrónico
+          const userResponse = await fetch(
+            `http://localhost:3000/api/v1/users/email/${email}`
+          );
+          if (!userResponse.ok) {
+            throw new Error("Failed to fetch user data");
+          }
+          const userData = await userResponse.json();
+          const userId = userData.id;
+
+          // Obtener los pedidos del usuario usando el userId
+          const ordersResponse = await fetch(
+            `http://localhost:3000/api/v1/orders/user/${userId}`
+          );
+          if (!ordersResponse.ok) {
+            throw new Error("Failed to fetch orders");
+          }
+          const orders = await ordersResponse.json();
+
+          // Mostrar los pedidos en la página
+          const ordersList = document.getElementById("ordersList");
+          if (orders.length === 0) {
+            ordersList.innerHTML = "<p>No tienes pedidos realizados.</p>";
+          } else {
+            const ordersHTML = orders
+              .map(
+                (order) => `
+  <div class="order-card">
+    <div class="order-details">
+      <h3>Pedido ID: ${order.id}</h3>
+      <p>Total: $${order.total.toFixed(2)}</p>
+    </div>
+    <p>Fecha: ${new Date(order.createdAt).toLocaleString()}</p>
+    <ul>
+      ${order.items
+        .map(
+          (item) => `
+        <li>
+          <img src="${item.image}" alt="${item.name}">
+          <div>
+            <span>${item.name}</span>
+            <p>Cantidad: ${item.OrderProduct.amount}</p>
+          </div>
+        </li>
+      `
+        )
+        .join("")}
+    </ul>
+  </div>
+`
+              )
+              .join("");
+            ordersList.innerHTML = ordersHTML;
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Error al cargar los pedidos");
+        }
+      };
+    </script>
+  </body>
+</html>

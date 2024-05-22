@@ -22,6 +22,7 @@ function routerApi(app) {
   router.use('/auth', authRouter);
   router.use('/profile', profileRouter);
   router.use('/maps', mapRouter)
+  
 
 }
 module.exports = routerApi;

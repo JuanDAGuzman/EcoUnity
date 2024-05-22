@@ -96,5 +96,14 @@ router.get('delete-item', async (req, res, next) => {
       }
     };
 });
+router.get('/user/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const orders = await service.findByUser(userId);
+    res.json(orders);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

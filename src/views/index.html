@@ -25,6 +25,7 @@
       </ul>
       <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
 
+<<<<<<< HEAD
       <div class="toggle_btn">
         <i class="bx bx-menu"></i>
       </div>
@@ -35,6 +36,249 @@
           <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
           <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
         </ul>
+=======
+      :root {
+        --white: #ffffff;
+        --black: #000000;
+        --very-light-pink: #c7c7c7;
+        --text-input-field: #f7f7f7;
+        --hospital-green: #acd9b2;
+        --sm: 14px;
+        --md: 16px;
+        --lg: 18px;
+      }
+
+      .navbar {
+        width: 100%;
+        height: 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .navbar .logo a {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--black);
+        font-size: 0.5rem;
+        position: relative;
+      }
+
+      a::before {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--hospital-green);
+        transition: all 0.4s;
+      }
+
+      a:hover::before {
+        width: 100%;
+        /* El borde se extiende de izquierda a derecha */
+      }
+
+      .navbar a {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        margin: 0 1rem;
+      }
+
+      .navbar .links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .toggle_btn {
+        color: var(--hospital-green);
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: none;
+      }
+
+      .action_btn {
+        background-color: var(--hospital-green);
+        color: var(--white);
+        padding: 0.5rem 1rem;
+        border: none;
+        outline: none;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: scale 0.2ease;
+      }
+
+      .action_btn:hover {
+        scale: 1.05;
+        color: var(--white);
+      }
+
+      .action_btn :active {
+        scale: 0.95;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        right: 20rem;
+        top: 40px;
+        width: 280px;
+        background: var(--white);
+        backdrop-filter: blur(15px);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: none;
+      }
+
+      .dropdown-menu.open {
+        height: 240px;
+      }
+
+      .dropdown-menu li {
+        padding: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .dropdown-menu .action_btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      /* responsive design */
+      @media (max-width: 992px) {
+        .navbar .links,
+        .navbar .action_btn {
+          display: none;
+        }
+
+        .navbar .toggle_btn {
+          display: block;
+        }
+
+        .dropdown-menu {
+          display: block;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .dropdown-menu {
+          left: 2rem;
+          width: unset;
+        }
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      #map-template {
+        height: 80vh;
+        width: 100%;
+        margin-bottom: 2rem;
+        border-radius: 20px;
+        border: 4px solid var(--hospital-green);
+        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
+        margin-top: 20px;
+      }
+
+      button {
+        height: 80px;
+        width: 300px;
+        border-radius: 20px;
+        background-color: var(--hospital-green);
+        font-size: var(--md);
+        cursor: pointer;
+        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
+        transition: scale 0.2ease;
+        font-weight: bold;
+      }
+
+      button:hover {
+        scale: 1.05;
+        color: var(--white);
+        font-weight: bold;
+      }
+
+      button :active {
+        scale: 0.95;
+      }
+
+      header {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-bottom: 2px solid var(--hospital-green);
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .container span {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--hospital-green);
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo"><a>Ecounity</a></div>
+        <ul class="links">
+          <li id="welcomeMessage"></li>
+          <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
+          <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
+          <li>
+            <a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a>
+          </li>
+          <li><a href="./../../templates/pages/pqrs.html">Ayuda</a></li>
+        </ul>
+        <a
+          href="./../../templates/pages/login.html"
+          id="loginButton"
+          class="action_btn"
+          >Acceder</a
+        >
+        <div class="toggle_btn">
+          <i class="bx bx-menu"></i>
+        </div>
+        <div class="dropdown-menu">
+          <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
+          <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
+          <li>
+            <a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a>
+          </li>
+          <li ><a href="./../../templates/pages/pqrs.html">Ayuda</a></li>
+          <li>
+            <a href="./../../templates/pages/login.html" class="action_btn"
+              >Acceder</a>
+          </li>
+        </div>
+>>>>>>> 748376951dcabb5bb745688570b120bb59319efd
       </div>
     </div>
   </header>

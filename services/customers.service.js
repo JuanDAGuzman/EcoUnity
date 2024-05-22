@@ -1,18 +1,15 @@
 const boom = require('@hapi/boom');
 
-
 const bcrypt = require('bcrypt');
-
 
 const { models } = require('../libs/sequelize');
 
 class CustomerService {
-
   constructor() {}
 
   async find() {
     const rta = await models.Customer.findAll({
-      include: ['user']
+      include: ['user'],
     });
     return rta;
   }
@@ -28,15 +25,15 @@ class CustomerService {
   async create(data) {
     const hash = await bcrypt.hash(data.user.password, 10);
     const newData = {
-      ...data,//clona la infor
+      ...data, //clona la infor
       user: {
         ...data.user,
-        password: hash
-      }
-    }
+        password: hash,
+      },
+    };
 
     const newCustomer = await models.Customer.create(newData, {
-      include: ['user']
+      include: ['user'],
     });
     delete newCustomer.dataValues.user.dataValues.password;
     return newCustomer;
@@ -54,6 +51,19 @@ class CustomerService {
     return { rta: true };
   }
 
+  async findCustomerIdByUserId(userId) {
+    try {
+      const customer = await models.Customer.findOne({
+        where: { user_id: userId },
+        attributes: ['id'], // Solo queremos obtener el id
+      });
+      return customer ? customer.id : null;
+    } catch (error) {
+      throw new Error(
+        `Error al buscar el id del cliente por userId: ${error.message}`
+      );
+    }
+  }
 }
 
 module.exports = CustomerService;
