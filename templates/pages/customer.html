@@ -14,9 +14,9 @@
     <div class="navbar">
       <div class="logo"><a href="#">Ecounity Admin</a></div>
       <ul class="links">
-        <li><a href="./categories.html">Editar Categorias</a></li>
-        <li><a href="./map-crud.html">Añadir punto de reforestación</a></li>
-        <li><a href="./customer.html">Administar usuarios</a></li>
+        <li><a href="/EcoUnity/templates/pages/categories.html">Editar Categorias</a></li>
+        <li><a href="/EcoUnity/templates/pages/map-crud.html">Añadir punto de reforestación</a></li>
+        <li><a href="/EcoUnity/templates/pages/customer.html">Administar usuarios</a></li>
         <li id="welcomeMessage"></li>
       </ul>
       <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
@@ -26,16 +26,16 @@
       </div>
       <div class="dropdown-menu">
         <ul>
-          <li><a href="./inicio.html">Editar Categorias</a></li>
-          <li><a href="./prueba.html">Añadir</a></li>
-          <li><a href="./../../src/views/index.html">administrar usuarios</a></li>
+          <li><a href="/EcoUnity/templates/pages/categories.html">Editar Categorias</a></li>
+          <li><a href="/EcoUnity/templates/pages/map-crud.html">Añadir punto de reforestación</a></li>
+          <li><a href="/EcoUnity/templates/pages/customer.html">Administar usuarios</a></li>
         </ul>
       </div>
     </div>
   </header>
 
   <div class="container">
-    <h2 class="tittle" >Lista de Usuarios</h2>
+    <h2 class="tittle">Lista de Usuarios</h2>
     <div class="Listas">
       <div class="Users">
         <ul id="userList"></ul>
@@ -102,7 +102,7 @@
       });
     });
 
-    
+
     const token = localStorage.getItem("token");
 
     if (token) {

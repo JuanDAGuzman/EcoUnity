@@ -1,208 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
-    />
-    <link rel="stylesheet" href="./../../static/cuenta.css" />
-    <title>Registro</title>
-  </head>
-  <body>
-      <header>
-        <div class="navbar">
-          <div class="logo"><a href="#">Ecounity</a></div>
-          <ul class="links">
-            <li><a href="./inicio.html">Inicio</a></li>
-            <li><a href="./prueba.html">Productos</a></li>
-            <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
-            <li><a href="#">Ayuda</a></li>
-          </ul>
-          <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
-  
-          <div class="toggle_btn">
-            <i class="bx bx-menu"></i>
-          </div>
-          <div class="dropdown-menu">
-            <ul>
-              <li><a href="./inicio.html">Inicio</a></li>
-              <li><a href="./prueba.html">Productos</a></li>
-              <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
-              <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
-            </ul>
-          </div>
-        </div>
-      </header>
 
-    <section>
-      <div class="container-form register">
-        <div class="information">
-          <div class="info-childs">
-            <h2 class="tittle-container">Bienvenido a EcoUnity</h2>
-            <p>
-              Para conocer todos los beneficios crea una cuenta con nosotros o
-              accede desde el siguiente link .
-            </p>
-            <button onclick="location.href='login.html'" class="login">
-              Acceder
-            </button>
-          </div>
-        </div>
-        <div class="form-information">
-          <div class="form-information-childs">
-            <h2 class="register">Registra tus datos</h2>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  <link rel="stylesheet" href="./../../static/cuenta.css" />
+  <title>Registro</title>
+</head>
 
-            <form id="customerForm" class="form">
-              <div>
-                <label>
-                  <i class="bx bx-user"></i>
-                  <input
-                    type="text"
-                    placeholder="Nombre"
-                    id="name"
-                    name="name"
-                    class="input"
-                    required
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  <i class="bx bx-user"></i>
-                  <input
-                    type="text"
-                    placeholder="Apellido"
-                    id="lastName"
-                    name="lastName"
-                    class="input"
-                    required
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  <i class="bx bx-phone"></i>
-                  <input
-                    type="text"
-                    placeholder="Teléfono"
-                    id="phone"
-                    name="phone"
-                    class="input"
-                    required
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  <i class="bx bx-envelope"></i>
-                  <input
-                    type="email"
-                    placeholder="Correo Electrónico"
-                    id="email"
-                    name="user[email]"
-                    class="input input-email"
-                    required
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  <i class="bx bx-lock-alt"></i>
-                  <input
-                    type="password"
-                    placeholder="Contraseña"
-                    id="password"
-                    name="user[password]"
-                    class="input input-password"
-                    required
-                  />
-                </label>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo"><a href="#">Ecounity</a></div>
+      <ul class="links">
+        <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
+        <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
+        <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
+        <li><a href="/EcoUnity/templates/pages/pqrs.html">Ayuda</a></li>
+      </ul>
+      <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
 
-                <button type="submit" class="primary-button login-button">
-                  Crear cuenta
-                </button>
-              </div>
+      <div class="toggle_btn">
+        <i class="bx bx-menu"></i>
+      </div>
+      <div class="dropdown-menu">
+        <ul>
+          <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
+          <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
+          <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
+          <li><a href="/EcoUnity/templates/pages/pqrs.html">Ayuda</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
 
-            </form>
-          </div>
+  <section>
+    <div class="container-form register">
+      <div class="information">
+        <div class="info-childs">
+          <h2 class="tittle-container">Bienvenido a EcoUnity</h2>
+          <p>
+            Para conocer todos los beneficios crea una cuenta con nosotros o
+            accede desde el siguiente link .
+          </p>
+          <button onclick="location.href='login.html'" class="login">
+            Acceder
+          </button>
         </div>
       </div>
-    </section>
-    <script>
-        // button
-  document.addEventListener('DOMContentLoaded', function() {
-    var toggleBtn = document.querySelector('.toggle_btn');
-    var dropdownMenu = document.querySelector('.dropdown-menu');
+      <div class="form-information">
+        <div class="form-information-childs">
+          <h2 class="register">Registra tus datos</h2>
 
-    toggleBtn.addEventListener('click', function() {
-      dropdownMenu.classList.toggle('open');
+          <form id="customerForm" class="form">
+            <div>
+              <label>
+                <i class="bx bx-user"></i>
+                <input type="text" placeholder="Nombre" id="name" name="name" class="input" required />
+              </label>
+            </div>
+            <div>
+              <label>
+                <i class="bx bx-user"></i>
+                <input type="text" placeholder="Apellido" id="lastName" name="lastName" class="input" required />
+              </label>
+            </div>
+            <div>
+              <label>
+                <i class="bx bx-phone"></i>
+                <input type="text" placeholder="Teléfono" id="phone" name="phone" class="input" required />
+              </label>
+            </div>
+            <div>
+              <label>
+                <i class="bx bx-envelope"></i>
+                <input type="email" placeholder="Correo Electrónico" id="email" name="user[email]"
+                  class="input input-email" required />
+              </label>
+            </div>
+            <div>
+              <label>
+                <i class="bx bx-lock-alt"></i>
+                <input type="password" placeholder="Contraseña" id="password" name="user[password]"
+                  class="input input-password" required />
+              </label>
+
+              <button type="submit" class="primary-button login-button">
+                Crear cuenta
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    // button
+    document.addEventListener('DOMContentLoaded', function () {
+      var toggleBtn = document.querySelector('.toggle_btn');
+      var dropdownMenu = document.querySelector('.dropdown-menu');
+
+      toggleBtn.addEventListener('click', function () {
+        dropdownMenu.classList.toggle('open');
+      });
     });
-  });
-  //button
+    //button
 
-  const Mail = localStorage.getItem("Mail");
-      if (Mail) {
-        const welcomeMessage = document.getElementById("welcomeMessage");
-        welcomeMessage.textContent = "Bienvenid@ " + Mail;
+    const Mail = localStorage.getItem("Mail");
+    if (Mail) {
+      const welcomeMessage = document.getElementById("welcomeMessage");
+      welcomeMessage.textContent = "Bienvenid@ " + Mail;
 
-        loginButton.textContent = "Cerrar sesión";
+      loginButton.textContent = "Cerrar sesión";
 
-        loginButton.addEventListener("click", () => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("Mail");
-          window.location.href = "./../../templates/pages/login.html";
-        });
-      }
-        
+      loginButton.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("Mail");
+        window.location.href = "./../../templates/pages/login.html";
+      });
+    }
+
     const customerForm = document.getElementById("customerForm");
 
-      const submitForm = async (e) => {
-        e.preventDefault();
+    const submitForm = async (e) => {
+      e.preventDefault();
 
-        const name = document.getElementById("name").value;
-        const lastName = document.getElementById("lastName").value;
-        const phone = document.getElementById("phone").value;
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+      const name = document.getElementById("name").value;
+      const lastName = document.getElementById("lastName").value;
+      const phone = document.getElementById("phone").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/customers",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                name,
-                lastName,
-                phone,
-                user: { email, password },
-              }),
-            }
-          );
-
-          const data = await response.json();
-
-          if (response.ok) {
-            // El cliente se creó correctamente
-            console.log("Customer created:", data);
-            alert("Cliente creado exitosamente");
-          } else {
-            // Hubo un error al crear el cliente
-            throw new Error(`Failed to create customer: ${data.error}`);
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/customers",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              lastName,
+              phone,
+              user: { email, password },
+            }),
           }
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Oops... " + error.message);
-        }
-      };
+        );
 
-      customerForm.addEventListener("submit", submitForm);
-    </script>
-  </body>
+        const data = await response.json();
+
+        if (response.ok) {
+          // El cliente se creó correctamente
+          console.log("Customer created:", data);
+          alert("Cliente creado exitosamente");
+        } else {
+          // Hubo un error al crear el cliente
+          throw new Error(`Failed to create customer: ${data.error}`);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Oops... " + error.message);
+      }
+    };
+
+    customerForm.addEventListener("submit", submitForm);
+  </script>
+</body>
+
 </html>

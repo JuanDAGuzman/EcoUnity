@@ -19,9 +19,9 @@
     <div class="navbar">
       <div class="logo"><a href="#">Ecounity Admin</a></div>
       <ul class="links">
-        <li><a href="./categories.html">Editar Categorias</a></li>
-        <li><a href="./map-crud.html">Añadir punto de reforestación</a></li>
-        <li><a href="./customer.html">Administar usuarios</a></li>
+        <li><a href="/EcoUnity/templates/pages/categories.html">Editar Categorias</a></li>
+        <li><a href="/EcoUnity/templates/pages/map-crud.html">Añadir punto de reforestación</a></li>
+        <li><a href="/EcoUnity/templates/pages/customer.html">Administar usuarios</a></li>
         <li id="welcomeMessage"></li>
       </ul>
       <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
@@ -31,9 +31,9 @@
       </div>
       <div class="dropdown-menu">
         <ul>
-          <li><a href="./inicio.html">Editar Categorias</a></li>
-          <li><a href="./prueba.html">Añadir</a></li>
-          <li><a href="./../../src/views/index.html">administrar usuarios</a></li>
+          <li><a href="/EcoUnity/templates/pages/categories.html">Editar Categorias</a></li>
+          <li><a href="/EcoUnity/templates/pages/map-crud.html">Añadir punto de reforestación</a></li>
+          <li><a href="/EcoUnity/templates/pages/customer.html">Administar usuarios</a></li>
         </ul>
       </div>
     </div>
@@ -58,8 +58,29 @@
     </form>
 
     <script>
+       document.addEventListener('DOMContentLoaded', function () {
+      var toggleBtn = document.querySelector('.toggle_btn');
+      var dropdownMenu = document.querySelector('.dropdown-menu');
 
-      // button
+      toggleBtn.addEventListener('click', function () {
+        dropdownMenu.classList.toggle('open');
+      });
+    });
+    
+    const Mail = localStorage.getItem("Mail");
+    if (Mail) {
+      const welcomeMessage = document.getElementById("welcomeMessage");
+      welcomeMessage.textContent = "Bienvenid@ " + Mail;
+
+      loginButton.textContent = "Cerrar sesión";
+
+      loginButton.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("Mail");
+        window.location.href = "./../../templates/pages/login.html";
+      });
+    }
+
       document.addEventListener('DOMContentLoaded', function () {
         var toggleBtn = document.querySelector('.toggle_btn');
         var dropdownMenu = document.querySelector('.dropdown-menu');
@@ -68,16 +89,6 @@
           dropdownMenu.classList.toggle('open');
         });
       });
-      
-      document.addEventListener('DOMContentLoaded', function () {
-        var toggleBtn = document.querySelector('.toggle_btn');
-        var dropdownMenu = document.querySelector('.dropdown-menu');
-
-        toggleBtn.addEventListener('click', function () {
-          dropdownMenu.classList.toggle('open');
-        });
-      });
-
 
       const categoryForm = document.getElementById("categoryForm");
       categoryForm.addEventListener("submit", async (event) => {

@@ -230,14 +230,16 @@ input[type="submit"] {
         margin: 0;
         padding: 12px;
     }
-    
+
     input[type="submit"] {
-        margin: 20px 0 0 0; /* Espacio superior para separación */
+        margin: 20px 0 0 0;
+        /* Espacio superior para separación */
     }
 }
 
 /* Responsive design */
 @media (max-width: 992px) {
+
     .navbar .links,
     .navbar .action_btn {
         display: none;

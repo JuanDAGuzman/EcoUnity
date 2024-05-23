@@ -37,12 +37,12 @@ body {
 }
 
 
-li{
+li {
   list-style: none;
   padding: 0 40px;
 }
 
-a{
+a {
   text-decoration: none;
   color: var(--black);
   font-size: 1rem;
@@ -62,7 +62,8 @@ a::before {
 }
 
 a:hover::before {
-  width: 100%;  /* El borde se extiende de izquierda a derecha */
+  width: 100%;
+  /* El borde se extiende de izquierda a derecha */
 }
 
 
@@ -90,7 +91,8 @@ header {
 .navbar .logo a {
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--hospital-green); /* Manteniendo el color del logo */
+  color: var(--hospital-green);
+  /* Manteniendo el color del logo */
 }
 
 .navbar .links {
@@ -102,7 +104,8 @@ header {
   color: var(--hospital-green);
   font-size: 1.5rem;
   cursor: pointer;
-  display: none; /* Oculto por defecto */
+  display: none;
+  /* Oculto por defecto */
 }
 
 .action_btn {
@@ -114,15 +117,18 @@ header {
   border-radius: 20px;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: transform 0.2s ease; /* Corregido el error de sintaxis en la propiedad transition */
+  transition: transform 0.2s ease;
+  /* Corregido el error de sintaxis en la propiedad transition */
 }
 
 .action_btn:hover {
-  transform: scale(1.05); /* Corregido el error en la propiedad transform */
+  transform: scale(1.05);
+  /* Corregido el error en la propiedad transform */
 }
 
 .action_btn:active {
-  transform: scale(0.95); /* Corregido el error en la propiedad transform */
+  transform: scale(0.95);
+  /* Corregido el error en la propiedad transform */
 }
 
 .dropdown-menu {
@@ -169,7 +175,8 @@ header {
   overflow: hidden;
 }
 
-.information, .form-information {
+.information,
+.form-information {
   width: 50%;
   display: flex;
   align-items: center;
@@ -297,7 +304,7 @@ header {
   margin-bottom: 20px;
 }
 
-.registrarse{
+.registrarse {
   background-color: var(--white);
   border-radius: 8px;
   color: var(--black);
@@ -310,61 +317,70 @@ header {
   box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
+.tittle {
+  font-style: oblique;
+}
+
 /* Responsive Styles */
 @media (max-width: 992px) {
   .container-form {
-      flex-direction: column;
-      height: auto;
+    flex-direction: column;
+    height: auto;
   }
 
-  .information, .form-information {
-      width: 100%;
-      border-radius: 0;
-      padding: 20px;
+  .information,
+  .form-information {
+    width: 100%;
+    border-radius: 0;
+    padding: 20px;
   }
 
   .information {
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 0;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 0;
   }
 
   .form-information {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 20px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 20px;
   }
 
   .info-childs p {
-      margin: 30px 30px;
+    margin: 30px 30px;
   }
 
   .form {
-      margin: 30px 0;
+    margin: 30px 0;
   }
 }
 
 @media (max-width: 576px) {
-  .info-childs h2, .form-information-childs h2 {
-      font-size: 1.5rem;
-      
+
+  .info-childs h2,
+  .form-information-childs h2 {
+    font-size: 1.5rem;
+
   }
 
-  .info-childs p, .form-information-childs p {
-      margin: 15px 0;
-      font-size: var(--md);
-      margin-top: 15px ;
+  .info-childs p,
+  .form-information-childs p {
+    margin: 15px 0;
+    font-size: var(--md);
+    margin-top: 15px;
   }
 
   .icons i {
-      padding: 10px;
+    padding: 10px;
   }
 
-  .primary-button{
+  .primary-button {
     margin-bottom: 30px;
   }
 }
 
 /* Responsive design */
 @media (max-width: 992px) {
+
   .navbar .links,
   .navbar .action_btn {
     display: none;
@@ -394,5 +410,3 @@ header {
     margin-left: 1rem;
   }
 }
-
-

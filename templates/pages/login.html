@@ -23,9 +23,9 @@
         <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
         <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
         <li><a href="/EcoUnity/templates/pages/pqrs.html">Ayuda</a></li>
-        <li id="welcomeMessage"></li>
       </ul>
-      <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
+      <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
+
       <div class="toggle_btn">
         <i class="bx bx-menu"></i>
       </div>
@@ -33,10 +33,8 @@
         <ul>
           <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
           <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
-          <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
-          <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
-          <li><a href="#">Ayuda </a></li>
-          <li><a href="./login.html" class="action_btn">Acceder</a></li>
+          <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
+          <li><a href="/EcoUnity/templates/pages/pqrs.html">Ayuda</a></li>
         </ul>
       </div>
     </div>
@@ -75,7 +73,7 @@
       </div>
       <div class="information">
         <div class="info-childs">
-          <h2>Inicia Sesión</h2>
+          <h2 class="tittle">Inicia Sesión</h2>
           <p>
             Si no tienes una cuenta registrada, ingresa al siguiente link y
             regístrate
@@ -96,19 +94,19 @@
     };
 
     const Mail = localStorage.getItem("Mail");
-      if (Mail) {
-        const welcomeMessage = document.getElementById("welcomeMessage");
-        welcomeMessage.textContent = "Bienvenid@ " + Mail;
+    if (Mail) {
+      const welcomeMessage = document.getElementById("welcomeMessage");
+      welcomeMessage.textContent = "Bienvenid@ " + Mail;
 
-        loginButton.textContent = "Cerrar sesión";
+      loginButton.textContent = "Cerrar sesión";
 
-        loginButton.addEventListener("click", () => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("Mail");
-          window.location.href = "./../../templates/pages/login.html";
-        });
-      } 
-    
+      loginButton.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("Mail");
+        window.location.href = "./../../templates/pages/login.html";
+      });
+    }
+
     const loginForm = document.getElementById("loginForm");
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
