@@ -24,7 +24,7 @@ const whitelist = [
   'http://127.0.0.1:5500',
   'http://127.0.0.1:5501',
   'http://127.0.0.1:5500/templates/pages/recuperar.html',
-  '/api/v1/customers'
+  '/api/v1/customers',
 ];
 const options = {
   origin: (origin, callback) => {
@@ -38,7 +38,6 @@ const options = {
 
 app.use(cors(options));
 app.use(paymentRouter);
-
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');

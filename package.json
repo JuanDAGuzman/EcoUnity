@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch index.js",
+    "dev": "nodemon index.js",
     "start": "node index.js",
     "lint": "eslint",
     "migrations:generate": "sequelize-cli migration:generate --name",
@@ -19,7 +19,7 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.1",
-    "nodemon": "^2.0.12",
+    "nodemon": "2.0.22",
     "prettier": "^2.3.2"
   },
   "dependencies": {

@@ -2,94 +2,118 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario PQRS</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="./../../static/pqrs.css">
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
-  />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PQRS</title>
+  <link rel="stylesheet" href="/EcoUnity/static/pqrs.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
 </head>
 
 <body>
 
-    <header>
-        <div class="navbar">
-          <div class="logo"><a href="#">Ecounity</a></div>
-          <ul class="links">
-            <li><a href="./inicio.html">Inicio</a></li>
-            <li><a href="./prueba.html">Productos</a></li>
-            <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
-            <li><a href="#form">Ayuda</a></li>
-          </ul>
-          <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
+  <header>
+    <div class="navbar">
+      <div class="logo"><a href="#">Ecounity</a></div>
+      <ul class="links">
+        <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
+        <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
+        <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
+        <li><a href="/EcoUnity/templates/pages/pqrs.html">Ayuda</a></li>
+      </ul>
+      <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
 
-          <div class="toggle_btn">
-            <i class="bx bx-menu"></i>
-          </div>
-          <div class="dropdown-menu">
-            <ul>
-              <li><a href="./inicio.html">Inicio</a></li>
-              <li><a href="./prueba.html">Productos</a></li>
-              <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
-              <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
-            </ul>
-          </div>
-        </div>
-      </header>
+      <div class="toggle_btn">
+        <i class="bx bx-menu"></i>
+      </div>
+      <div class="dropdown-menu">
+        <ul>
+          <li><a href="/EcoUnity/templates/pages/inicio.html">Inicio</a></li>
+          <li><a href="/EcoUnity/templates/pages/prueba.html">Productos</a></li>
+          <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
+          <li><a href="/EcoUnity/templates/pages/pqrs.html">Ayuda</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2 class="title">Contactanos</h2>
+    <h3 class="description">En este apartado podras enviar tus sugerencias o quejas para ayudarnos a mejorar.</h3>
 
     <form id="form">
-        <div class="field">
-            <label for="from_name">Nombre de usuario</label>
-            <input type="text" name="from_name" id="from_name">
-        </div>
-        <div class="field">
-            <label for="name">Nombre Completo</label>
-            <input type="text" name="name" id="name">
-        </div>
-        <div class="field">
-            <label for="subject">Razón de la queja</label>
-            <input type="text" name="subject" id="subject">
-        </div>
-        <div class="field">
-            <label for="message">Descipción del problema</label>
-            <input type="text" name="message" id="message">
-        </div>
-        <div class="field">
-            <label for="reply_to">Correo al que se va a enviar la respuesta</label>
-            <input type="text" name="reply_to" id="reply_to">
-        </div>
+      <div class="field">
+        <label for="from_name">Nombre de usuario</label>
+        <input type="text" name="from_name" id="from_name">
+      </div>
+      <div class="field">
+        <label for="name">Nombre Completo</label>
+        <input type="text" name="name" id="name">
+      </div>
+      <div class="field">
+        <label for="subject">Razón de la queja</label>
+        <input type="text" name="subject" id="subject">
+      </div>
+      <div class="field">
+        <label for="message">Descipción del problema</label>
+        <input type="text" name="message" id="message">
+      </div>
+      <div class="field">
+        <label for="reply_to">Correo al que se va a enviar la respuesta</label>
+        <input type="text" name="reply_to" id="reply_to">
+      </div>
 
-        <input type="submit" id="button" value="Enviar">
+      <input type="submit" id="button" value="Enviar">
     </form>
+  </div>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-    <script type="text/javascript">
-        emailjs.init('U7355kaS4rrJkQLEG')
-    </script>
+  <script type="text/javascript">
+    emailjs.init('U7355kaS4rrJkQLEG')
+  </script>
 </body>
 <script>
-    const btn = document.getElementById('button');
+  // button
+  document.addEventListener('DOMContentLoaded', function () {
+    var toggleBtn = document.querySelector('.toggle_btn');
+    var dropdownMenu = document.querySelector('.dropdown-menu');
 
-    document.getElementById('form')
-        .addEventListener('submit', function (event) {
-            event.preventDefault();
+    toggleBtn.addEventListener('click', function () {
+      dropdownMenu.classList.toggle('open');
+    });
+  });
 
-            btn.value = 'Enviando...';
+  const Mail = localStorage.getItem("Mail");
+  if (Mail) {
+    const welcomeMessage = document.getElementById("welcomeMessage");
+    welcomeMessage.textContent = "Bienvenid@ " + Mail;
 
-            const serviceID = 'default_service';
-            const templateID = 'template_7iowr0l';
+    loginButton.textContent = "Cerrar sesión";
 
-            emailjs.sendForm(serviceID, templateID, this)
-                .then(() => {
-                    btn.value = 'Enviando';
-                    alert('Correo enviado correctamente');
-                }, (err) => {
-                    btn.value = 'Send Email';
-                    alert(JSON.stringify(err));
-                });
+    loginButton.addEventListener("click", () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("Mail");
+      window.location.href = "./../../templates/pages/login.html";
+    });
+  }
+
+  const btn = document.getElementById('button');
+
+  document.getElementById('form')
+    .addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      btn.value = 'Enviando...';
+
+      const serviceID = 'default_service';
+      const templateID = 'template_7iowr0l';
+
+      emailjs.sendForm(serviceID, templateID, this)
+        .then(() => {
+          btn.value = 'Enviando';
+          alert('Correo enviado correctamente');
+        }, (err) => {
+          btn.value = 'Send Email';
+          alert(JSON.stringify(err));
         });
+    });
 </script>

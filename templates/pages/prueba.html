@@ -1,317 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./../../static/prueba.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
-    />
-    <title>PRODUCTOS</title>
-    <style>
-      /* Existing CSS */
-      .product-card {
-        position: relative;
-        display: flex;
-        width: 100%;
-        height: 100%;
-        flex-direction: column;
-        justify-content: space-between;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
 
-      .product-card img {
-        width: 80%;
-        height: 200px; /* Ajusta esta altura según tus necesidades */
-        object-fit: cover; /* Asegura que la imagen cubra todo el área sin distorsión */
-        margin-left: 0;
-        margin-top: 20px;
-        border-radius: 8px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./../../static/prueba.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  <link rel="stylesheet" href="/EcoUnity/static/prueba.css">
 
-      .product-card .price {
-        position: relative;
-        align-items: center;
-        justify-content: center;
-        margin: 10px 0;
-        font-weight: bold;
-        color: #333;
-      }
+  <title>PRODUCTOS</title>
+</head>
 
-      .product-card h5 {
-        font-size: 1.2em;
-        margin: 0.5em 0;
-      }
-
-      .product-card p {
-        position: relative;
-        align-items: center;
-        justify-content: center;
-        margin: 10px 0;
-      }
-
-      .product-card .add-button {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        margin: 10px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 0.5em 1em;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      .navbar .cart-icon {
-        position: relative;
-        font-size: 24px;
-        cursor: pointer;
-      }
-
-      .navbar .cart-icon .cart-count {
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        background-color: red;
-        color: white;
-        border-radius: 50%;
-        padding: 2px 6px;
-        font-size: 12px;
-      }
-
-      /* Carrito modal */
-      .cart-modal {
-        display: none;
-        position: fixed;
-        top: 50px;
-        right: 50px;
-        width: 300px;
-        max-height: calc(100vh - 100px);
-        overflow-y: auto;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        z-index: 1000;
-      }
-
-      .cart-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-      }
-
-      .cart-item img {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-        border-radius: 4px;
-        margin-right: 10px;
-      }
-
-      .item-details {
-        flex-grow: 1;
-      }
-
-      .item-details h5 {
-        margin: 0 0 5px;
-        font-size: 16px;
-        color: #333;
-      }
-
-      .item-details .quantity,
-      .item-details .price {
-        margin: 0;
-        font-size: 14px;
-        color: #666;
-      }
-
-      .quantity-input {
-        width: 50px;
-        margin-right: 10px;
-        padding: 5px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        text-align: center;
-      }
-
-      .remove-button {
-        background-color: #dc3545;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      .remove-button:hover {
-        background-color: #c82333;
-      }
-
-      .total {
-        margin-top: 20px;
-        text-align: right;
-        font-size: 18px;
-        color: #333;
-      }
-      #cartModal {
-        display: none;
-        position: fixed;
-        top: 10%;
-        left: 50%;
-        transform: translate(-50%, -10%);
-        background: white;
-        border: 1px solid #ccc;
-        padding: 20px;
-        z-index: 1000;
-      }
-      #cartModal .cart-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-      #cartModal .total {
-        text-align: right;
-        font-weight: bold;
-      }
-      #cartIcon {
-        cursor: pointer;
-      }
-    </style>
-  </head>
-
-  <body>
-    <header>
-      <div class="navbar">
-        <div class="logo"><a href="#">Ecounity</a></div>
-        <ul class="links">
-          <li><a href="./inicio.html">Inicio</a></li>
-          <li><a href="./prueba.html">Productos</a></li>
-          <li>
-            <a href="./../../src/views/index.html"
-              >Puntos de reciclaje y reforestación</a
-            >
-          </li>
-          <li><a href="#">Ayuda</a></li>
-          <li><a href="./mis_pedidos.html">Mis pedidos</a></li>
-        </ul>
-        <a
-          href="./../../templates/pages/login.html"
-          id="loginButton"
-          class="action_btn"
-          >Acceder</a
-        >
-        <div class="cart-icon" id="cartIcon">
-          <i class="bx bx-cart"></i>
-          <span class="cart-count" id="cartCount">0</span>
-        </div>
-        <div class="toggle_btn">
-          <i class="bx bx-menu"></i>
-        </div>
-
-        <div class="dropdown-menu">
-          <li><a href="./inicio.html">Inicio</a></li>
-          <li><a href="./prueba.html">Productos</a></li>
-          <li>
-            <a href="./../../src/views/index.html"
-              >Puntos de reciclaje y reforestación</a
-            >
-          </li>
-          <li><a href="#">Ayuda</a></li>
-          <li><a href="./mis_pedidos.html">Mis pedidos</a></li>
-
-          <li>
-            <a href="./../../templates/pages/login.html" class="action_btn"
-              >Acceder</a
-            >
-          </li>
-        </div>
-        <li id="welcomeMessage"></li>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">Ecounity</div>
+      <ul class="links">
+        <li><a href="./inicio.html">Inicio</a></li>
+        <li><a href="./prueba.html">Productos</a></li>
+        <li>
+          <a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a>
+        </li>
+        <li><a href="./mis_pedidos.html">Mis pedidos</a></li>
+      </ul>
+      <li id="welcomeMessage"></li>
+      <div class="cart-icon" id="cartIcon">
+        <i class="bx bx-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
       </div>
-    </header>
+      <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
 
-    <div class="container-principal">
-      <!-- Formulario de búsqueda por ID -->
-      <form id="searchForm">
-        <div class="mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="productName"
-            placeholder="Buscar productos por nombre"
-          />
-        </div>
-      </form>
-      <br />
-      <div class="row" id="data"></div>
+      <div class="toggle_btn">
+        <i class="bx bx-menu"></i>
+      </div>
+
+      <div class="dropdown-menu">
+        <li><a href="./inicio.html">Inicio</a></li>
+        <li><a href="./prueba.html">Productos</a></li>
+        <li>
+          <a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a>
+        </li>
+        <li><a href="./mis_pedidos.html">Mis pedidos</a></li>
+      </div>
+      <li id="welcomeMessage"></li>
     </div>
+  </header>
 
-    <div id="cartModal" style="display: none">
-      <h2>Carrito de Compras</h2>
-      <div id="cartItems"></div>
-      <button id="confirmButton">Confirmar</button>
-    </div>
+  <div class="container-principal">
+    <!-- Formulario de búsqueda por ID -->
+    <form id="searchForm">
+      <div class="mb-3">
+        <input type="text" class="form-control" id="productName" placeholder="Buscar productos por nombre" />
+      </div>
+    </form>
+    <br />
+    <div class="row" id="data"></div>
+  </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      const searchForm = document.getElementById("searchForm");
-      const productNameInput = document.getElementById("productName");
-      const dataContainer = document.getElementById("data");
-      const cartIcon = document.getElementById("cartIcon");
-      const cartCount = document.getElementById("cartCount");
-      const cartModal = document.getElementById("cartModal");
-      const cartItemsContainer = document.getElementById("cartItems");
-      const confirmButton = document.getElementById("confirmButton");
-      let allProducts = [];
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  <div id="cartModal" style="display: none">
+    <h2>Carrito de Compras</h2>
+    <div id="cartItems"></div>
+    <button id="confirmButton">Confirmar</button>
+  </div>
 
-      const Mail = localStorage.getItem("Mail");
-      if (Mail) {
-        const welcomeMessage = document.getElementById("welcomeMessage");
-        welcomeMessage.textContent = "Bienvenid@ " + Mail;
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script>
+    // button
+    document.addEventListener('DOMContentLoaded', function () {
+      var toggleBtn = document.querySelector('.toggle_btn');
+      var dropdownMenu = document.querySelector('.dropdown-menu');
 
-        loginButton.textContent = "Cerrar sesión";
+      toggleBtn.addEventListener('click', function () {
+        dropdownMenu.classList.toggle('open');
+      });
+    });
+    //button
+    const searchForm = document.getElementById("searchForm");
+    const productNameInput = document.getElementById("productName");
+    const dataContainer = document.getElementById("data");
+    const cartIcon = document.getElementById("cartIcon");
+    const cartCount = document.getElementById("cartCount");
+    const cartModal = document.getElementById("cartModal");
+    const cartItemsContainer = document.getElementById("cartItems");
+    const confirmButton = document.getElementById("confirmButton");
+    let allProducts = [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-        loginButton.addEventListener("click", () => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("Mail");
-          window.location.href = "./../../templates/pages/login.html";
-        });
-      }
+    const Mail = localStorage.getItem("Mail");
+    if (Mail) {
+      const welcomeMessage = document.getElementById("welcomeMessage");
+      welcomeMessage.textContent = "Bienvenid@ " + Mail;
 
-      // Función para cargar todos los productos
-      const loadAllProducts = async () => {
-        try {
-          const response = await fetch("http://localhost:3000/api/v1/products");
-          if (!response.ok) {
-            throw new Error("Failed to fetch products");
-          }
-          allProducts = await response.json();
-          updateTable(allProducts);
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Failed to fetch products");
+      loginButton.textContent = "Cerrar sesión";
+
+      loginButton.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("Mail");
+        window.location.href = "./../../templates/pages/login.html";
+      });
+    }
+
+    // Función para cargar todos los productos
+    const loadAllProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/v1/products");
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
         }
-      };
+        allProducts = await response.json();
+        updateTable(allProducts);
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to fetch products");
+      }
+    };
 
-      // Función para actualizar la tabla con los productos
-      const updateTable = (products) => {
-        let body = "";
-        for (const product of products) {
-          body += `
+    // Función para actualizar la tabla con los productos
+    const updateTable = (products) => {
+      let body = "";
+      for (const product of products) {
+        body += `
           <div class="container-principal">
             <div class="container-cards">
               <div class="product-card">
@@ -320,58 +130,58 @@
                 <h5>${product.name}</h5>
                 <p>${product.description}</p>
                 <button class="add-button" onclick='addToCart(${JSON.stringify(
-                  product
-                )})'>Add</button>
+          product
+        )})'>Add</button>
               </div>
             </div>
           </div>
           `;
-        }
-        dataContainer.innerHTML = body;
-      };
+      }
+      dataContainer.innerHTML = body;
+    };
 
-      // Función para manejar la búsqueda
-      const handleSearch = () => {
-        const searchQuery = productNameInput.value.toLowerCase();
-        const filteredProducts = allProducts.filter((product) =>
-          product.name.toLowerCase().includes(searchQuery)
-        );
-        updateTable(filteredProducts);
-      };
+    // Función para manejar la búsqueda
+    const handleSearch = () => {
+      const searchQuery = productNameInput.value.toLowerCase();
+      const filteredProducts = allProducts.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery)
+      );
+      updateTable(filteredProducts);
+    };
 
-      // Función para añadir producto al carrito
-      const addToCart = (product) => {
-        // Buscar si el producto ya está en el carrito
-        const existingProduct = cart.find((item) => item.id === product.id);
+    // Función para añadir producto al carrito
+    const addToCart = (product) => {
+      // Buscar si el producto ya está en el carrito
+      const existingProduct = cart.find((item) => item.id === product.id);
 
-        // Si el producto ya está en el carrito, incrementar la cantidad
-        if (existingProduct) {
-          existingProduct.quantity++;
-        } else {
-          // Si el producto no está en el carrito, añadirlo con cantidad 1
-          product.quantity = 1;
-          cart.push(product);
-        }
+      // Si el producto ya está en el carrito, incrementar la cantidad
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        // Si el producto no está en el carrito, añadirlo con cantidad 1
+        product.quantity = 1;
+        cart.push(product);
+      }
 
-        updateCartCount();
-        updateCartModal();
-        saveCart();
-      };
+      updateCartCount();
+      updateCartModal();
+      saveCart();
+    };
 
-      // Función para actualizar el contador del carrito
-      const updateCartCount = () => {
-        cartCount.textContent = cart.reduce(
-          (acc, item) => acc + item.quantity,
-          0
-        );
-      };
+    // Función para actualizar el contador del carrito
+    const updateCartCount = () => {
+      cartCount.textContent = cart.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
+    };
 
-      // Función para actualizar el modal del carrito
-      const updateCartModal = () => {
-        cartItemsContainer.innerHTML = "";
-        let total = 0;
-        cart.forEach((product, index) => {
-          cartItemsContainer.innerHTML += `
+    // Función para actualizar el modal del carrito
+    const updateCartModal = () => {
+      cartItemsContainer.innerHTML = "";
+      let total = 0;
+      cart.forEach((product, index) => {
+        cartItemsContainer.innerHTML += `
           <div class="cart-item">
             <img src="${product.image}" alt="${product.name}">
             <div class="item-details">
@@ -385,140 +195,141 @@
             </div>
           </div>
           `;
-          total += product.price * product.quantity;
-        });
+        total += product.price * product.quantity;
+      });
 
-        cartItemsContainer.innerHTML += `
+      cartItemsContainer.innerHTML += `
         <div class="total">
           <p>Total: $${total.toFixed(2)}</p>
         </div>
         `;
-      };
+    };
 
-      // Función para guardar el carrito en el almacenamiento local
-      const saveCart = () => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-      };
+    // Función para guardar el carrito en el almacenamiento local
+    const saveCart = () => {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    };
 
-      // Función para remover producto del carrito
-      const removeFromCart = (index) => {
-        const quantityInput = document.getElementById(`quantityInput${index}`);
-        const quantityToRemove = parseInt(quantityInput.value);
-        if (quantityToRemove > 0) {
-          cart[index].quantity -= quantityToRemove;
-          if (cart[index].quantity <= 0) {
-            cart.splice(index, 1);
-          }
-          updateCartCount();
-          updateCartModal();
-          saveCart();
+    // Función para remover producto del carrito
+    const removeFromCart = (index) => {
+      const quantityInput = document.getElementById(`quantityInput${index}`);
+      const quantityToRemove = parseInt(quantityInput.value);
+      if (quantityToRemove > 0) {
+        cart[index].quantity -= quantityToRemove;
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
         }
-      };
+        updateCartCount();
+        updateCartModal();
+        saveCart();
+      }
+    };
 
-      let customerId;
+    let customerId;
 
-      // Función para confirmar la orden
-      const confirmOrder = async () => {
-        try {
-          // Verificar si el usuario ha iniciado sesión
-          const email = localStorage.getItem("Mail");
-          if (!email) {
-            alert("Debes iniciar sesión para confirmar la orden.");
-            return;
+    // Función para confirmar la orden
+    const confirmOrder = async () => {
+      try {
+        // Verificar si el usuario ha iniciado sesión
+        const email = localStorage.getItem("Mail");
+        if (!email) {
+          alert("Debes iniciar sesión para confirmar la orden.");
+          return;
+        }
+
+        // Obtener userId del endpoint usando el correo electrónico
+        const userResponse = await fetch(
+          `http://localhost:3000/api/v1/users/email/${email}`
+        );
+        if (!userResponse.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        const userData = await userResponse.json();
+        const userId = userData.id;
+
+        // Obtener customerId del endpoint usando el userId
+        const customerResponse = await fetch(
+          `http://localhost:3000/api/v1/customers/id/${userId}`
+        );
+        if (!customerResponse.ok) {
+          throw new Error("Failed to fetch customer data");
+        }
+        const customerData = await customerResponse.json();
+        customerId = customerData.customerId; // Almacenar customerId en la variable global
+
+        // Crear la orden usando el customerId
+        const orderResponse = await fetch(
+          "http://localhost:3000/api/v1/orders",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ customerId }),
           }
+        );
 
-          // Obtener userId del endpoint usando el correo electrónico
-          const userResponse = await fetch(
-            `http://localhost:3000/api/v1/users/email/${email}`
-          );
-          if (!userResponse.ok) {
-            throw new Error("Failed to fetch user data");
-          }
-          const userData = await userResponse.json();
-          const userId = userData.id;
+        if (!orderResponse.ok) {
+          throw new Error("Failed to create order");
+        }
 
-          // Obtener customerId del endpoint usando el userId
-          const customerResponse = await fetch(
-            `http://localhost:3000/api/v1/customers/id/${userId}`
-          );
-          if (!customerResponse.ok) {
-            throw new Error("Failed to fetch customer data");
-          }
-          const customerData = await customerResponse.json();
-          customerId = customerData.customerId; // Almacenar customerId en la variable global
+        const orderData = await orderResponse.json();
+        const orderId = orderData.id; // Obtener el orderId de la respuesta
 
-          // Crear la orden usando el customerId
-          const orderResponse = await fetch(
-            "http://localhost:3000/api/v1/orders",
+        // Agregar productos a la orden usando el orderId
+        for (const product of cart) {
+          const addItemResponse = await fetch(
+            "http://localhost:3000/api/v1/orders/add-item",
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ customerId }),
+              body: JSON.stringify({
+                orderId, // Incluir orderId aquí
+                productId: product.id,
+                amount: product.quantity,
+              }),
             }
           );
 
-          if (!orderResponse.ok) {
-            throw new Error("Failed to create order");
+          if (!addItemResponse.ok) {
+            throw new Error("Failed to add item to order");
           }
-
-          const orderData = await orderResponse.json();
-          const orderId = orderData.id; // Obtener el orderId de la respuesta
-
-          // Agregar productos a la orden usando el orderId
-          for (const product of cart) {
-            const addItemResponse = await fetch(
-              "http://localhost:3000/api/v1/orders/add-item",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  orderId, // Incluir orderId aquí
-                  productId: product.id,
-                  amount: product.quantity,
-                }),
-              }
-            );
-
-            if (!addItemResponse.ok) {
-              throw new Error("Failed to add item to order");
-            }
-          }
-
-          // Limpiar el carrito después de confirmar la orden
-          cart = [];
-          localStorage.removeItem("cart");
-          updateCartCount();
-          updateCartModal();
-
-          alert("Pedido confirmado exitosamente");
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Failed to confirm order");
         }
-      };
 
-      // Event listener para mostrar el modal del carrito
-      cartIcon.addEventListener("click", () => {
-        cartModal.style.display =
-          cartModal.style.display === "none" ? "block" : "none";
-      });
+        // Limpiar el carrito después de confirmar la orden
+        cart = [];
+        localStorage.removeItem("cart");
+        updateCartCount();
+        updateCartModal();
 
-      productNameInput.addEventListener("input", handleSearch);
-      productNameInput.addEventListener("input", () => {
-        if (productNameInput.value.trim() === "") {
-          loadAllProducts();
-        }
-      });
+        alert("Pedido confirmado exitosamente");
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to confirm order");
+      }
+    };
 
-      // Event listener para confirmar la orden
-      confirmButton.addEventListener("click", confirmOrder);
+    // Event listener para mostrar el modal del carrito
+    cartIcon.addEventListener("click", () => {
+      cartModal.style.display =
+        cartModal.style.display === "none" ? "block" : "none";
+    });
 
-      // Cargar todos los productos al cargar la página
-      loadAllProducts();
-    </script>
-  </body>
+    productNameInput.addEventListener("input", handleSearch);
+    productNameInput.addEventListener("input", () => {
+      if (productNameInput.value.trim() === "") {
+        loadAllProducts();
+      }
+    });
+
+    // Event listener para confirmar la orden
+    confirmButton.addEventListener("click", confirmOrder);
+
+    // Cargar todos los productos al cargar la página
+    loadAllProducts();
+  </script>
+</body>
+
 </html>
