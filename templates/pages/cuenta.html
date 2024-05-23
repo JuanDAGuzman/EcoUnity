@@ -21,8 +21,8 @@
             <li><a href="./prueba.html">Productos</a></li>
             <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
             <li><a href="./../../templates/pages/pqrs.html">Ayuda</a></li>
-          </ul>
-          <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
+            <li id="welcomeMessage"></li>
+            <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
 
           <div class="toggle_btn">
             <i class="bx bx-menu"></i>
@@ -35,6 +35,8 @@
               <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
             </ul>
           </div>
+          <li id="welcomeMessage"></li>
+
         </div>
       </header>
 
@@ -133,6 +135,20 @@
       </div>
     </section>
     <script>
+
+const Mail = localStorage.getItem("Mail");
+      if (Mail) {
+        const welcomeMessage = document.getElementById("welcomeMessage");
+        welcomeMessage.textContent = "Bienvenid@ " + Mail;
+
+        loginButton.textContent = "Cerrar sesión";
+
+        loginButton.addEventListener("click", () => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("Mail");
+          window.location.href = "./../../templates/pages/login.html";
+        });
+      }
         // button
   document.addEventListener('DOMContentLoaded', function() {
     var toggleBtn = document.querySelector('.toggle_btn');

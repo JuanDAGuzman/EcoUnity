@@ -23,10 +23,15 @@
         <ul class="links">
           <li><a href="./inicio.html">Inicio</a></li>
           <li><a href="./prueba.html">Productos</a></li>
-          <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
+          <li>
+            <a href="./../../src/views/index.html"
+              >Puntos de reciclaje y reforestación</a
+            >
+          </li>
           <li><a href="#">Ayuda</a></li>
-        </ul>
-        <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
+          <li id="welcomeMessage"></li>
+        <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
+
         <div class="toggle_btn">
           <i class="bx bx-menu"></i>
         </div>
@@ -34,12 +39,16 @@
           <ul>
             <li><a href="./inicio.html">Inicio</a></li>
             <li><a href="./prueba.html">Productos</a></li>
-            <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
-            <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
+            <li>
+              <a href="./../../src/views/index.html">Puntos de reciclaje</a>
+            </li>
+            <li>
+              <a href="./../../src/views/index.html">Puntos de reforestación</a>
+            </li>
             <li><a href="#">Ayuda </a></li>
-            <li><a href="./login.html" class="action_btn">Acceder</a></li>
           </ul>
         </div>
+        <li id="welcomeMessage"></li>
       </div>
     </header>
     <section>
@@ -101,6 +110,20 @@
       </div>
     </section>
     <script>
+      const Mail = localStorage.getItem("Mail");
+      if (Mail) {
+        const welcomeMessage = document.getElementById("welcomeMessage");
+        welcomeMessage.textContent = "Bienvenid@ " + Mail;
+
+        loginButton.textContent = "Cerrar sesión";
+
+        loginButton.addEventListener("click", () => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("Mail");
+          window.location.href = "./../../templates/pages/login.html";
+        });
+      }
+
       const toggleBtn = document.querySelector(".toggle_btn");
       const dropDownMenu = document.querySelector(".dropdown-menu");
 
@@ -119,7 +142,6 @@
         // Guardar el correo electrónico en la variable
         userEmail = loginData.email;
         localStorage.setItem("Mail", userEmail);
-
 
         try {
           const response = await fetch(
