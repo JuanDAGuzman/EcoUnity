@@ -96,7 +96,9 @@
       </button>
       <h1>Mis Pedidos</h1>
     </header>
-    <div id="ordersList"></div>
+    <div id="ordersList">
+      <button id="checkout">Pagar</button>
+    </div>
 
     <script>
       window.onload = async () => {
@@ -166,6 +168,54 @@
           alert("Error al cargar los pedidos");
         }
       };
+
+      const $button = document.getElementById("checkout");
+      $button.addEventListener("click", async () => {
+        try {
+          const email = localStorage.getItem("Mail");
+          const userResponse = await fetch(
+            `http://localhost:3000/api/v1/users/email/${email}`
+          );
+          const userData = await userResponse.json();
+          const userId = userData.id;
+          const ordersResponse = await fetch(
+            `http://localhost:3000/api/v1/orders/user/${userId}`
+          );
+          const orders = await ordersResponse.json();
+
+          const lineItems = orders.flatMap((order) => {
+            order.items.map((item) => {
+              return {
+                price_data: {
+                  currency: "usd",
+                  product_data: {
+                    name: item.name,
+                    images: [item.image],
+                    description: item.description,
+                  },
+                  unit_amount: item.price * 100,
+                },
+                quantity: item.OrderProduct.amount,
+              };
+            });
+          });
+
+          const res = await fetch("/create-checkout-session", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ lineItems }),
+          });
+
+          const data = await res.json();
+          console.log(data.session.url);
+          window.location.href = data.session.url;
+        } catch (e) {
+          console.error('Error', e)
+          alert('Error al procesar el pago')
+        }
+      });
     </script>
   </body>
 </html>

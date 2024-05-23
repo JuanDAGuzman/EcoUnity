@@ -8,6 +8,7 @@ const authRouter = require('./auth.router');
 const profileRouter = require('./profile.router');
 const map = require ('./map-points.router');
 const mapRouter = require('./map.router')
+const paymentRouter = require('./payment.router');
 
 
 function routerApi(app) {
@@ -22,6 +23,7 @@ function routerApi(app) {
   router.use('/auth', authRouter);
   router.use('/profile', profileRouter);
   router.use('/maps', mapRouter)
+  router.use('/payment', paymentRouter);
   
 
 }
