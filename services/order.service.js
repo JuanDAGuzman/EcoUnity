@@ -1,11 +1,8 @@
 const boom = require('@hapi/boom');
-
 const { models } = require('./../libs/sequelize');
 
 class OrderService {
-
-  constructor(){
-  }
+  constructor() {}
 
   async create(data) {
     const newOrder = await models.Order.create(data);
@@ -17,11 +14,32 @@ class OrderService {
     return newItem;
   }
 
+  async deleteItem(data) {
+    const { orderId, productId, amount } = data;
 
-  async deleteItem(data){
-    const newItem = await models.OrderProduct.delete(data);
-    return newItem;
+    const orderProduct = await models.OrderProduct.findOne({
+      where: {
+        orderId,
+        productId,
+      },
+    });
+
+    if (!orderProduct) {
+      throw new Error('El producto no está asociado con esta orden');
+    }
+
+    if (orderProduct.amount >= amount) {
+      await orderProduct.decrement('amount', { by: amount });
+      return {
+        message: `Se eliminaron ${amount} unidades del producto de la orden`,
+      };
+    } else {
+      throw new Error(
+        'No hay suficientes unidades del producto en la orden para eliminar'
+      );
+    }
   }
+
 
   async findByUser(userId) {
     const orders = await models.Order.findAll({
@@ -32,87 +50,50 @@ class OrderService {
         {
           association: 'customer',
           include: ['user']
-        }
+        },
+        'items' // Incluir los detalles de los artículos asociados con cada orden
       ]
     });
     return orders;
   }
-
   async deleteOrder(orderId) {
-    // Buscar la orden por su ID
     const order = await models.Order.findByPk(orderId);
 
-    // Si la orden no existe, lanzar un error
     if (!order) {
       throw new Error('La orden no existe');
     }
 
-    // Eliminar la orden y las filas correspondientes en la tabla orders_products
     await models.OrderProduct.destroy({
       where: {
-        orderId: order.id
-      }
+        orderId: order.id,
+      },
     });
 
     await order.destroy();
   }
-
-
-
-  async deleteItem(data) {
-    const { orderId, productId, amount } = data;
-
-    // Busca la fila en la tabla 'orders_products' que corresponda a la orden y el producto dados
-    const orderProduct = await models.OrderProduct.findOne({
-      where: {
-        orderId,
-        productId
-      }
-    });
-
-    // Si no se encuentra la relación entre la orden y el producto, lanza un error
-    if (!orderProduct) {
-      throw new Error('El producto no está asociado con esta orden');
-    }
-
-    // Verifica si la cantidad a eliminar es menor o igual a la cantidad en la orden
-    if (orderProduct.amount >= amount) {
-      // Si es así, reduce la cantidad del producto en la orden
-      await orderProduct.decrement('amount', { by: amount });
-      // Devuelve un mensaje de éxito
-      return { message: `Se eliminaron ${amount} unidades del producto de la orden` };
-    } else {
-      // Si la cantidad a eliminar es mayor que la cantidad en la orden, lanza un error
-      throw new Error('No hay suficientes unidades del producto en la orden para eliminar');
-    }
-  }
-
-
 
   async find() {
     const orders = await models.Order.findAll({
       include: [
         {
           association: 'customer',
-          include: ['user']
+          include: ['user'],
         },
-        'items'
-      ]
+        'items',
+      ],
     });
     return orders;
   }
-
-
 
   async findOne(id) {
     const order = await models.Order.findByPk(id, {
       include: [
         {
           association: 'customer',
-          include: ['user']
+          include: ['user'],
         },
-        'items'
-      ]
+        'items',
+      ],
     });
     return order;
   }
@@ -127,7 +108,6 @@ class OrderService {
   async delete(id) {
     return { id };
   }
-
 }
 
 module.exports = OrderService;
