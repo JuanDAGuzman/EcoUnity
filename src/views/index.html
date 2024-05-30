@@ -223,6 +223,7 @@
       }
 
       button {
+        margin-left: 50px;
         height: 80px;
         width: 300px;
         border-radius: 20px;
@@ -301,7 +302,9 @@
       <span>Puntos de reforestación</span>
       <div id="map-template"></div>
 
-      <button id="info-btn" class="button">Información</button>
+      <button id="info-btn" class="button">Plantacion</button>
+      <button id="info1-btn" class="button">Reciclaje</button>
+
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -334,6 +337,12 @@
       backButton.addEventListener("click", () => {
         window.location.href = "./recomendations.html";
       });
+
+      const backButton1 = document.getElementById("info1-btn");
+      backButton1.addEventListener("click", () => {
+        window.location.href = "./../../templates/pages/reciclaje.html";
+      });
+
       // Inicializa el mapa
       const map = L.map("map-template").setView([4.6089, -74.0875], 12);
 
