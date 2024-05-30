@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" IE="edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Seaweed+Script&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="./logos/credit-card-pay.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>PAGO CON TC</title>
+  <style>
+    :root {
+      --white: #ffffff;
+      --black: #000000;
+      --very-light-pink: #c7c7c7;
+      --text-input-field: #f7f7f7;
+      --hospital-green: #acd9b2;
+      --sm: 14px;
+      --md: 16px;
+      --lg: 18px;
+    }
+
+    body {
+      background: var(--white);
+    }
+
+    .card-default {
+      background: #e2eaed;
+    }
+
+    .card-visa {
+      background: linear-gradient(135deg, #1a237e 0%, #8c9eff 100%);
+    }
+
+    .card-mastercard {
+      background: linear-gradient(135deg, #ff6f00 0%, #ff8f00 100%);
+    }
+
+    .card-amex {
+      background: linear-gradient(135deg, #004d40 0%, #00acc1 100%);
+    }
+
+    .card-discover {
+      background: linear-gradient(135deg, #ff7043 0%, #ffccbc 100%);
+    }
+
+    .card-container {
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-brand-logo {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .card-chip {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    .bg-white {
+      /* --tw-bg-opacity: 1; */
+      background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    }
+
+    #total_container {
+      display: flex;
+      padding-left: 50px;
+      padding-top: 20px;
+      font-weight: bold;
+      background-color: var(--white);
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--hospital-green);
+    }
+
+    #total_amount {
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--black);
+      padding-bottom: 20px;
+    }
+
+    .flex-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn-volver {
+      margin-left: auto;
+      margin-right: 18px;
+    }
+
+    .mt-40 {
+      background-color: var(--white);
+    }
+
+    .btn-volver:hover {
+      color: var(--hospital-green);
+      /* Cambia el color del texto al hacer hover */
+    }
+
+    #payButton {
+      background-color: var(--hospital-green);
+      color: white;
+      font-weight: bold;
+    }
+
+    #payButton:hover {
+      background-color: darkgreen;
+      color: white;
+      font-weight: bold;
+    }
+
+    #popup {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: fixed;
+      z-index: 1000;
+      width: 35%;
+      height: 10%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #processingMessage {
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      font: bold;
+    }
+
+
+    .bg-white.shadow-md.rounded.px-8.pt-6.pb-8.mb-4 {
+      border: 1px solid var(--hospital-green);
+    }
+
+      .tittle {
+      font-size: 48px;
+      font-weight: bold;
+      color: var(--hospital-green);
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="total_container" class="flex-container">
+    <div>
+      <p>Total a pagar: <span id="total_amount"></span></p>
+    </div>
+    <div>
+      <button class="btn-volver">
+        <a href="./mis_pedidos.html">VOLVER</a>
+      </button>
+    </div>
+  </div>
+  <h2 class="tittle">Pagos en linea</h2>
+</body>
+
+<div id="popup" style="display: none">
+  <p id="processingMessage">Procesando pago</p>
+</div>
+
+<body style="background-color: white">
+  <main class="mt-40">
+    <section id="card_container" style="transform-style: preserve-3d" class="
+          card-container
+          rotate-y-45
+          relative
+          w-full
+          max-w-sm
+          mx-auto
+          h-52
+          card-default
+        ">
+      <div id="card_front" style="backface-visibility: hidden" class="
+            flex flex-col
+            items-start
+            p-5
+            justify-center
+            text-white
+            h-52
+            rounded-xl
+            w-full
+            max-w-sm
+            shadow shadow-lg
+            mx-auto
+          ">
+        <img id="card_chip" class="card-chip w-10" src="./assets/chipTarjeta.png" alt="" />
+        <img id="card_brand_logo" class="card-brand-logo w-20 object-contain" src="" alt="" />
+        <div class="flex flex-col mt-4 mb-4">
+          <span class="text-xs">Número de Tarjeta</span>
+          <span id="card_number_text" class="text-white">#### #### #### ####</span>
+        </div>
+        <div class="w-full flex justify-between">
+          <div>
+            <span class="text-xs">Nombre Tarjeta</span>
+            <p class="italic break-all" id="card_name_text">Nombre Titular</p>
+          </div>
+          <div>
+            <div class="w-20">
+              <label for="exp" class="text-xs">Válido hasta</label>
+              <p>
+                <span id="month_text">00</span> /
+                <span id="year_text">00</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Card Back -->
+      <div id="card_back" style="transform: rotateY(180deg); backface-visibility: hidden" class="
+            absolute
+            top-0
+            flex flex-col
+            items-start
+            p-5
+            justify-center
+            text-white
+            h-52
+            rounded-xl
+            w-full
+            max-w-sm
+          ">
+        <div class="w-full h-8 bg-slate-400 absolute top-10 left-0"></div>
+        <div class="flex w-full justify-between mt-20">
+          <div id="signature_text" class="
+                w-60
+                h-8
+                bg-slate-200
+                text-black text-sm
+                flex
+                items-center
+                pl-2
+              " style="font-family: 'Seaweed Script', cursive"></div>
+          <div class="w-1/4 h-8 bg-white flex items-center">
+            <span id="cvv_text" class="ml-3 text-center text-black"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="w-full max-w-xs mx-auto mt-10">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+            Número de tarjeta
+          </label>
+          <input class="
+                shadow
+                appearance-none
+                border
+                rounded
+                w-full
+                py-2
+                px-3
+                text-gray-700
+                leading-tight
+                focus:outline-none focus:shadow-outline
+              " id="card_number" type="text" placeholder="#### #### #### ####" />
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="card_name">
+            Nombre Tarjeta
+          </label>
+          <input class="
+                shadow
+                appearance-none
+                border
+                rounded
+                w-full
+                py-2
+                px-3
+                text-gray-700
+                mb-3
+                leading-tight
+                focus:outline-none focus:shadow-outline
+              " id="card_name" type="text" placeholder="Nombre en la tarjeta" />
+        </div>
+
+        <div class="mb-6 flex items-center justify-between">
+          <select id="month" class="
+                p-2
+                outline outline-slate-200 outline-1
+                border-white border-r-8
+              ">
+            <option value="">Mes</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <select id="year" class="
+                p-2
+                outline outline-slate-200 outline-1
+                border-white border-r-8
+              ">
+            <option value="">Año</option>
+            <option value="23">2023</option>
+            <option value="24">2024</option>
+            <option value="25">2025</option>
+            <option value="26">2026</option>
+            <option value="27">2027</option>
+            <option value="28">2028</option>
+          </select>
+          <div>
+            <input id="cvv" type="text" placeholder="CVV" class="block shadow w-20 border rounded p-2" />
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <button id="payButton" class="w-full text-white font-bold py-2 px-4 rounded" type="button">
+            Pagar
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="./../../pagotc.js"></script>
+</body>
+
+</html>

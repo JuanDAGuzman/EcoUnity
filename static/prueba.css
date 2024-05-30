@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
   padding: 0;
@@ -9,14 +9,14 @@
 }
 
 :root {
---white: #ffffff;
---black: #000000;
---very-light-pink: #c7c7c7;
---text-input-field: #f7f7f7;
---hospital-green: #acd9b2;
---sm: 14px;
---md: 16px;
---lg: 18px;
+  --white: #ffffff;
+  --black: #000000;
+  --very-light-pink: #c7c7c7;
+  --text-input-field: #f7f7f7;
+  --hospital-green: #acd9b2;
+  --sm: 14px;
+  --md: 16px;
+  --lg: 18px;
 }
 
 body {
@@ -25,13 +25,10 @@ body {
   font-family: system-ui;
 }
 
-
-
-
 header {
   border-bottom: 2px solid var(--hospital-green);
   background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   height: 94px;
@@ -43,8 +40,6 @@ header {
   justify-content: space-between;
   gap: 40px;
 }
-
-
 
 .logo {
   margin-left: 10px; /* Ajusta el margen izquierdo del logo */
@@ -71,7 +66,7 @@ header {
 }
 
 .links a::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -3px;
   left: 0;
@@ -105,34 +100,33 @@ header {
 
 #loginButton {
   margin-right: 20px; /* Ajusta el margen derecho del botón */
-
 }
 
-#welcomeMessage{
+#welcomeMessage {
   margin-left: auto;
 }
 
-.action_btn:hover{
+.action_btn:hover {
   transform: scale(1.05); /* Corregido el error en la propiedad transform */
 }
 
-.action_btn:active{
+.action_btn:active {
   transform: scale(0.95); /* Corregido el error en la propiedad transform */
 }
 
-.dropdown-menu{
-    position: absolute;
-    right: 0;
-    top: 100%;
-    width: 200px;
-    background: var(--white);
-    backdrop-filter: blur(15px) ;
-    border-radius: 10px;
-    overflow: hidden;
-    display: none;
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 200px;
+  background: var(--white);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  overflow: hidden;
+  display: none;
 }
 
-.dropdown-menu.open{
+.dropdown-menu.open {
   display: block;
 }
 
@@ -142,11 +136,11 @@ header {
   margin: 0;
 }
 
-.dropdown-menu li{
+.dropdown-menu li {
   padding: 0.9rem;
 }
 
-.dropdown-menu .action_btn{
+.dropdown-menu .action_btn {
   width: 100%;
 }
 
@@ -170,21 +164,20 @@ header {
 
 /* container */
 
-
-.container-principal{
+.container-principal {
   display: block;
 }
 
 .row {
   /* GRID */
   display: grid;
-  grid-template-columns: repeat(auto-fill, 380px);
+  grid-template-columns: repeat(4, 380px);
   place-items: center;
-  margin-left: 60px;
   margin-top: 70px;
   gap: 70px;
+  justify-content: center;
+  align-items: center;
 }
-
 
 .container-cards {
   border: 2.2px solid var(--hospital-green);
@@ -197,7 +190,6 @@ header {
   transform: scale(1.05);
 }
 
-
 .product-card {
   justify-content: center;
   align-items: center;
@@ -206,26 +198,27 @@ header {
 }
 
 .product-card img {
-  width: 240px;
-  height: 240px;
+  display: flex;
+  /* width: 240px; */
+  /* height: 240px; */
   border-radius: 20px;
   object-fit: cover;
-  margin-left: 20px;
-  margin-top: 20PX;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: 20px; */
+  margin-top: 20px;
 }
 
-h5{
+h5 {
   margin-top: 8px;
   margin-bottom: 8px;
   margin-left: 26px;
-
 }
 
-p{
+p {
   margin-bottom: 4px;
   margin-top: 8px;
   margin-left: 26px;
-
 }
 
 .price {
@@ -233,10 +226,11 @@ p{
   font-size: var(--lg);
 }
 
-
 .mb-3 {
-  margin-left: 620px;
-  margin-bottom: 20px;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .mb-3 input {
@@ -244,10 +238,10 @@ p{
   height: 46px;
   border: 2px solid var(--hospital-green);
   border-radius: 20px;
-  padding:  0 0 0 20px;
+  padding-left: 20px;
 }
 
-.btn-primary{
+.btn-primary {
   border-radius: 15px;
   height: 28px;
   width: 70px;
@@ -255,19 +249,56 @@ p{
   border: 1px solid white;
 }
 
+@media (max-width: 600px) {
+  #form {
+    padding: 10px;
+    width: 100%;
+  }
 
+  input[type="text"],
+  input[type="submit"] {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+  }
 
-/* responsive */
+  input[type="submit"] {
+    margin: 20px 0 0 0;
+    /* Espacio superior para separación */
+  }
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .navbar .links,
+  .navbar .action_btn {
+    display: none;
+  }
+
+  .navbar .toggle_btn {
+    display: block;
+  }
+
+  .dropdown-menu {
+    position: static;
+    margin-top: 110px;
+    width: 50%;
+    display: none;
+  }
+}
+
 @media (max-width: 576px) {
-  .dropdown-menu{
+  .dropdown-menu {
     right: unset;
     left: 0;
     width: 100%;
     border-radius: 0;
   }
 
-  .navbar .logo a{
+  .navbar .logo a {
     margin-left: 1rem;
   }
+  .row{
+    grid-template-columns: repeat(1, 380px);
+  }
 }
-

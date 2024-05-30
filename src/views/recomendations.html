@@ -2,8 +2,11 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Flashcards</title>
-    <link rel="stylesheet" type="text/css" href="estilos.css" />
+    <title>Instrucciones Para Plantar</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
@@ -25,68 +28,52 @@
         --md: 16px;
         --lg: 18px;
       }
-      /* Estilos de flashcards */
-      .flashcard-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 80px; /* Espacio entre flashcards */
-        justify-content: center;
-        margin-top: 130px;
+
+      section {
+        padding: 4.5rem 0 1.5rem;
       }
 
-      .flashcard {
-        background: white;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        width: 300px;
-        height: 400px;
-        perspective: 1000px;
-        position: relative;
-        transform-style: preserve-3d;
-        transition: transform 0.6s;
-      }
-
-      .flashcard-front,
-      .flashcard-back {
-        position: absolute;
+      img {
         width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        backface-visibility: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
       }
 
-      .flashcard-front {
-        background: var(--hospital-green);
-      }
-
-      .flashcard-back {
-        background: lightblue;
-        transform: rotateY(180deg);
-      }
-
-      .flashcard.flipped {
-        transform: rotateY(180deg);
-      }
-
-      /* Estilos para la barra de navegación */
-
-      span {
+      body {
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-top: 52px;
-        margin-bottom: 0;
       }
 
-      header {
+      li {
+        list-style: none;
+        padding: 0 20px;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--black);
+        font-size: 1rem;
         position: relative;
+      }
+
+      a::before {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--hospital-green);
+        transition: all 0.4s;
+      }
+
+      a:hover::before {
+        width: 100%;
+        /* El borde se extiende de izquierda a derecha */
+      }
+
+      /* header */
+      header {
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
@@ -106,44 +93,16 @@
       }
 
       .navbar .logo a {
-        font-size: 1.5rem;
+        font-size: 2.5rem;
         font-weight: bold;
-      }
-
-      a {
-        text-decoration: none;
-        color: var(--black);
-        font-size: 0.5rem;
-        position: relative;
-      }
-
-      a::before {
-        content: "";
-        position: absolute;
-        bottom: -3px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--hospital-green);
-        transition: all 0.4s;
-      }
-
-      a:hover::before {
-        width: 100%;
-      }
-
-      .navbar a {
-        font-size: 1rem;
-        font-weight: 500;
-        color: #333;
-        text-decoration: none;
-        transition: color 0.3s ease;
-        margin: 0 1rem;
+        color: var(--hospital-green);
+        /* Manteniendo el color del logo */
       }
 
       .navbar .links {
         display: flex;
-        gap: 2rem;
+        justify-content: center;
+        align-items: center;
       }
 
       .toggle_btn {
@@ -151,6 +110,7 @@
         font-size: 1.5rem;
         cursor: pointer;
         display: none;
+        /* Oculto por defecto */
       }
 
       .action_btn {
@@ -162,48 +122,196 @@
         border-radius: 20px;
         font-size: 0.8rem;
         cursor: pointer;
-        transition: scale 0.2s;
+        transition: transform 0.2s ease;
+        /* Corregido el error de sintaxis en la propiedad transition */
       }
 
       .action_btn:hover {
-        scale: 1.05;
+        transform: scale(1.05);
+        /* Corregido el error en la propiedad transform */
       }
 
       .action_btn:active {
-        scale: 0.95;
+        transform: scale(0.95);
+        /* Corregido el error en la propiedad transform */
       }
 
       .dropdown-menu {
         position: absolute;
-        right: 20rem;
-        top: 40px;
-        width: 280px;
+        right: 0;
+        top: 100%;
+        width: 200px;
         background: var(--white);
         backdrop-filter: blur(15px);
         border-radius: 10px;
         overflow: hidden;
-        transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         display: none;
       }
 
       .dropdown-menu.open {
-        height: 240px;
+        display: block;
+      }
+
+      .dropdown-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
       }
 
       .dropdown-menu li {
         padding: 0.9rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
 
       .dropdown-menu .action_btn {
         width: 100%;
+      }
+
+      /* Estilos generales */
+
+      .title {
+        font-size: 54px;
+        font-weight: bold;
+        color: var(--hospital-green);
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top: 50px;
+        font-family: "Times New Roman", Times, serif;
+      }
+
+      .container-form,
+      .container-form2,
+      .container-form3,
+      .container-form4,
+      .container-form5 {
         display: flex;
+        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
+        height: 530px;
+        width: 100vw;
+        transition: all 1s ease;
+        margin: 10px auto;
+        flex-direction: row;
+        overflow: hidden;
+        background-color: var(--text-input-field);
+        border: 0.2px solid var(--hospital-green);
+        margin-top: 70px;
+      }
+
+      .description {
+        font-size: var(--md);
+        color: var(--black);
+        text-align: center;
+        max-width: 90%;
+        margin-bottom: 30px;
+        margin-left: 110px;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      }
+
+      .information,
+      .form-information {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .information {
+        background-color: var(--white);
+        align-items: center;
         justify-content: center;
       }
 
-      /* Diseño responsivo */
+      .info-childs {
+        width: 700px;
+        height: 600px;
+        margin-top: 135px;
+      }
+
+      .info-childs img {
+        max-width: 100%;
+        /* Hace que la imagen sea responsive */
+        height: auto;
+        /* Mantiene la proporción de aspecto */
+      }
+
+      .form-information {
+        justify-content: center;
+        background-color: var(--hospital-green);
+      }
+
+      .form-information-childs {
+        padding: 0 20px;
+        font-size: 40px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .info-p {
+        font-size: 23px;
+        margin-bottom: 16px;
+        font-style: italic;
+      }
+
+      .info-s {
+        font-size: 16px;
+        font-size: 20px;
+        font-style: italic;
+      }
+
+      .form-information-childs h2 {
+        color: #333;
+        font-size: 2rem;
+      }
+
+      .form-information-childs p {
+        color: #555;
+      }
+
+      .form {
+        margin: 30px 0 0 0;
+      }
+
+      .form label {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-bottom: 15px;
+        border-radius: 20px;
+        padding: 0 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Estilos para dispositivos con un ancho máximo de 768px (tabletas y dispositivos móviles) */
+      @media only screen and (max-width: 768px) {
+        .container-form,
+        .container-form2,
+        .container-form3,
+        .container-form4,
+        .container-form5 {
+          flex-direction: column;
+          height: auto;
+          margin-top: 50px;
+          /* Ajustar según sea necesario */
+        }
+
+        .description {
+          margin-left: 0;
+        }
+
+        .information,
+        .form-information {
+          width: 100%;
+          padding: 10px;
+        }
+
+        .info-childs {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      /* Responsive Styles */
+
       @media (max-width: 992px) {
         .navbar .links,
         .navbar .action_btn {
@@ -215,137 +323,248 @@
         }
 
         .dropdown-menu {
-          display: block;
+          position: static;
+          margin-top: 110px;
+          width: 50%;
+          display: none;
         }
       }
 
       @media (max-width: 576px) {
         .dropdown-menu {
-          left: 2rem;
-          width: unset;
+          right: unset;
+          left: 0;
+          width: 100%;
+          border-radius: 0;
+        }
+
+        .navbar .logo a {
+          margin-left: 1rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .dropdown-menu {
+          right: unset;
+          left: 0;
+          width: 100%;
+          border-radius: 0;
+        }
+
+        .navbar .logo a {
+          margin-left: 1rem;
         }
       }
     </style>
   </head>
+
   <body>
     <header>
       <div class="navbar">
-        <div class="logo"><a>Ecounity</a></div>
+        <div class="logo"><a href="#">Ecounity</a></div>
         <ul class="links">
-          <li id="welcomeMessage"></li>
-
           <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
           <li><a href="./../../templates/pages/prueba.html">Productos</a></li>
           <li>
-            <a href="./../../src/views/index.html">Puntos de reciclaje</a>
+            <a href="./../../src/views/index.html"
+              >Puntos de reciclaje y reforestación</a
+            >
           </li>
-          <li>
-            <a href="./../../src/views/index.html">Puntos de reforestación</a>
-          </li>
-          <li><a href="#">Información</a></li>
+          <li><a href="./../../templates/pages/pqrs.html">Ayuda</a></li>
+          <li id="welcomeMessage"></li>
         </ul>
         <a
-        href="./../../templates/pages/login.html"
-        id="loginButton"
-        class="action_btn"
-        >Acceder</a
-      >
+          href="./../../templates/pages/login.html"
+          id="loginButton"
+          class="action_btn"
+          >Acceder</a
+        >
+        <div class="dropdown-menu">
+          <ul>
+            <li><a href="./../../templates/pages/inicio.html">Inicio</a></li>
+            <li>
+              <a href="./../../templates/pages/prueba.html">Productos</a>
+            </li>
+            <li>
+              <a href="./../../src/views/index.html"
+                >Puntos de reciclaje y reforestación</a
+              >
+            </li>
+            <li><a href="./../../templates/pages/pqrs.html">Ayuda</a></li>
+          </ul>
+        </div>
         <div class="toggle_btn">
           <i class="bx bx-menu"></i>
         </div>
-        <div class="dropdown-menu">
-          <li><a href="./inicio.html">Inicio</a></li>
-          <li><a href="./prueba.html">Productos</a></li>
-          <li>
-            <a href="./../../src/views/index.html">Puntos de reciclaje</a>
-          </li>
-          <li>
-            <a href="./../../src/views/index.html">Puntos de reforestación</a>
-          </li>
-          <li><a href="#">Información</a></li>
-          <li><a href="./login.html" class="action_btn">Acceder</a></li>
-        </div>
       </div>
     </header>
-    <span class="titulo"
-      >En esta parte encontraras información de como realizar la plantación
-      correctamente</span
-    >
-    <div class="flashcard-container">
-      <div class="flashcard" onclick="flipCard(this)">
-        <div class="flashcard-front">
-          <h2>Preparación del suelo</h2>
+
+    <section>
+      <!-- container1 -->
+      <h1 class="title">Instrucciones para Plantar</h1>
+      <h3 class="description">
+        En este lugar, aprenderás cómo sembrar árboles y plantas de manera
+        correcta.
+      </h3>
+      <div class="container-form login">
+        <div class="form-information">
+          <div class="form-information-childs">
+            <i class="bx bxs-tree" style="color: #ffffff"></i>
+            <h1 class="steps">1er Paso</h1>
+            <form class="form form-login" id="loginForm">
+              <div class="info-p">
+                Mullir el suelo en casillas de plantación de 30 x 30 x 30 cm.
+              </div>
+              <div class="info-s">
+                Esto significa remover y aflojar la tierra hasta esa profundidad
+                y tamaño <br />
+                para facilitar el crecimiento de las raíces.
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="flashcard-back">
-          <h2>Preparación del suelo</h2>
-          <br />
-          <p>
-            Asegúrate de que el suelo esté bien preparado para la plantación, lo
-            que puede incluir labrar y fertilizar adecuadamente.
-          </p>
+        <div class="information">
+          <div class="info-childs">
+            <img
+              src="https://images.pexels.com/photos/7728106/pexels-photo-7728106.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+              alt="suelo"
+            />
+          </div>
         </div>
       </div>
 
-      <!-- Flashcard 2 -->
-      <div class="flashcard" onclick="flipCard(this)">
-        <div class="flashcard-front">
-          <h2>Selección de especies</h2>
+      <!-- container2 -->
+      <div class="container-form2">
+        <div class="information">
+          <div class="info-childs">
+            <img
+              src="https://images.pexels.com/photos/7728884/pexels-photo-7728884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="suelo"
+            />
+          </div>
         </div>
-        <div class="flashcard-back">
-          <h2>Selección de especies</h2>
-          <br />
-          <p>
-            Escoge especies nativas de la región para promover la biodiversidad
-            y asegurar un mayor éxito en el crecimiento.
-          </p>
+        <div class="form-information">
+          <div class="form-information-childs">
+            <i class="bx bxs-tree" style="color: #ffffff"></i>
+            <h1 class="steps">2do Paso</h1>
+            <form class="form form-login" id="loginForm">
+              <div class="info-p">
+                Abrir un hueco del tamaño suficiente para introducir la raíz de
+                la planta.
+              </div>
+              <div class="info-s">
+                Esto significa que el hoyo debe ser lo suficientemente grande
+                para acomodar todas las <br />
+                raíces sin doblarlas o amontonarlas.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- container3 -->
+      <div class="container-form3">
+        <div class="form-information">
+          <div class="form-information-childs">
+            <i class="bx bxs-tree" style="color: #ffffff"></i>
+            <h1 class="steps">3cer Paso</h1>
+            <form class="form form-login" id="loginForm">
+              <div class="info-p">Selecciona un tutor adecuado.</div>
+              <div class="info-s">
+                Elige un tutor de madera que sea largo y resistente para
+                soportar la planta. <br />
+                Puedes usar palos de madera de jardín o incluso ramas gruesas.
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="information">
+          <div class="info-childs">
+            <img
+              src="https://images.pexels.com/photos/12768154/pexels-photo-12768154.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+              alt="suelo"
+            />
+          </div>
         </div>
       </div>
 
-      <div class="flashcard" onclick="flipCard(this)">
-        <div class="flashcard-front">
-          <h2>Época de plantación</h2>
+      <!-- container4cambiar -->
+      <div class="container-form4">
+        <div class="information">
+          <div class="info-childs">
+            <img
+              src="https://images.pexels.com/photos/7728082/pexels-photo-7728082.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="suelo"
+            />
+          </div>
         </div>
-        <div class="flashcard-back">
-          <h2>Época de plantación</h2>
-          <p>
-            Generalmente, la mejor época para plantar es durante la temporada de
-            lluvias, lo cual ayuda al establecimiento de las plantas.
-          </p>
+        <div class="form-information">
+          <div class="form-information-childs">
+            <i class="bx bxs-tree" style="color: #ffffff"></i>
+            <h1 class="steps">4to Paso</h1>
+            <form class="form form-login" id="loginForm">
+              <div class="info-p">Compactar el suelo con las manos.</div>
+              <div class="info-s">
+                Compactar el suelo alrededor de la planta puede ser beneficioso
+                para asegurar un buen contacto entre las raíces y el suelo.
+                <br />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
 
-      <div class="flashcard" onclick="flipCard(this)">
-        <div class="flashcard-front">
-          <h2>Mantenimiento</h2>
+      <!-- container5 -->
+
+      <div class="container-form5">
+        <div class="form-information">
+          <div class="form-information-childs">
+            <i class="bx bxs-tree" style="color: #ffffff"></i>
+            <h1 class="steps">5to Paso</h1>
+            <form class="form form-login" id="loginForm">
+              <div class="info-p">Riega la planta.</div>
+              <div class="info-s">
+                Asegúrate de regar uniformemente alrededor de la planta para que
+                el agua alcance las raíces recién plantadas.
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="flashcard-back">
-          <h2>Mantenimiento</h2>
-          <p>
-            Las plantas jóvenes necesitarán cuidado y mantenimiento, como riego
-            y protección contra plagas y enfermedades.
-          </p>
+        <div class="information">
+          <div class="info-childs">
+            <img
+              src="https://images.pexels.com/photos/4750274/pexels-photo-4750274.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+              alt="suelo"
+            />
+          </div>
         </div>
       </div>
-    </div>
-
-    <script>
-      const Mail = localStorage.getItem("Mail");
-      if (Mail) {
-        const welcomeMessage = document.getElementById("welcomeMessage");
-        welcomeMessage.textContent = "Bienvenid@ " + Mail;
-
-        loginButton.textContent = "Cerrar sesión";
-
-        loginButton.addEventListener("click", () => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("Mail");
-          window.location.href = "./../../templates/pages/login.html";
-        });
-      }
-
-      function flipCard(card) {
-        card.classList.toggle("flipped"); // Alterna la clase para voltear la tarjeta
-      }
-    </script>
+    </section>
   </body>
+  <script>
+    // button
+    document.addEventListener("DOMContentLoaded", function () {
+      var toggleBtn = document.querySelector(".toggle_btn");
+      var dropdownMenu = document.querySelector(".dropdown-menu");
+
+      toggleBtn.addEventListener("click", function () {
+        dropdownMenu.classList.toggle("open");
+      });
+    });
+    //button
+
+    const Mail = localStorage.getItem("Mail");
+    if (Mail) {
+      const welcomeMessage = document.getElementById("welcomeMessage");
+      welcomeMessage.textContent = "Bienvenid@ " + Mail;
+
+      loginButton.textContent = "Cerrar sesión";
+
+      loginButton.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("Mail");
+        window.location.href = "./../../templates/pages/login.html";
+      });
+    }
+  </script>
 </html>

@@ -25,10 +25,10 @@
 
       .product-card img {
         width: 80%;
-        height: 200px; /* Ajusta esta altura según tus necesidades */
-        object-fit: cover; /* Asegura que la imagen cubra todo el área sin distorsión */
-        margin-left: 0;
-        margin-top: 20px;
+        height: 200px;
+        object-fit: cover;
+        /* margin-left: 0; */
+        /* margin-top: 20px; */
         border-radius: 8px;
       }
 
@@ -186,6 +186,18 @@
       #cartIcon {
         cursor: pointer;
       }
+
+      .form-control {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .toggle_btn {
+        color: var(--hospital-green);
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: none;
+        /* Oculto por defecto */
+      }
     </style>
   </head>
 
@@ -203,6 +215,7 @@
           </li>
           <li><a href="#">Ayuda</a></li>
           <li><a href="./mis_pedidos.html">Mis pedidos</a></li>
+          <li id="welcomeMessage"></li>
         </ul>
         <a
           href="./../../templates/pages/login.html"
@@ -210,14 +223,11 @@
           class="action_btn"
           >Acceder</a
         >
+
         <div class="cart-icon" id="cartIcon">
           <i class="bx bx-cart"></i>
           <span class="cart-count" id="cartCount">0</span>
         </div>
-        <div class="toggle_btn">
-          <i class="bx bx-menu"></i>
-        </div>
-
         <div class="dropdown-menu">
           <li><a href="./inicio.html">Inicio</a></li>
           <li><a href="./prueba.html">Productos</a></li>
@@ -235,7 +245,9 @@
             >
           </li>
         </div>
-        <li id="welcomeMessage"></li>
+        <div class="toggle_btn">
+          <i class="bx bx-menu"></i>
+        </div>
       </div>
     </header>
 
@@ -267,6 +279,15 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var toggleBtn = document.querySelector(".toggle_btn");
+        var dropdownMenu = document.querySelector(".dropdown-menu");
+
+        toggleBtn.addEventListener("click", function () {
+          dropdownMenu.classList.toggle("open");
+        });
+      });
+
       const searchForm = document.getElementById("searchForm");
       const productNameInput = document.getElementById("productName");
       const dataContainer = document.getElementById("data");
@@ -321,7 +342,7 @@
                 <p>${product.description}</p>
                 <button class="add-button" onclick='addToCart(${JSON.stringify(
                   product
-                )})'>Add</button>
+                )})'>Añadir</button>
               </div>
             </div>
           </div>

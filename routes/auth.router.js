@@ -1,4 +1,5 @@
 const express = require('express');
+const { config } = require('./../config/config');
 const passport = require('passport');
 
 const AuthService = require('./../services/auth.service');
