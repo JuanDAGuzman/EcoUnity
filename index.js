@@ -22,6 +22,11 @@ const whitelist = [
   'https://myapp.co',
   'http://127.0.0.1:5500',
   'http://127.0.0.1:5501',
+<<<<<<< HEAD
+=======
+  'http://127.0.0.1:5500/templates/pages/recuperar.html',
+  '/api/v1/customers',
+>>>>>>> c8fcf6953ad109de80b43f2315a41c0fa41030f9
 ];
 const options = {
   origin: (origin, callback) => {
@@ -33,9 +38,14 @@ const options = {
   },
 };
 
+<<<<<<< HEAD
 app.use(cors({
   origin: '*'
 }));
+=======
+app.use(cors(options));
+app.use(paymentRouter);
+>>>>>>> c8fcf6953ad109de80b43f2315a41c0fa41030f9
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');

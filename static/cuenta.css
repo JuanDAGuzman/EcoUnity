@@ -10,77 +10,81 @@
       }
 
       :root {
-      --white: #ffffff;
-      --black: #000000;
-      --very-light-pink: #c7c7c7;
-      --text-input-field: #f7f7f7;
-      --hospital-green: #acd9b2;
-      --sm: 14px;
-      --md: 16px;
-      --lg: 18px;
-    }
+        --white: #ffffff;
+        --black: #000000;
+        --very-light-pink: #c7c7c7;
+        --text-input-field: #f7f7f7;
+        --hospital-green: #acd9b2;
+        --sm: 14px;
+        --md: 16px;
+        --lg: 18px;
+      }
 
 
-      section{
-          padding: 4.5rem 0 1.5rem;
+      section {
+        padding: 4.5rem 0 1.5rem;
       }
 
       img {
-          width: 100%;
+        width: 100%;
       }
 
       body {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-          background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-size: cover;
       }
 
 
       .container-form {
         display: flex;
         border-radius: 20px;
-        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25); /* Uso adecuado de rgba para transparencia */
+        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
+        /* Uso adecuado de rgba para transparencia */
         height: 530px;
         width: 100%;
         max-width: 1200px;
         transition: all 1s ease;
-        margin: 10px auto; /* Centra el contenedor */
+        margin: 10px auto;
+        /* Centra el contenedor */
         border: 1.5px solid var(--hospital-green);
         flex-direction: row;
       }
-      
-      .information, .form-information {
+
+      .information,
+      .form-information {
         width: 50%;
         display: flex;
         align-items: center;
         text-align: center;
         border-radius: 20px;
-        padding: 20px; /* Ajusta el relleno para que quede bien en dispositivos más pequeños */
+        padding: 20px;
+        /* Ajusta el relleno para que quede bien en dispositivos más pequeños */
       }
-      
+
       .information {
         background-color: var(--hospital-green);
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
       }
-      
+
       .info-childs {
         width: 100%;
         padding: 0 30px;
       }
-      
+
       .info-childs h2 {
         font-size: 2.5rem;
         color: var(--black);
       }
-      
+
       .info-childs p {
         margin: 30px 90px;
         color: var(--black);
       }
-      
+
       .info-childs input {
         background-color: transparent;
         outline: none;
@@ -90,40 +94,41 @@
         color: var(--white);
         cursor: pointer;
         transition: background-color .3s ease;
-        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25); /* Uso adecuado de rgba para transparencia */
+        box-shadow: 0 8px 11px rgba(14, 55, 54, 0.25);
+        /* Uso adecuado de rgba para transparencia */
       }
-      
+
       .info-childs input:hover {
         background-color: var(--hospital-green);
         border: none;
         color: #fff;
         box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
       }
-      
+
       .form-information {
         justify-content: center;
         background-color: #f8f8f8;
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
       }
-      
+
       .form-information-childs {
         padding: 0 30px;
       }
-      
+
       .form-information-childs h2 {
         color: #333;
         font-size: 2rem;
       }
-      
+
       .form-information-childs p {
         color: #555;
       }
-      
+
       .icons {
         margin: 15px 0;
       }
-      
+
       .icons i {
         border-radius: 50%;
         padding: 17px;
@@ -134,16 +139,16 @@
         transition: background-color 0.3s ease;
         box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
       }
-      
+
       .icons i:hover {
         background-color: var(--hospital-green);
         color: var(--white);
       }
-      
+
       .form {
         margin: 30px 0 0 0;
       }
-      
+
       .form label {
         display: flex;
         width: 312px;
@@ -154,7 +159,7 @@
         background-color: #fff;
         box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
       }
-      
+
       .form label input {
         width: 100%;
         padding: 10px;
@@ -164,11 +169,11 @@
         border-radius: 20px;
         color: #333;
       }
-      
+
       .form label i {
         color: #a7a7a7;
       }
-      
+
       .primary-button {
         background-color: var(--hospital-green);
         border-radius: 8px;
@@ -181,7 +186,7 @@
         height: 36px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
       }
-      
+
       .login {
         background-color: var(--white);
         border-radius: 8px;
@@ -195,181 +200,194 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
       }
 
-        .information, .form-information {
-          width: 100%;
-          border-radius: 20px;
-        }
-      
-        .information {
-          border-bottom-left-radius: 0;
-          border-top-right-radius: 20px;
-        }
-      
-        .form-information {
-          border-top-right-radius: 0;
-          border-bottom-left-radius: 20px;
-        }
-      
-        .info-childs p {
-          margin: 30px 30px;
-        }
-      
-        .form label {
-          width: 100%;
-        }
-      
-      
+      .information,
+      .form-information {
+        width: 100%;
+        border-radius: 20px;
+      }
 
-        li {
-          list-style: none;
-          padding: 0 40px;
-        }
-        
-        a {
-          text-decoration: none;
-          color: var(--black);
-          font-size: 1rem;
-          position: relative;
-        }
-        
-        a::before {
-          content: '';
-          position: absolute;
-          bottom: -3px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: var(--hospital-green);
-          transition: all 0.4s;
-        }
-        
-        a:hover::before {
-          width: 100%;  /* El borde se extiende de izquierda a derecha */
-        }
-        
-        header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          border-bottom: 2px solid var(--hospital-green);
-          background-color: white;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-        }
-        
-        .navbar {
-          width: 100%;
-          height: 80px;
-          max-width: 1200px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-        
-        .navbar .logo a {
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: var(--hospital-green); /* Manteniendo el color del logo */
-        }
-        
-        .navbar .links {
-          display: flex;
-          gap: 1rem;
-        }
-        
-        .toggle_btn {
-          color: var(--hospital-green);
-          font-size: 1.5rem;
-          cursor: pointer;
-          display: none; /* Oculto por defecto */
-        }
-        
-        .action_btn {
-          background-color: var(--hospital-green);
-          color: var(--white);
-          padding: 0.5rem 1rem;
-          border: none;
-          outline: none;
-          border-radius: 20px;
-          font-size: 0.8rem;
-          cursor: pointer;
-          transition: transform 0.2s ease; /* Corregido el error de sintaxis en la propiedad transition */
-        }
-        
-        .action_btn:hover {
-          transform: scale(1.05); /* Corregido el error en la propiedad transform */
-        }
-        
-        .action_btn:active {
-          transform: scale(0.95); /* Corregido el error en la propiedad transform */
-        }
-        
-        .dropdown-menu {
-          position: absolute;
-          right: 0;
-          top: 100%;
-          width: 200px;
-          background: var(--white);
-          backdrop-filter: blur(15px);
-          border-radius: 10px;
-          overflow: hidden;
+      .information {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 20px;
+      }
+
+      .form-information {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 20px;
+      }
+
+      .info-childs p {
+        margin: 30px 30px;
+      }
+
+      .form label {
+        width: 100%;
+      }
+
+
+
+      li {
+        list-style: none;
+        padding: 0 40px;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--black);
+        font-size: 1rem;
+        position: relative;
+      }
+
+      a::before {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--hospital-green);
+        transition: all 0.4s;
+      }
+
+      a:hover::before {
+        width: 100%;
+        /* El borde se extiende de izquierda a derecha */
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-bottom: 2px solid var(--hospital-green);
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+      }
+
+      .navbar {
+        width: 100%;
+        height: 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .navbar .logo a {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--hospital-green);
+        /* Manteniendo el color del logo */
+      }
+
+      .navbar .links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .toggle_btn {
+        color: var(--hospital-green);
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: none;
+        /* Oculto por defecto */
+      }
+
+      .action_btn {
+        background-color: var(--hospital-green);
+        color: var(--white);
+        padding: 0.5rem 1rem;
+        border: none;
+        outline: none;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        /* Corregido el error de sintaxis en la propiedad transition */
+      }
+
+      .action_btn:hover {
+        transform: scale(1.05);
+        /* Corregido el error en la propiedad transform */
+      }
+
+      .action_btn:active {
+        transform: scale(0.95);
+        /* Corregido el error en la propiedad transform */
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        width: 200px;
+        background: var(--white);
+        backdrop-filter: blur(15px);
+        border-radius: 10px;
+        overflow: hidden;
+        display: none;
+      }
+
+      .dropdown-menu.open {
+        display: block;
+      }
+
+      .dropdown-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .dropdown-menu li {
+        padding: 0.9rem;
+      }
+
+      .dropdown-menu .action_btn {
+        width: 100%;
+      }
+
+      .tittle-container {
+        font-style: oblique;
+      }
+
+
+      /* Responsive design */
+      @media (max-width: 992px) {
+
+        .navbar .links,
+        .navbar .action_btn {
           display: none;
         }
-        
-        .dropdown-menu.open {
+
+        .navbar .toggle_btn {
           display: block;
         }
-        
-        .dropdown-menu ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
+
+        .dropdown-menu {
+          position: static;
+          margin-top: 110px;
+          width: 50%;
+          display: none;
         }
-        
-        .dropdown-menu li {
-          padding: 0.9rem;
-        }
-        
-        .dropdown-menu .action_btn {
+      }
+
+      @media (max-width: 576px) {
+        .dropdown-menu {
+          right: unset;
+          left: 0;
           width: 100%;
+          border-radius: 0;
         }
-        
-        /* Responsive design */
-        @media (max-width: 992px) {
-          .navbar .links,
-          .navbar .action_btn {
-            display: none;
-          }
-        
-          .navbar .toggle_btn {
-            display: block;
-          }
-        
-          .dropdown-menu {
-            position: static;
-            margin-top: 110px;
-            width: 50%;
-            display: none;
-          }
+
+        .navbar .logo a {
+          margin-left: 1rem;
         }
-        
-        @media (max-width: 576px) {
-          .dropdown-menu {
-            right: unset;
-            left: 0;
-            width: 100%;
-            border-radius: 0;
-          }
-        
-          .navbar .logo a {
-            margin-left: 1rem;
-          }
-        }
-        
+      }
+
       @media (max-width: 768px) {
         .container-form {
           flex-direction: column;
           height: auto;
         }
-      }  
+      }

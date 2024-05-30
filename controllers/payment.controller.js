@@ -1,3 +1,29 @@
+// const Stripe = require('stripe');
+// const stripe = new Stripe(
+//   'sk_test_51OeN6FGAjY1gaWacRAC1ykBeWLoN2RLtqeJNfHc8q53l5XAQjnUWH74Q4tdCQ0HpdGkEDROTHKpIR4xjAk7pIaaV00M6RNzBI2'
+// );
+
+// const CreateSession = async (req, res) => {
+//   const { lineItems } = req.body;
+
+//   try {
+//     const session = await stripe.checkout.sessions.create({
+//       payment_method_types: ['card'],
+//       line_items: lineItems,
+//       mode: 'payment',
+//       success_url: 'http://localhost:3000/success',
+//       cancel_url: 'http://localhost:3000/cancel',
+//     });
+
+//     res.json({ session });
+//   } catch (error) {
+//     console.error('Error creating checkout session:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// };
+
+// module.exports = CreateSession;
+
 const Stripe = require('stripe');
 
 const stripe = new Stripe(
@@ -17,7 +43,11 @@ const createSession = async (req, res) => {
             },
             unit_amount: 2000,
           },
+<<<<<<< HEAD
           quantity: 1
+=======
+          quantity: 1,
+>>>>>>> c8fcf6953ad109de80b43f2315a41c0fa41030f9
         },
         {
           price_data: {
@@ -28,7 +58,11 @@ const createSession = async (req, res) => {
             },
             unit_amount: 800,
           },
+<<<<<<< HEAD
           quantity: 1
+=======
+          quantity: 1,
+>>>>>>> c8fcf6953ad109de80b43f2315a41c0fa41030f9
         },
       ],
       mode: 'payment',
@@ -38,8 +72,13 @@ const createSession = async (req, res) => {
 
     res.json({ session });
   } catch (error) {
+<<<<<<< HEAD
     console.error("Error creating checkout session:", error);
     res.status(500).json({ error: "Error creating checkout session" });
+=======
+    console.error('Error creating checkout session:', error);
+    res.status(500).json({ error: 'Error creating checkout session' });
+>>>>>>> c8fcf6953ad109de80b43f2315a41c0fa41030f9
   }
 };
 

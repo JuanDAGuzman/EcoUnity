@@ -1,82 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./../../static/recovery.css" />
-    <title>Password Recovery</title>
-  </head>
-  <body>
-    <div class="container-send">
-      <div class="login">
-        <div class="form-container">
-          <img src="./logos/logo\_yard\_sale.svg" alt="logo" class="logo" />
-          <form id="recoveryForm" class="form">
-            <label for="email" class="label"
-              >Ingresa el correo electrónico registrado</label
-            >
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="andres@mail.com"
-              class="input input-email"
-              required
-            />
-            <button type="submit" class="primary-button login-button">
-              Enviar solicitud
-            </button>
-          </form>
-          <!-- Agregamos el botón de Login -->
-          <button
-            onclick="location.href='login.html'"
-            class="primary-button login-button"
-          >
-            Iniciar sesión
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@300..700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./../../static/recovery.css" />
+  <title>Password Recovery</title>
+</head>
+
+<body>
+  <div class="container-send">
+    <div class="login">
+      <div class="form-container">
+        <h3 class="ecounity">Ecounity</h3>
+        <form id="recoveryForm" class="form">
+          <label for="email" class="label">Ingresa el correo electrónico registrado</label>
+          <input type="email" id="email" name="email" placeholder="example@gmail.com" class="input input-email"
+            required />
+          <button type="submit" class="primary-button login-button">
+            Enviar solicitud
           </button>
-        </div>
+        </form>
+        <!-- Agregamos el botón de Login -->
+        <button onclick="location.href='login.html'" class="primary-button login-button">
+          Iniciar sesión
+        </button>
       </div>
     </div>
-    <script>
-      const recoveryForm = document.getElementById("recoveryForm");
+  </div>
+  <script>
+    const recoveryForm = document.getElementById("recoveryForm");
 
-      recoveryForm.addEventListener("submit", async (event) => {
-        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-        const formData = new FormData(recoveryForm);
-        const email = formData.get("email");
+    recoveryForm.addEventListener("submit", async (event) => {
+      event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+      const formData = new FormData(recoveryForm);
+      const email = formData.get("email");
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/auth/recovery",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email }),
-            }
-          );
-
-          if (response.ok) {
-            // La solicitud fue exitosa
-            alert(
-              "Correo de recuperación enviado correctamente. Por favor, revise su bandeja de entrada."
-            );
-            window.location.href = "./login.html"; // Redireccionar después de un tiempo
-          } else {
-            // La solicitud no fue exitosa
-            throw new Error("Failed to send recovery email");
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/auth/recovery",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
           }
-        } catch (error) {
-          console.error("Error:", error);
+        );
+
+        if (response.ok) {
+          // La solicitud fue exitosa
+          alert(
+            "Correo de recuperación enviado correctamente. Por favor, revise su bandeja de entrada."
+          );
+          window.location.href = "./login.html"; // Redireccionar después de un tiempo
+        } else {
+          // La solicitud no fue exitosa
+          throw new Error("Failed to send recovery email");
         }
-      });
-    </script>
-  </body>
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
+  </script>
+</body>
+
 </html>

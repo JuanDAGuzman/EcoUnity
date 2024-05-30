@@ -23,15 +23,10 @@
         <ul class="links">
           <li><a href="./inicio.html">Inicio</a></li>
           <li><a href="./prueba.html">Productos</a></li>
-          <li>
-            <a href="./../../src/views/index.html"
-              >Puntos de reciclaje y reforestación</a
-            >
-          </li>
+          <li><a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a></li>
           <li><a href="#">Ayuda</a></li>
-          <li id="welcomeMessage"></li>
-        <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
-
+        </ul>
+        <a href="./../../templates/pages/login.html" class="action_btn">Acceder</a>
         <div class="toggle_btn">
           <i class="bx bx-menu"></i>
         </div>
@@ -39,16 +34,12 @@
           <ul>
             <li><a href="./inicio.html">Inicio</a></li>
             <li><a href="./prueba.html">Productos</a></li>
-            <li>
-              <a href="./../../src/views/index.html">Puntos de reciclaje</a>
-            </li>
-            <li>
-              <a href="./../../src/views/index.html">Puntos de reforestación</a>
-            </li>
+            <li><a href="./../../src/views/index.html">Puntos de reciclaje</a></li>
+            <li><a href="./../../src/views/index.html">Puntos de reforestación</a></li>
             <li><a href="#">Ayuda </a></li>
+            <li><a href="./login.html" class="action_btn">Acceder</a></li>
           </ul>
         </div>
-        <li id="welcomeMessage"></li>
       </div>
     </header>
     <section>
@@ -110,26 +101,26 @@
       </div>
     </section>
     <script>
-      const Mail = localStorage.getItem("Mail");
-      if (Mail) {
-        const welcomeMessage = document.getElementById("welcomeMessage");
-        welcomeMessage.textContent = "Bienvenid@ " + Mail;
-
-        loginButton.textContent = "Cerrar sesión";
-
-        loginButton.addEventListener("click", () => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("Mail");
-          window.location.href = "./../../templates/pages/login.html";
-        });
-      }
-
       const toggleBtn = document.querySelector(".toggle_btn");
       const dropDownMenu = document.querySelector(".dropdown-menu");
 
-      toggleBtn.onclick = function () {
-        dropDownMenu.classList.toggle("open");
-      };
+    toggleBtn.onclick = function () {
+      dropDownMenu.classList.toggle("open");
+    };
+
+    const Mail = localStorage.getItem("Mail");
+    if (Mail) {
+      const welcomeMessage = document.getElementById("welcomeMessage");
+      welcomeMessage.textContent = "Bienvenid@ " + Mail;
+
+      loginButton.textContent = "Cerrar sesión";
+
+      loginButton.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("Mail");
+        window.location.href = "./../../templates/pages/login.html";
+      });
+    }
 
       const loginForm = document.getElementById("loginForm");
       loginForm.addEventListener("submit", async (event) => {
@@ -143,43 +134,45 @@
         userEmail = loginData.email;
         localStorage.setItem("Mail", userEmail);
 
-        try {
-          const response = await fetch(
-            "http://localhost:3000/api/v1/auth/login",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(loginData),
-            }
-          );
 
-          if (!response.ok) {
-            throw new Error("Login failed");
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/auth/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(loginData),
           }
+        );
 
-          const data = await response.json();
-          const token = data.token;
-          const role = data.user.role;
-
-          // Guardar el token en el almacenamiento local
-          localStorage.setItem("token", token);
-
-          // Redireccionar según el rol del usuario
-          if (role === "admin" || role === "seller") {
-            window.location.href = "products.html"; // Redirigir a products.html
-          } else if (role === "customer") {
-            window.location.href = "prueba.html"; // Redirigir a prueba.html
-          }
-
-          // Imprimir el token en la consola para verificar
-          console.log("Token:", token);
-        } catch (error) {
-          console.error("Error:", error);
-          alert("Failed to login");
+        if (!response.ok) {
+          throw new Error("Login failed");
         }
-      });
-    </script>
-  </body>
+
+        const data = await response.json();
+        const token = data.token;
+        const role = data.user.role;
+
+        // Guardar el token en el almacenamiento local
+        localStorage.setItem("token", token);
+
+        // Redireccionar según el rol del usuario
+        if (role === "admin" || role === "seller") {
+          window.location.href = "products.html"; // Redirigir a products.html
+        } else if (role === "customer") {
+          window.location.href = "prueba.html"; // Redirigir a prueba.html
+        }
+
+        // Imprimir el token en la consola para verificar
+        console.log("Token:", token);
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to login");
+      }
+    });
+  </script>
+</body>
+
 </html>

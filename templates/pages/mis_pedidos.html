@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -476,26 +477,53 @@
           if (!email) {
             throw new Error("Debes iniciar sesión para ver tus pedidos.");
           }
+=======
 
-          // Obtener el userId usando el correo electrónico
-          const userResponse = await fetch(
-            `http://localhost:3000/api/v1/users/email/${email}`
-          );
-          if (!userResponse.ok) {
-            throw new Error("Failed to fetch user data");
-          }
-          const userData = await userResponse.json();
-          const userId = userData.id;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis Pedidos</title>
+  <link rel="stylesheet" href="/EcoUnity/static/pedidos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+</head>
 
-          // Obtener los pedidos del usuario usando el userId
-          const ordersResponse = await fetch(
-            `http://localhost:3000/api/v1/orders/user/${userId}`
-          );
-          if (!ordersResponse.ok) {
-            throw new Error("Failed to fetch orders");
-          }
-          const orders = await ordersResponse.json();
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">Ecounity</div>
+      <ul class="links">
+        <li><a href="./inicio.html">Inicio</a></li>
+        <li><a href="./prueba.html">Productos</a></li>
+        <li>
+          <a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a>
+        </li>
+        <li><a href="./mis_pedidos.html">Mis pedidos</a></li>
+      </ul>
+      <li id="welcomeMessage"></li>
+      <a href="./../../templates/pages/login.html" id="loginButton" class="action_btn">Acceder</a>
 
+      <div class="toggle_btn">
+        <i class="bx bx-menu"></i>
+      </div>
+      <div class="dropdown-menu">
+        <li><a href="./inicio.html">Inicio</a></li>
+        <li><a href="./prueba.html">Productos</a></li>
+        <li>
+          <a href="./../../src/views/index.html">Puntos de reciclaje y reforestación</a>
+        </li>
+        <li><a href="./mis_pedidos.html">Mis pedidos</a></li>
+      </div>
+>>>>>>> c8fcf6953ad109de80b43f2315a41c0fa41030f9
+
+    </div>
+  </header>
+
+  <div class="container-title">
+    <h2 class="title">Mis Pedidos</h2>
+  </div>
+  <div id="ordersList"></div>
+
+<<<<<<< HEAD
           // Mostrar los pedidos en la página
           const ordersList = document.getElementById("ordersList");
           if (orders.length === 0) {
@@ -554,8 +582,90 @@
         } catch (error) {
           console.error("Error:", error);
           alert("Error al cargar los pedidos");
+=======
+  <script>
+
+    // button
+    document.addEventListener('DOMContentLoaded', function () {
+      var toggleBtn = document.querySelector('.toggle_btn');
+      var dropdownMenu = document.querySelector('.dropdown-menu');
+
+      toggleBtn.addEventListener('click', function () {
+        dropdownMenu.classList.toggle('open');
+      });
+    });
+    //button
+
+
+    window.onload = async () => {
+      try {
+        // Obtener userId del usuario actual
+        const email = localStorage.getItem("Mail");
+        if (!email) {
+          throw new Error("Debes iniciar sesión para ver tus pedidos.");
         }
-      };
-    </script>
-  </body>
+
+        // Obtener el userId usando el correo electrónico
+        const userResponse = await fetch(
+          `http://localhost:3000/api/v1/users/email/${email}`
+        );
+        if (!userResponse.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        const userData = await userResponse.json();
+        const userId = userData.id;
+
+        // Obtener los pedidos del usuario usando el userId
+        const ordersResponse = await fetch(
+          `http://localhost:3000/api/v1/orders/user/${userId}`
+        );
+        if (!ordersResponse.ok) {
+          throw new Error("Failed to fetch orders");
+        }
+        const orders = await ordersResponse.json();
+
+        // Mostrar los pedidos en la página
+        const ordersList = document.getElementById("ordersList");
+        if (orders.length === 0) {
+          ordersList.innerHTML = "<p>No tienes pedidos realizados.</p>";
+        } else {
+          const ordersHTML = orders
+            .map(
+              (order) => `
+  <div class="order-card">
+    <div class="order-details">
+      <h3>Pedido ID: ${order.id}</h3>
+      <p>Total: $${order.total.toFixed(2)}</p>
+    </div>
+    <p>Fecha: ${new Date(order.createdAt).toLocaleString()}</p>
+    <ul>
+      ${order.items
+                  .map(
+                    (item) => `
+        <li>
+          <img src="${item.image}" alt="${item.name}">
+          <div>
+            <span>${item.name}</span>
+            <p>Cantidad: ${item.OrderProduct.amount}</p>
+          </div>
+        </li>
+      `
+                  )
+                  .join("")}
+    </ul>
+  </div>
+`
+            )
+            .join("");
+          ordersList.innerHTML = ordersHTML;
+>>>>>>> c8fcf6953ad109de80b43f2315a41c0fa41030f9
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Error al cargar los pedidos");
+      }
+    };
+  </script>
+</body>
+
 </html>
